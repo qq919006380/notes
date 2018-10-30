@@ -53,10 +53,12 @@
     - **修改元素**
         - appendChild() 在元素末尾添加元素
         - insertBefore() 在某个元素之前插入元素
-        - replaceChild()replaceChild()接受两个参数：要插入的元素和要替换的元素
+        - replaceChild()接受两个参数：要插入的元素和要替换的元素
     - **删除元素**
+
         - parentNode.removeChild(childNode);parentNode是删除目标的父元素，childNode是删除目标
     - **克隆元素**
+
         - node.cloneNode(true);方法用于克隆元素，方法有一个布尔值参数，传入true的时候会深复制，也就是会复制元素及其子元素（IE还会复制其事件），false的时候只复制元素本身
 - **属性操作**
     - getAttribute()用于获取元素的attribute值

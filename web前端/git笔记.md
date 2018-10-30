@@ -15,10 +15,15 @@
 -  git reset --hard 3628164 //切换版本 3628164等于版本号的前几位数字，没必要写全git会自动查找
 -   git reflog // 列出你每一次存档的命令，包括前几位数的版本号
 
-# **创建用户名和邮箱**
+# **修改全局用户名和邮箱**
 ```
     git config --global user.email "919006380@qq.com"
     git config --global user.name "weibo"
+```
+# **查看用户名和地址**
+```
+git config user.name
+git config user.email
 ```
 # **修改完后推送上github三步代码**
 ```
@@ -42,7 +47,7 @@
 # **上传创库**
 - 在github官网创建项目，按提示上传
 - 在本地文件输入git init创建git隐藏的跟踪文件
-    
+  
 
 # **分支管理**
 - 查看分支：git branch
