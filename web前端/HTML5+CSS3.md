@@ -1,0 +1,140 @@
+# HTML
+- [HTML源头W3.org文档](www.w3.org)
+- [兼容查看](www.caniuse.com)
+- [图床sm.ms](sm.ms)
+- [csssprites.com](csssprites.com)
+- [css-sprite](https://www.toptal.com/developers/css/sprite-generator)
+
+
+
+## form标签
+```
+用于包裹所有需要发送和请求的表单，主要的两个属性
+1、action=“/abc” 数据提交到当前域名的abc后台的路径上
+2、method=“” 有两个类型一个是get和post
+```
+
+---
+
+# CSS 选择器
+**伪类选择器**
+- a:link { ... }  ——元素的默认样式
+- a:visited { ... }——当元素被访问过后生效
+- a:hover { ... }——当鼠标指针移动到元素时生效
+- a:active { ... }——当鼠标按下元素时生效
+- input:focus{ ... }——当元素处于激活状态下生效
+- li:first-child { ... }——代表了一组兄弟元素中的第一个元素
+- li:last-child { ... }——代表了一组兄弟元素中的最后一个元素
+- li：first-of-type{...}——表示一组兄弟元素中其类型的第一个元素
+
+**伪元素选择器**
+- ::after——用来创建一个伪元素，做为已选中元素的最后一个子元素。通常会配合content属性来为该元素添加装饰内容。这个虚拟元素默认是行内元素
+- ::before——用来创建一个伪元素，做为已选中元素的第一个一个子元素。通常会配合content属性来为该元素添加装饰内容。这个虚拟元素默认是行内元素
+- ::selection—— 应用于文档中被用户高亮的部分（比如鼠标选中的部分）。
+- ::first-letter—— 选中一整块文字第一行的第一个字母，当文字所处的行之前没有其他内容（如图片和内联的表格）。
+- ::first-line——将样式只应用于一个块状元素的首行。
+# 单位
+PX：pixel的缩写，意为像素1px等于1像素  
+em：是相对单位，相对于父元素，如果父元素没有设置font-siz则再继承父元素上一级，直到继承html设置的font-size或者默认的16px。
+rem：相对单位，相对于html标签。在css中可以用:root来选择根元素html，更具语义化。
+vw：相对单位，相对于浏览器的屏幕宽度，1vw则等于浏览器屏幕宽度1%，vh则相对于浏览器高度
+# CSS样式
+**文本溢出...**
+```
+white-space: nowrap;    //溢出不换行
+overflow: hidden;       //溢出隐藏
+text-overflow: ellipsis;    //溢出用...来代替
+```
+**display**
+```
+块级元素：block，list-item，table
+行内元素：inline，inline-table，inline-block
+```
+**文本样式**
+```
+————text-decoration 属性用于设置文字划线样式。
+none 取消划线
+underline 下划线
+overline 上划线
+line-through 中划线
+
+————text-transform 属性用于改变字母的大小写。
+none 取消转换效果
+uppercase 转为大写
+lowercase 转为小写
+capitalize 转为首字母大写
+
+————text-shadow 属性用于设置文字阴影。
+p { 
+  text-shadow: 1px 1px 2px black;
+}
+
+————text-indent 属性用于设置首行文本的缩进。
+p { 
+  text-indent: 2em;  /* 文章的每一段空两格开头 */
+}
+h1 { text-indent: -9999px; }    /* 对用户隐藏文字 */
+
+————letter-spacing 属性用于设置文字/字母的间距。
+<h1>装 <span class="b">13</span></h1>
+
+————vertical-align 用来指定行内元素（inline）或表格单元格（table-cell）元素的垂直对齐方式。
+top 元素及其后代的顶端与整行的顶端对齐。
+bottom 元素及其后代的底端与整行的底端对齐。
+middle 单元格垂直居中
+[跟多值详细见MDN](https://developer.mozilla.org/zh-CN/docs/Web/CSS/vertical-align/)
+
+————text-align:justify
+文字向两侧对齐，对最后一行无效。
+```
+**隐藏or透明**
+```
+opacity:0 //透明度为0，有0到1的过度（占位）
+visibility：hidden  //和opacity：0类似（占位）设置为visible变为可见。只能像开关一样设置为可见或不可见
+display：none   //脱离文档流，消失不占位
+background-color：rgba（0，0，0，0，0.2）   //只是背景色透明
+```
+**浮动**
+```
+clear:left;要求该盒的top border边位于源文档中在此之前的元素形成的所有左浮动盒的bottom外边下方。
+clear:right;要求该盒的top border边位于源文档中在此之前的元素形成的所有右浮动盒的bottom外边下方。
+clear:both;要求该盒的top border边位于源文档中在此之前的元素形成的所有左浮动盒和右浮动盒的bottom外边下方。
+
+清楚浮动
+给坍塌的父元素添加：
+1.overflow:hidden
+2.display:inline-block
+3.position:absolute
+4.float:left
+
+```
+**[BFC](http://www.cnblogs.com/Candybunny/p/6222939.html)**
+```
+BFC是block formatting context的简称
+每个渲染区域用formatting context表示，他决定了其子元素如何定位，以及和其他元素的关系和相互作用在正常流中的盒子要么属于块级格式化上下文，要么属于内联格式化上下文。
+他可以使相邻元素，父子元素的外边框不合并，内生成BFC
+  border:solid 1px
+  padding:1px
+  overflow:hidden
+  float:left（属性不为none都可以）
+  display:inline-block或flex
+  position:absolute或fixed */
+  
+```
+# css3
+- transition 过度 (注意开关性质的没有过度，例如display:none/diplay)
+    - transition:1s 
+- transform 变换
+    - transform:  rotate(angle)  旋转（默认为Z轴）
+        - transform:rotateX(angle)
+        - transform:rotateY(angle)
+        - backface-visibility: hidden 旋转180deg后隐藏背面仅限X,Y（对默认Z轴使用会有影响边框粗细）
+    - transform:  scale(sx[, sy]) 缩放
+        - transform:scaleX(sx)
+        - transform:scaleY(sy)  
+    - transform:  skew(20deg, deg])倾斜
+        - transform:skewX(angle)  
+        - transform:skewY(angle)
+    - transform:  translate(tx[, ty]) 平移 相对定位
+        - transform:translateX(tx)
+        - transform:translateY(ty)

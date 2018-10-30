@@ -1,0 +1,73 @@
+# **git常用命令**
+- pwd  //查看当前完整路劲
+- ssh-keygen -t rsa -b 4096 -C "919006380@qq.com"  //创建ssh钥匙 
+- cd ~/.ssh  //查找ssh文件
+- mkdir  //创建目录
+- rm -rf //删除目录
+- git rm -r --cache 删除远程仓库文件，本地文件不删除
+- touch a.md  //创建文件
+- echo “hello” >> a.md  //在文件尾部插入一个字符串，一个“>”代表 覆盖。
+- git status //查看仓库当前状态
+- git diff  //是工作区(work dict)和暂存区(stage)的比较
+- git diff --cached //是暂存区(stage)和分支(master)的比较
+- git log  //显示最近存档commit日志 “--pretty=oneline”参数显示简化版
+-  git reset --hard HEAD^ //退回上一个版本 ^^两个^等于上上个版本。
+-  git reset --hard 3628164 //切换版本 3628164等于版本号的前几位数字，没必要写全git会自动查找
+-   git reflog // 列出你每一次存档的命令，包括前几位数的版本号
+
+# **创建用户名和邮箱**
+```
+    git config --global user.email "919006380@qq.com"
+    git config --global user.name "weibo"
+```
+# **修改完后推送上github三步代码**
+```
+ git add .  // 文件进入暂存区，. 表示添加所有
+ git commit -am "add" // 存档，实际上就是把暂存区的所有内容提交到当前分支(master)其中
+ “ ”内写入的是本次提交的说明，可以是任意内容
+ git push   // push到远端GitHub的master上
+```
+# **关联远程库**
+- git remote add origin git@server-name:path/repo-name.git //关联一个远程库
+    - git remote add origin git@github.com:qq919006380/WEBdesignPattern.git
+    - git remote add origin git@github.com:qq919006380/WEBdesignPattern.git
+    - git remote set-url origin git@github.com:qq919006380/WEBdesignPattern.git
+- git remote set-url origin [url] //修改关联一个远程库
+- git remote rm origin      //删除关联一个远程库
+- git push origin master// 关联后推送内容
+3. [阮一峰远程操作详解](http://www.ruanyifeng.com/blog/2014/06/git_remote.html)
+
+
+
+# **上传创库**
+- 在github官网创建项目，按提示上传
+- 在本地文件输入git init创建git隐藏的跟踪文件
+    
+
+# **分支管理**
+- 查看分支：git branch
+- 查看分支包括隐藏分支：git branch -a
+- 创建分支：git branch <name>
+- 切换分支：git checkout <name>
+- 创建+切换分支：git checkout -b <name>
+- 合并某分支到当前分支：git merge <name>
+- 删除分支：git branch -d <name>
+- 查看分支合并途：git log --graph
+- 查看远程库的信息：git remote
+- 查看远程库详细的信息：git remote -v
+
+# **三个状态**
+- 已提交（mommitted）该文件已经被安全地保存在本地数据中了
+- 已修改（modified）修改了某个文件，但还没有提交保存
+- 已缓存（staged）吧已修改的文件放在下次提交时要保存的清单中
+# **三个区**
+- 工作区（Working Directory）  //本机电脑能看的目录文件夹，知识库
+- 版本库（Repository）  //工作区有一个隐藏目录.git，这个是版本库
+- 暂存区 //Git的版本库里的stage（或者叫index）的叫暂存区
+
+
+
+
+[git讲解视频](https://jirengu.com/app/watch/382/1?vsum=1)
+[廖雪峰git教程](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)
+[github慕课视频](https://www.imooc.com/learn/390)
