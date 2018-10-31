@@ -8,7 +8,7 @@
     - xhr.responseText
     - xhr.responseXML
 
-```
+```javascript
 //get 
 var xhr = new XMLHttpRequest()
 xhr.open('GET', 'http://api.jirengu.com/weather.php', true)
@@ -25,7 +25,7 @@ xhr.onerror = function(){
 }
 xhr.send()
 ```
-```
+```javascript
 //post
  var xhr = new XMLHttpRequest()
   xhr.timeout = 3000        //可选，设置xhr请求的超时时间
