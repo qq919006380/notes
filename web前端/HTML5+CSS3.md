@@ -13,7 +13,13 @@
 1、action=“/abc” 数据提交到当前域名的abc后台的路径上
 2、method=“” 有两个类型一个是get和post
 ```
-
+## input
+- [表单输入校验](https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Forms/Data_form_validation)
+  - ```html
+    <input type="text" pattern="[a-zA-Z]+" oninvalid="setCustomValidity('Custom Message')" />
+    ```
+  
+```
 ---
 
 # CSS 选择器
@@ -119,7 +125,7 @@ BFC是block formatting context的简称
   float:left（属性不为none都可以）
   display:inline-block或flex
   position:absolute或fixed */
-  
+
 ```
 # css3
 - transition 过度 (注意开关性质的没有过度，例如display:none/diplay)
@@ -138,3 +144,4 @@ BFC是block formatting context的简称
     - transform:  translate(tx[, ty]) 平移 相对定位
         - transform:translateX(tx)
         - transform:translateY(ty)
+```
