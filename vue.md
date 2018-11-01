@@ -12,6 +12,7 @@ options vue object
 # 指令
 - v-text    //innertext
 - v-html    //innerHtml
+- v-model	//双向绑定（一般用在input[text] ）
 - if-else 判断,以下三个指令必须是相邻的DOM，（删除DOM元素）
     - v-if
     - v-else-if
