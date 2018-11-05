@@ -9,5 +9,4 @@ var num=123
 ## 原型
 ## 原型链子
 ## 虚拟ＤＯＭ
-
-
+## map, reduce, filter 等高阶函数
