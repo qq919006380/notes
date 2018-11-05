@@ -82,8 +82,9 @@
     - window.innerHeight 窗口的高度
     - element.getBoundingClientRect() 获取元素在视窗中的位置
 - **event对象**
-    - preventDefault() 取消事件默认行为
-    - stopPropagation() 取消事件进一步捕获或冒泡
+    - e.preventDefault() 取消事件默认行为
+      - e.cancelable 属性表明该事件是否可以被取消默认行为
+    - e.stopPropagation() 取消事件进一步捕获或冒泡
     - e.target 事件的目标元素 常用做事件代理
 - **常用事件**
     - click 鼠标单击
@@ -109,7 +110,7 @@
         - clientHeight = content + padding = 200 + 2 * 10 = 220
         - window.getComputedStyle(dom).height = css设置的样式
         - dom.getBoundingClientRect()方法获取与元素相关的CSS属性边框集合。
-返回对象中共有6个属性。(bottom,right,left,top,height,width)
+    返回对象中共有6个属性。(bottom,right,left,top,height,width)
      - element.scrollTop 滚动的高度
      - window.innerHeight 窗口的高度
 # 动画
