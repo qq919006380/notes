@@ -71,7 +71,9 @@ git config user.email
 - 版本库（Repository）  //工作区有一个隐藏目录.git，这个是版本库
 - 暂存区 //Git的版本库里的stage（或者叫index）的叫暂存区
 
-
+# 图形工具
+- sourcetree
+- tortoisegit小乌龟
 
 
 [git讲解视频](https://jirengu.com/app/watch/382/1?vsum=1)
