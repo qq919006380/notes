@@ -1,9 +1,4 @@
  - # [Node](http://www.imooc.com/learn/348)
-- 模块
-    - fs模块就是文件系统模块，负责读写文件
-    - http模块，主要用于创建服务器
-    - path模块，主要用于处理文件与目录的路径
-
 ---
 # npm
 ## 安装
@@ -32,7 +27,8 @@
         - npm install -g nrm
         - nrm ls
         - nrm use taobao
-# http模块
+# 系统模块
+### http模块
 创建服务
 ```
 http.createServer(function(req,res){
@@ -40,24 +36,33 @@ http.createServer(function(req,res){
 	res.end()
 }).listen(8080)
 ```
-# fs模块
+### fs模块
 读写文件
 - fs.readFile('fileName','callback(err,data){}')
     - 读文件
 - fs.writeFile('fileName','content','callback(err,dara){}')
     - 写或创建文件
-# 调试
-断点调试：断点调试：node debugger 或node inspector 或vscode
 
-[package.json中文文档](https://github.com/ericdum/mujiang.info/issues/6/)
-
-# url模块
+### url模块
 解析url 主要解析get数据
 - url.pathname 获取及设置URL的路径(path)部分
 - url.parse(req.url,true)
-# querystring模块
+### querystring模块
 主要解析post数据
-- x
+### path模块
+主要用于处理文件与目录的路径
+
+# 自定义模块
+### 引入
+> var mod=quirequi=('mod')
+> 注意：如果不在module_nodes文件下的模块需要加——'./' 如 var mod=quirequi=('./mod')
+### 输出
+> xxx
+
+
+# 调试
+断点调试：断点调试：node debugger 或node inspector 或vscode
+[package.json中文文档](https://github.com/ericdum/mujiang.info/issues/6/)
 
 # [Express](http://www.expressjs.com.cn/)
 
