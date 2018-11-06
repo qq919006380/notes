@@ -1,6 +1,6 @@
  - # [Node](http://www.imooc.com/learn/348)
 ---
-# npm
+# [npm](https://juejin.im/post/5ab3f77df265da2392364341)
 ## 安装
  - 本地安装
     - 将安装包放在 ./node_modules 下（运行npm时所在的目录）
@@ -57,7 +57,9 @@ http.createServer(function(req,res){
 > var mod=quirequi=('mod')
 > 注意：如果不在module_nodes文件下的模块需要加——'./' 如 var mod=quirequi=('./mod')
 ### 输出
-> xxxxxx123
+> exports.xxx=??  	exports.yyy=??
+>
+> module.exports={xxx:??,yyy:??}
 
 
 # 调试
@@ -78,6 +80,19 @@ cd myapp  //进入文件夹
 npm install  //安装所有依赖包
 npm start   //打开服务
 
+```
+### 创建基本服务三步
+```javascript
+const express=require('express')
+//1.创建服务
+var server=express()
+//2.处理请求 
+server.use('/b.html',function(req,res){
+    res.send('BBB')
+    res.end()
+})
+//3.监听端口
+server.listen(8080)
 ```
 - 请求req
     - req.params.xx //读取url返回：后面的xx参数
