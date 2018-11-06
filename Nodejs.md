@@ -57,7 +57,7 @@ http.createServer(function(req,res){
 > var mod=quirequi=('mod')
 > 注意：如果不在module_nodes文件下的模块需要加——'./' 如 var mod=quirequi=('./mod')
 ### 输出
-> xxx
+> xxxxxx123
 
 
 # 调试
