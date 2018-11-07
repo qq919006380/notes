@@ -99,4 +99,4 @@ server.listen(8080)
     - req.path   //读取url返回/后面的url
     - req.query  //读取？后面的参数
 - 响应res
-    - s
+    - sss
