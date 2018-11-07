@@ -66,6 +66,16 @@ http.createServer(function(req,res){
 断点调试：断点调试：node debugger 或node inspector 或vscode
 [package.json中文文档](https://github.com/ericdum/mujiang.info/issues/6/)
 
+# cookie&session
+cookie和session都是储存数据用的，区别在于
+- cookie储存在客户端（不安全）
+	- 只能存储4K数据
+- session储存在服务器（安全）
+	- 可以存储大量数据，只要服务器容量大
+	- 基于cookie实现
+	- 隐患：session劫持
+
+
 # [Express](http://www.expressjs.com.cn/)
 
 #### 安装应用生成器
