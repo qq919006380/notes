@@ -1,2 +1,3 @@
 # filter diary folder
 /diary
+.vscode/launch.json
