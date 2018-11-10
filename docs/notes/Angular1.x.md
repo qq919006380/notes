@@ -232,7 +232,7 @@ app.controller('siteCtrl', function($scope, $http) {
     -  templateUrl: 'contacts.html'
         - templateUrl: function (stateParams){
     return '/partials/contacts.' + stateParams.filterBy + '.html';
-      } //templateUrl的值可以通过函数放回
+        } //templateUrl的值可以通过函数放回
     - 
 
 ### [ui-grid](https://www.cnblogs.com/lucky528/p/7211315.html)
