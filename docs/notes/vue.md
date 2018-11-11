@@ -1,9 +1,9 @@
 # 基础
-options vue object
+options vue object——new Vue({})
 - el： dom元素对象
     - "#DomObj"
     - document.querySelector('#DomObj') //更为优化，避免了vue判断查询
-- template：模板
+- template：模板或调用组件
 - data：数据
     - data:{key:"数据"}   //可选
     - data:function(){return{key:"数据"}} //可选
@@ -36,9 +36,13 @@ options vue object
 -   父组件通过 props 向下传递数据给子组件
 - 子组件通过 events 给父组件发送消息
 
-  ### 全局组件
-	- xxxx
-	- xxxx
+### 全局组件
+Vue.component('componentName',templateName)
+### 插槽slot
+vue提供的内置组件<slot></slot>用于占位给子组件传递DOM给父组件
+### 具名插槽slot
+如果父组件有多个插槽可以用名字分类<slot name='one'></slot> 调用的时候就<div slot='one'></div>
+
 # 过滤器（管道）
 ```javascript
 Vue.filter('dataReverse',(data)=>{
