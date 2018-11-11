@@ -1,5 +1,5 @@
 module.exports = {
-    // title: 'my-blog',  // 设置网站标题
+    title: '夏天夏',  // 设置网站标题
     // dest: './dist',    // 设置输出目录
     // base: '/mt-blog/', // 设置站点根路径
     // repo: 'https://github.com/TaoXuSheng/mt-blog', // 添加 github 链接
@@ -20,7 +20,7 @@ module.exports = {
         // ],
         '/blog/': [
           '', //README
-          ['angular1.x使用','angular1.x的使用记录'],
+          ['angular1.x使用','angular1.x的使用总结'],
           ['three','three'],
           ['ng','ng_title'],
           ['闭包','闭包']
