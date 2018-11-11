@@ -7,7 +7,7 @@ options vue object——new Vue({})
 - data：数据
     - data:{key:"数据"}   //可选
     - data:function(){return{key:"数据"}} //可选
-- methods
+- methods 	// 在 `methods` 对象中定义方法
 - components:{}     //声明组件
 - watch		//监控数据
 	- 深度监控
@@ -28,7 +28,7 @@ options vue object——new Vue({})
 
 - v-on 给元素添加事件
     - v-on:click='on'
-    - 简写 @click='on
+    - 简写 @click='on'
 - 'v-for
     - 数组(item,index) in item
     - 对象(key,value,index) in items
@@ -50,4 +50,17 @@ Vue.filter('dataReverse',(data)=>{
 })
 ```
 
-
+# 生命周期(事件函数)
+### 组件加载触发
+- beforeCreate——组件加载完成前触发
+- created————组件加载完成触发
+	- 应用场景：触发ajax请求
+### 页面加载触发
+- beforeMount——页面加载前触发
+- mounted————页面加载完成后触发
+### 页面数组更改时触发
+- beforeUpdate——页面数据发生更改前触发
+- updated————页面数据发生更改后触发
+### 组件销毁的时候触发（v-if）
+- beforeDestroy——销毁前
+- destroyed————销毁后
