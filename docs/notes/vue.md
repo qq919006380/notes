@@ -3,12 +3,12 @@ options vue object——new Vue({})
 - el： dom元素对象
     - "#DomObj"
     - document.querySelector('#DomObj') //更为优化，避免了vue判断查询
-- template：模板或调用组件
 - data：数据
     - data:{key:"数据"}   //可选
     - data:function(){return{key:"数据"}} //可选
 - methods 	// 在 `methods` 对象中定义方法
-- components:{}     //声明组件
+- components:{}     //声明组件  components:{'templateName':template}
+- template：		//模板或调用组件 {'templateName':template}
 - watch		//监控数据
 	- 深度监控
 	- obj:{deep:true,handler:function(a){console.log(a.data)}}
@@ -64,3 +64,13 @@ Vue.filter('dataReverse',(data)=>{
 ### 组件销毁的时候触发（v-if）
 - beforeDestroy——销毁前
 - destroyed————销毁后
+- 
+
+# 路由
+### 使用路由5步骤
+0. 如果使用模块化机制编程，导入Vue和VueRouter，要调用 Vue.use(VueRouter)用于创建router-view和router-link组件
+1. 定义 (路由) 组件:{template:'<div>123</div>'}
+2. 定义路由配置:{ path: '/foo', component: { template: '<div>foo</div>' } }
+3. 创建 router 实例，然后传路由配置 
+	- new VueRouter({routes // (缩写) 相当于 routes: routes})
+4. 创建和挂载根实例。记得要通过 router 实例参数注入路由，
