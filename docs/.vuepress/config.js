@@ -10,11 +10,11 @@ module.exports = {
         { text: 'Home', link: '/' },//主页
         { text: 'Blog', link: '/blog/' },
         { text: 'Notes', link: '/notes/' },
-        { text: 'About', link: 'about/about' }, 
+        { text: 'About', link: 'about/about.md' }, 
 
       ],
       sidebar: {
-        // '/': [// 主页
+        // '/': [ 
         //   '',        
         //   ['主页','主页'],
         // ],
