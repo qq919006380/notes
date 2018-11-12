@@ -57,7 +57,7 @@ Vue.filter('dataReverse',(data)=>{
 	- 应用场景：触发ajax请求
 ### 页面加载触发
 - beforeMount——页面加载前触发
-- mounted————页面加载完成后触发
+- mounted————页面加载完成后触发(到这里后的是Vue完成组装好的DOM)
 ### 页面数组更改时触发
 - beforeUpdate——页面数据发生更改前触发
 - updated————页面数据发生更改后触发
