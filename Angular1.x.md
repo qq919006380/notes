@@ -4,6 +4,7 @@
     - service 公有代码逻辑
     - controller 私有代码逻辑
     - filter 过滤器
+
 - ### [指令directive](http://www.runoob.com/angularjs/angularjs-reference.html)
     - ng-app 标记angularjs的作用域
     - ng-model 绑定输入框的值到 scope 变量中：
@@ -44,19 +45,21 @@
             - scope.test()可以执行controller中的test()函数,也可以这样写scope.apply('test()')
         - element 标签对象可以调用jq常用语法如bind(),addClass(),removeClass()对元素操作
         - attrs  包含了指令所在元素的属性的标准化的参数对象 如指令abc中有属性TEST
-            - <abc TEST></abc> 就是attrs.test
-            - <abc TEST='btn()'></abc> 可以通过使用$apply()来执行属性中的函数$apply(attrs.test.btn)
+            - `<abc TEST></abc>` 就是attrs.test
+            - `<abc TEST='btn()'></abc>` 可以通过使用$apply()来执行属性中的函数$apply(attrs.test.btn)
         - ctrl:指令中可以使用controller来做数据交互 如：
-        ```
+        ```javascript
         link: function($scope, iElm, iAttrs, controller) {
-					controller('myCtrl', ['$scope', function($scope){
-						
-					}])
-				}
+        			controller('myCtrl', ['$scope', function($scope){
+        				
+        			}])
+        		}
         ```
-        # [compile、link](https://blog.csdn.net/sinat_31057219/article/details/56677307)
 
-```
+
+# [compile-link](https://blog.csdn.net/sinat_31057219/article/details/56677307)
+
+```javascript
 指令的不同controller中的不同函数之间的复用
 <!-- html -->
 <div ng-controller="myCtrl">
@@ -96,7 +99,7 @@
 		}]);
 	
 ```
-```
+```javascript
 var app = angular.module("myApp", []);
 app.directive("runoobDirective", function() {
     return {
@@ -114,7 +117,7 @@ app.directive("runoobDirective", function() {
     -  $interval 服务对应了 JS window.setInterval 函数。
         -  取消定时器 $interval.cancel(t)
 - ### 自定义服务
- ```
+ ```javascript
  app.service('hexafy', function() {
     this.myFunc = function (x) {
         return x.toString(16);
@@ -134,7 +137,7 @@ app.directive("runoobDirective", function() {
     - number:2 保留两位小数
     - limitTo :6 从前面开始截取6位
 - ### 自定义过滤器 filter |
-```
+```javascript
 app.filter("myFilter",function(){
 			return function(input){
 				return input+"#"
@@ -143,13 +146,13 @@ app.filter("myFilter",function(){
 ```
 ### 依赖注入（只执行一起，实现多数据共享）
 #### factory——简单
-```
+```javascript
 app.factory(xx, function (){
 	return {a:"xxx"};
 });
 ```
 #### provider——强大：可配置的
-```
+```javascript
 app.provider(xx, function (){
 	this.$get=function (){
 		return {a:"xxx"};
@@ -157,13 +160,13 @@ app.provider(xx, function (){
 });
 ```
 ### service——类似于构造函数
-```
+```javascript
 app.service(xx, function (){
 	this....
 });
 ```
 ### 修改依赖 *会修改原始的依赖，原来的依赖就变了 (用不了可能废弃了)
-```
+```javascript
 app.decorator('依赖的名字', function ($delegate){
 	$delegate	依赖项的东西
 	return 修改后的依赖;
@@ -181,7 +184,7 @@ app.decorator('依赖的名字', function ($delegate){
 ---
 
 ### $HTTP 通用方法实例
-```
+```javascript
 var app = angular.module('myApp', []);
     
 app.controller('siteCtrl', function($scope, $http) {
@@ -208,7 +211,7 @@ app.controller('siteCtrl', function($scope, $http) {
 ### [懒加载 $ocLazyLoad](http://dreamapple.leanapp.cn/gitbook/oclazyload-doc/)
 ### [懒加载 $ocLazyLoad 官方文档](https://oclazyload.readme.io/)
 [使用方法+参考资料](https://blog.csdn.net/zcl_love_wx/article/details/52034193)
-```
+```javascript
     //定义模板，并注入ui-router
     var app = angular.module('myApp', ['ui.router']);   
     //对服务进行参数初始化，这里配stateProvider服务的视图控制
@@ -229,15 +232,15 @@ app.controller('siteCtrl', function($scope, $http) {
 
 - 模板
     - template: '\<h1>My Contacts<\/h1>'
-    -  templateUrl: 'contacts.html'
+    - templateUrl: 'contacts.html'
         - templateUrl: function (stateParams){
-    return '/partials/contacts.' + stateParams.filterBy + '.html';
-        } //templateUrl的值可以通过函数放回
+          return '/partials/contacts.' + stateParams.filterBy + '.html';
+          } //templateUrl的值可以通过函数放回
     - 
 
 ### [ui-grid](https://www.cnblogs.com/lucky528/p/7211315.html)
 # 模块划分
-```
+```javascript
 ------- app
 ----- 
 ------- config

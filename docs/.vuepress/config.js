@@ -1,7 +1,7 @@
 module.exports = {
     title: '夏天夏',  // 设置网站标题
     // dest: './dist',    // 设置输出目录
-    // base: '/mt-blog/', // 设置站点根路径
+    base: '/root/', // 设置站点根路径
     // repo: 'https://github.com/TaoXuSheng/mt-blog', // 添加 github 链接
     themeConfig: {
         // activeHeaderLinks: false, // 活动的标题链接 默认值：true 
@@ -53,7 +53,7 @@ module.exports = {
                 // ['web前端/HTML5+CSS3.md','HTML5+CSS3'],
                 ['web前端/实用代码段.md','实用代码段'],
                 // ['web前端/flex布局&Grid 布局.md','flex布局&Grid 布局'],
-                ['web前端/JavaScript.md','JavaScript'],
+                ['web前端/JavaScript.md','JavaScript']
 
             ]
           },
