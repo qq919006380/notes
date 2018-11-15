@@ -72,7 +72,9 @@ Vue.filter('dataReverse',(data)=>{
 1. 定义 (路由) 组件:{template:'<div>123</div>'}
 2. 定义路由配置:{ path: '/foo', component: { template: '<div>foo</div>' } }
 3. 创建 router 实例，然后传路由配置 
-  - new VueRouter({routes // (缩写) 相当于 routes: routes})
+> new VueRouter({routes // (缩写) 相当于 routes: routes})  
+> 注意  new VueRouter({routes:[path:'/xxx',component:xxx]})  建名字一定是routes
+
 4. 创建和挂载根实例。记得要通过 router 实例参数注入路由，
 
 ## 全局路由和渲染前事件
