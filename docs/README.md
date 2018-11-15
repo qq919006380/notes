@@ -3,7 +3,7 @@
 ```markdown
 ---
 home: true
-title: 夏天夏
+title: 夏天夏123
 description: 厕所唱山歌
 component: home
 bgimg: ./mt-blog/docs/bg.jpeg
