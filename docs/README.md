@@ -1,4 +1,4 @@
-# 主页（home）
+# 主页（docs ---> home）
 
 ```markdown
 ---
