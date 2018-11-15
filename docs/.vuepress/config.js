@@ -1,9 +1,9 @@
 module.exports = {
     title: '夏天夏',  // 设置网站标题
     dest: './dist',    // 设置输出目录
-    base: '/notes/', // 设置站点根路径
-    repo: 'https://github.com/qq919006380/notes', // 添加 github 链接
+    // base: '/notes/', // 设置站点根路径
     themeConfig: {
+        repo: 'https://github.com/qq919006380/notes', // 添加 github 链接
         // activeHeaderLinks: false, // 活动的标题链接 默认值：true 
         // displayAllHeaders: true, // 显示所有页面的标题链接 默认值：false
       nav: [
