@@ -29,7 +29,7 @@ options vue object——new Vue({})
 - v-on 给元素添加事件
     - v-on:click='on'
     - 简写 @click='on'
-- 'v-for
+- v-for
     - 数组(item,index) in item
     - 对象(key,value,index) in items
 # 组件 component
@@ -61,12 +61,12 @@ Vue.filter('dataReverse',(data)=>{
 ### 页面数组更改时触发
 - beforeUpdate——页面数据发生更改前触发
 - updated————页面数据发生更改后触发
-### 组件销毁的时候触发（v-if）
+### 组件销毁的时候触发（如：v-if）
 - beforeDestroy——销毁前
 - destroyed————销毁后
 - 
 
-# 路由
+# [路由](https://router.vuejs.org/zh/)
 ### 使用路由5步骤
 0. 如果使用模块化机制编程，导入Vue和VueRouter，要调用 Vue.use(VueRouter)用于创建router-view和router-link组件
 1. 定义 (路由) 组件:{template:'<div>123</div>'}
@@ -77,5 +77,14 @@ Vue.filter('dataReverse',(data)=>{
 
 4. 创建和挂载根实例。记得要通过 router 实例参数注入路由
 
-## 全局路由和渲染前事件
+## 全局路由和渲染前事件（全局路由守卫）
 
+```js
+const router = new VueRouter({ ... })
+
+router.beforeEach((to, from, next) => {
+    console.log(to) //即将要进入的目标 路由对象
+    console.log(from) //当前导航正要离开的路由
+    next // 一定要调用该方法来 resolve 这个钩子。执行效果依赖 next 方法的调用参数。
+})
+```

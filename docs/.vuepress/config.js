@@ -1,7 +1,7 @@
 module.exports = {
-  // base: '/notes/', // 设置站点根路径  
+  base: '/notes/', // 设置站点根路径  
   title: '夏天夏',  // 设置网站标题
-  description: '12345，上山打老虎。',
+  description: '编程是一门手艺活',
   themeConfig: {
     repo: 'qq919006380/notes', // 添加 github 链接
     nav: [
