@@ -10,7 +10,6 @@ module.exports = {
       { text: 'Blog', link: '/blog/' },
       { text: 'Notes', link: '/notes/' },
       { text: 'About', link: 'about/about.md' },
-
     ],
     sidebar: {
       // '/': [ 
