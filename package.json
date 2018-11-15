@@ -20,7 +20,7 @@
     "deploy": "gh-pages -d docs/.vuepress/dist",
     "deploy:build": "npm run docs:build && gh-pages -d docs/.vuepress/dist",
 
-    "push":"git push -f git@github.com:qq919006380/notes.git master:gh-pages"
+    "deploy2": "bash deploy.sh"
 
   },
   "repository": {
