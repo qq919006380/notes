@@ -1,8 +1,8 @@
 module.exports = {
     title: '夏天夏',  // 设置网站标题
-    // dest: './dist',    // 设置输出目录
+    dest: './dist',    // 设置输出目录
     base: '/root/', // 设置站点根路径
-    // repo: 'https://github.com/TaoXuSheng/mt-blog', // 添加 github 链接
+    repo: 'https://github.com/qq919006380/notes', // 添加 github 链接
     themeConfig: {
         // activeHeaderLinks: false, // 活动的标题链接 默认值：true 
         // displayAllHeaders: true, // 显示所有页面的标题链接 默认值：false
