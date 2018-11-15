@@ -75,7 +75,7 @@ Vue.filter('dataReverse',(data)=>{
 > new VueRouter({routes // (缩写) 相当于 routes: routes})  
 > 注意  new VueRouter({routes:[path:'/xxx',component:xxx]})  建名字一定是routes.
 
-4. 创建和挂载根实例。记得要通过 router 实例参数注入路由，
+4. 创建和挂载根实例。记得要通过 router 实例参数注入路由
 
 ## 全局路由和渲染前事件
 
