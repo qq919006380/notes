@@ -1,6 +1,6 @@
 module.exports = {
   base: '/notes/', // 设置站点根路径  
-  dest: './dist',    // 设置输出目录
+  // dest: './dist',    // 设置输出目录
   title: '夏天夏',  // 设置网站标题
   description: '12345，上山打老虎。',
   themeConfig: {
