@@ -1,4 +1,4 @@
-# **git常用命令**
+## **git常用命令**
 - pwd  //查看当前完整路劲
 - ssh-keygen -t rsa -b 4096 -C "919006380@qq.com"  //创建ssh钥匙 
   - 创建成功最后会出现正方形里面有乱码
@@ -15,8 +15,9 @@
 - git reset --hard HEAD^ //退回上一个版本 ^^两个^等于上上个版本。
 - git reset --hard 3628164 //切换版本 3628164等于版本号的前几位数字，没必要写全git会自动查找
 - git reflog // 列出你每一次存档的命令，包括前几位数的版本号
+> git config --global core.quotepath false //解决中文文件名乱码
 
-# **修改全局用户名和邮箱**
+## **修改全局用户名和邮箱**
 ```
     git config --global user.email "919006380@qq.com"
     git config --global user.name "weibo"
