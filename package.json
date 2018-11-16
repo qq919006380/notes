@@ -18,7 +18,7 @@
     "docs:build": "vuepress build docs",
     "deploy": "gh-pages -d docs/.vuepress/dist",
     "deploy:build": "npm run docs:build && gh-pages -d docs/.vuepress/dist",
-    "deploy2": "bash deploy.sh"
+    "deploy:build2": "bash deploy.sh"
   },
   "repository": {
     "type": "git",
