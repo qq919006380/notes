@@ -2,7 +2,7 @@
 > npm run deploy:build2
 
 - 打包
-> docs:build
+> npm run docs:build
 
 - 开启本地服务
-> docs:dev
+> npm run docs:dev
