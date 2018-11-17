@@ -1,5 +1,8 @@
 # filter diary folder
 /diary
+/docs/.vuepress/dist
+
 /node_modules
 package-lock.json
+
 .vscode/launch.json
