@@ -79,6 +79,8 @@ Vue.filter('dataReverse',(data)=>{
 
 ## 全局路由和渲染前事件（全局路由守卫）
 
+router.beforeEach可以做路由的权限转跳
+
 ```js
 const router = new VueRouter({ ... })
 

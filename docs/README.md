@@ -1,6 +1,3 @@
-# 主页（docs ---> home）
-
-```markdown
 ---
 home: true
 title: 夏天夏123
@@ -15,7 +12,5 @@ nav:
   - text: github
     link: https://github.com/qq919006380
   - text: 关于我
-    link: /my/
+    link: /about/
 ---
-
-```
