@@ -9,9 +9,9 @@ options vue object——new Vue({})
 - methods 	// 在 `methods` 对象中定义方法
 - components:{}     //声明组件  components:{'templateName':template}
 - template：		//模板或调用组件 {'templateName':template}
-- watch		//监控数据
-	- 深度监控
-	- obj:{deep:true,handler:function(a){console.log(a.data)}}
+- watch		//监控数据,主要监控值的变化
+	- 深度监控,主要监控引用类型，对象，数组等
+		- obj:{deep:true,handler:function(a){console.log(a.data)}}
 - cumputed 监事多个数据
 # 指令
 - v-text    //innertext
@@ -90,3 +90,7 @@ router.beforeEach((to, from, next) => {
     next // 一定要调用该方法来 resolve 这个钩子。执行效果依赖 next 方法的调用参数。
 })
 ```
+
+# vue-cli
+
+

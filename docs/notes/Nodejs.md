@@ -65,8 +65,19 @@ http.createServer(function(req,res){
 # 调试
 断点调试：断点调试：node debugger 或node inspector 或vscode
 [package.json中文文档](https://github.com/ericdum/mujiang.info/issues/6/)
+# node版本管理器——nvm
+```
+nvm ls	//查看已下载的版本列表
+nvm use  <versionNumber> //使用版本
+nvm install <versionNumber> //下载
+nvm uninstall <versionNumber> //删除
+nvm node_mirror <node_mirror_url>：设置节点镜像,可以使用https://npm.taobao.org/mirrors/node/
 
-# cookie&session
+请注意： 在安装nvm for windows之前，你需要卸载任何现有版本的node.js。并且需要删除现有的nodejs安装目录（例如："C:\Program Files\nodejs’）。因为，nvm生成的symlink（符号链接/超链接)不会覆盖现有的（甚至是空的）安装目录。
+你还需要删除现有的npm安装位置（例如“C:\Users\weiqinl\AppData\Roaming\npm”），以便正确使用nvm安装位置。
+```
+# node后端
+## cookie&session
 cookie和session都是储存数据用的，区别在于
 - cookie储存在客户端（不安全）
 	- 只能存储4K数据
@@ -76,7 +87,7 @@ cookie和session都是储存数据用的，区别在于
 	- 隐患：session劫持
 
 
-# [Express](http://www.expressjs.com.cn/)
+## [Express](http://www.expressjs.com.cn/)
 
 #### 安装应用生成器
 ```
