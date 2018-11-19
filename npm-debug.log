@@ -2,27 +2,27 @@
 1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
 1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
 1 verbose cli   'run',
-1 verbose cli   'docs:build' ]
+1 verbose cli   'deploy:build2' ]
 2 info using npm@1.4.28
 3 info using node@v0.10.35
-4 verbose run-script [ 'predocs:build', 'docs:build', 'postdocs:build' ]
-5 info predocs:build notes@1.0.0
-6 info docs:build notes@1.0.0
+4 verbose run-script [ 'predeploy:build2', 'deploy:build2', 'postdeploy:build2' ]
+5 info predeploy:build2 notes@1.0.0
+6 info deploy:build2 notes@1.0.0
 7 verbose unsafe-perm in lifecycle true
-8 info notes@1.0.0 Failed to exec docs:build script
-9 error notes@1.0.0 docs:build: `vuepress build docs`
-9 error Exit status 8
-10 error Failed at the notes@1.0.0 docs:build script.
+8 info notes@1.0.0 Failed to exec deploy:build2 script
+9 error notes@1.0.0 deploy:build2: `bash deploy.sh`
+9 error Exit status 1
+10 error Failed at the notes@1.0.0 deploy:build2 script.
 10 error This is most likely a problem with the notes package,
 10 error not with npm itself.
 10 error Tell the author that this fails on your system:
-10 error     vuepress build docs
+10 error     bash deploy.sh
 10 error You can get their info via:
 10 error     npm owner ls notes
 10 error There is likely additional logging output above.
 11 error System Windows_NT 6.1.7601
-12 error command "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "run" "docs:build"
-13 error cwd C:\Users\Administrator\Desktop\notes
+12 error command "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "run" "deploy:build2"
+13 error cwd c:\Users\Administrator\Desktop\notes
 14 error node -v v0.10.35
 15 error npm -v 1.4.28
 16 error code ELIFECYCLE

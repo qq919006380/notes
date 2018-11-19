@@ -29,7 +29,7 @@ git config user.email
 ```
 # **修改完后推送上github三步代码**
 ```
- git add .  // 文件进入暂存区，. 表示添加所有已修改的，-A表示添加所有文件（包括删除的）
+ git add .  // 文件进入暂存区，. 表示添加所有已修改的，-A表示添加所有文件包括删除的
  git commit -am "add" // 存档，实际上就是把暂存区的所有内容提交到当前分支(master)其中
  “ ”内写入的是本次提交的说明，可以是任意内容
  git push   // push到远端GitHub的master上
