@@ -11,3 +11,4 @@ package-lock.json
 #test
 docs/test.txt
 docs/.vuepress/test.txt
+/npm-debug.log
