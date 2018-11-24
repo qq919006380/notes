@@ -91,6 +91,18 @@ router.beforeEach((to, from, next) => {
 })
 ```
 
-# vue-cli
+# vue-cli3
+- 安装		npm install -g @vue/cli
+- 查看版本		vue --version		
+- 创建项目		vue create hello-world
+	- window下交互提示符不起作用则需要使用		winpty vue.cmd create hello-world
+- 安装插件（从npm上安装并调用他的生成器）
+	- vue add @vue/eslint
+	- vue add router
+	- vue add vuex
+
+
+
+
 
 
