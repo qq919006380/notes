@@ -34,7 +34,7 @@ module.exports = {
             //   'Angular6.md',
             ['js设计模式.md', 'js设计模式'],
             ['Promise.md', 'Promise'],
-            ['webpack.md', 'webpack'],
+            ['打包工具.md', '打包工具'],
             ['js深入浅出.md', 'js深入浅出'],
             ['造轮子思路.md', '造轮子思路'],
             ['ES6.md', 'ES6'],
