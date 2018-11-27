@@ -22,7 +22,7 @@
 ```
 ---
 
-# CSS 选择器
+## CSS 选择器
 **伪类选择器**
 - a:link { ... }  ——元素的默认样式
 - a:visited { ... }——当元素被访问过后生效
@@ -127,7 +127,7 @@ BFC是block formatting context的简称
   position:absolute或fixed */
 
 ```
-# css3
+## css3
 - transition 过度 (注意开关性质的没有过度，例如display:none/diplay)
     - transition:1s 
 - transform 变换
@@ -145,3 +145,14 @@ BFC是block formatting context的简称
         - transform:translateX(tx)
         - transform:translateY(ty)
 ```
+## CSS变量
+```css
+:root{
+  --foo: pink;
+}
+a {
+  color: var(--foo);
+}
+```
+
+[阮一峰CSS变量](http://www.ruanyifeng.com/blog/2017/05/css-variables.html)

@@ -7,7 +7,11 @@
     - 可以通过 require() 来引入本地安装的包
     - npm install xxx 安装xxx模块到当前目录，但不记录到package.json里。
     - npm install --save xxx 安装xxx模块，并且记录到package.json里，字段对应的dependency，是产品环境必须依赖的模块
+      - 注意 node6开始--save的默认的，可以不写
     - npm install xxx --save-dev把你的安装包信息写入package.json文件的dev-Dependencies字段中
+      - npm i -d xxx (简写)
+    - ./node_modules/.bin/ XXX	执行一个本地目录安装的包命令
+        - npx XXX （缩写）
  - 全局安装
     - npm install --global xxx全局安装xxx模块，但不记录到package.json里，如果模块里package.json有bin配置，会自动链接，作为cli命令
     - 全局安装可以直接在命令行里使用
