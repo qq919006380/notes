@@ -1,3 +1,5 @@
+## 地址：https://qq919006380.github.io/notes/
+
 - 打包并推送到 gh-pages 分支
 > npm run deploy:build2
 
