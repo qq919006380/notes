@@ -31,6 +31,18 @@
         - npm install -g nrm
         - nrm ls
         - nrm use taobao
+
+## 发布npm包
+- npm adduser	添加登录npm用户
+- npm publish
+> 注意：发布前需要查看当前源是否npm，npm包名字是否已经被占用
+
+## 测试npm包
+npm link  当前的包发布到全局目录
+npm link XXX 用全局目录的包替换掉当前使用的包
+npm unlink XXX  用回当前本地的包
+
+
 # 系统模块
 ### http模块
 创建服务
