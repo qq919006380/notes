@@ -28,11 +28,16 @@ git config user.name
 git config user.email
 ```
 # **修改完后推送上github三步代码**
-```
+```shell
  git add .  // 文件进入暂存区，. 表示添加所有已修改的，-A表示添加所有文件包括删除的
  git commit -am "add" // 存档，实际上就是把暂存区的所有内容提交到当前分支(master)其中
  “ ”内写入的是本次提交的说明，可以是任意内容
  git push   // push到远端GitHub的master上
+ 
+ --------------常用参数说明------------------------------------
+ git add -A:[<path>] # [<path>]表示把<path>中所有tracked文件中被修改过或已删除文件和所有untracted的文件信息添加到索引库。省略<path>表示.,即当前目录。
+ git add -i #我们可以通过git add -i 命令查看当前目录中被所有修改过或已删除文件但没有提交的文件，并通过其revert子命令可以查看当前目录中所有untracted的文件，同时进入一个子命令系统。
+ git commit -v #查看存档并且添加存档信息
 ```
 # **关联远程库**
 - git remote add origin git@server-name:path/repo-name.git //关联一个远程库
