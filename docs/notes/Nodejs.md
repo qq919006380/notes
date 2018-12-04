@@ -1,4 +1,9 @@
  - # [Node](http://www.imooc.com/learn/348)
+ ## 简介 
+ Node诞生于2009年，是基于 Google V8 引擎的 JavaScript 运行时环境，具有 I/O、文件读写、操作数据库(服务器端)等能力，具有事件驱动，非阻塞 I/O 模型等特性，主要作用为前端的开发工具与网站后端。Node.js 内置了开源包管理器npm。
+
+
+
 ---
 # [npm](https://juejin.im/post/5ab3f77df265da2392364341)
 ## 安装
@@ -7,7 +12,7 @@
     - 可以通过 require() 来引入本地安装的包
     - npm install xxx 安装xxx模块到当前目录，但不记录到package.json里。
     - npm install --save xxx 安装xxx模块，并且记录到package.json里，字段对应的dependency，是产品环境必须依赖的模块
-      - 注意 node6开始--save的默认的，可以不写
+      - 注意 node6开始--save的默认的，可以不写 npm i XXX
     - npm install xxx --save-dev把你的安装包信息写入package.json文件的dev-Dependencies字段中
       - npm i -d xxx (简写)
     - ./node_modules/.bin/ XXX	执行一个本地目录安装的包命令
@@ -91,7 +96,7 @@ cookie和session都是储存数据用的，区别在于
 	- 隐患：session劫持
 
 
-## [Express](http://www.expressjs.com.cn/)
+## node后端框架 [Express](http://www.expressjs.com.cn/)
 
 #### 安装应用生成器
 ```
