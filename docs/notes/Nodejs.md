@@ -37,6 +37,8 @@
         - nrm ls
         - nrm use taobao
 
+其他npm命令 http://javascript.ruanyifeng.com/nodejs/npm.html
+
 ## 发布npm包
 - npm adduser	添加登录npm用户
 - npm publish
