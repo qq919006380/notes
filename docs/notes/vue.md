@@ -34,7 +34,12 @@ options vue object——new Vue({})
     - 对象(key,value,index) in items
 # 组件 component
 -   父组件通过 props 向下传递数据给子组件
-- 子组件通过 events 给父组件发送消息
+    -   props的值可以是数组或是对象
+    -   如果是数组则是声明属性，如props:['属性1','属性2']
+    -   如果是对象则可以写默认值，如porps:{属性1:{},属性2:{type:String,default:'默认值'}}
+        -   validator 属性检查器（可选）
+    -   注意的是如果porps声明的属性是有大写的，dom节点则需要使用-表示，如helloWorld则需要dom标签的属性则需要写成hello-world
+-   子组件通过 events 给父组件发送消息
 
 ### 全局组件
 Vue.component('componentName',templateName)
