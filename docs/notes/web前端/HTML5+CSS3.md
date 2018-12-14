@@ -1,25 +1,18 @@
 # HTML
-- [HTML源头W3.org文档](www.w3.org)
-- [兼容查看](www.caniuse.com)
-- [图床sm.ms](sm.ms)
-- [csssprites.com](csssprites.com)
-- [css-sprite](https://www.toptal.com/developers/css/sprite-generator)
-
-
 
 ## form标签
-```
+```shell
 用于包裹所有需要发送和请求的表单，主要的两个属性
 1、action=“/abc” 数据提交到当前域名的abc后台的路径上
 2、method=“” 有两个类型一个是get和post
 ```
 ## input
 - [表单输入校验](https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Forms/Data_form_validation)
-  - ```html
+```html
     <input type="text" pattern="[a-zA-Z]+" oninvalid="setCustomValidity('Custom Message')" />
-    ```
-  
 ```
+
+```css
 ---
 
 ## CSS 选择器
@@ -44,20 +37,21 @@ PX：pixel的缩写，意为像素1px等于1像素
 em：是相对单位，相对于父元素，如果父元素没有设置font-siz则再继承父元素上一级，直到继承html设置的font-size或者默认的16px。
 rem：相对单位，相对于html标签。在css中可以用:root来选择根元素html，更具语义化。
 vw：相对单位，相对于浏览器的屏幕宽度，1vw则等于浏览器屏幕宽度1%，vh则相对于浏览器高度
+```
 # CSS样式
 **文本溢出...**
-```
+```css
 white-space: nowrap;    //溢出不换行
 overflow: hidden;       //溢出隐藏
 text-overflow: ellipsis;    //溢出用...来代替
 ```
 **display**
-```
+```css
 块级元素：block，list-item，table
 行内元素：inline，inline-table，inline-block
 ```
 **文本样式**
-```
+```css
 ————text-decoration 属性用于设置文字划线样式。
 none 取消划线
 underline 下划线
@@ -71,18 +65,18 @@ lowercase 转为小写
 capitalize 转为首字母大写
 
 ————text-shadow 属性用于设置文字阴影。
-p { 
+`p { 
   text-shadow: 1px 1px 2px black;
-}
+}`
 
 ————text-indent 属性用于设置首行文本的缩进。
-p { 
+`p { 
   text-indent: 2em;  /* 文章的每一段空两格开头 */
 }
-h1 { text-indent: -9999px; }    /* 对用户隐藏文字 */
+h1 { text-indent: -9999px; }    /* 对用户隐藏文字 */`
 
 ————letter-spacing 属性用于设置文字/字母的间距。
-<h1>装 <span class="b">13</span></h1>
+`<h1>装 <span class="b">13</span></h1>`
 
 ————vertical-align 用来指定行内元素（inline）或表格单元格（table-cell）元素的垂直对齐方式。
 top 元素及其后代的顶端与整行的顶端对齐。
@@ -93,15 +87,16 @@ middle 单元格垂直居中
 ————text-align:justify
 文字向两侧对齐，对最后一行无效。
 ```
+
 **隐藏or透明**
-```
+```css
 opacity:0 //透明度为0，有0到1的过度（占位）
 visibility：hidden  //和opacity：0类似（占位）设置为visible变为可见。只能像开关一样设置为可见或不可见
 display：none   //脱离文档流，消失不占位
 background-color：rgba（0，0，0，0，0.2）   //只是背景色透明
 ```
 **浮动**
-```
+```css
 clear:left;要求该盒的top border边位于源文档中在此之前的元素形成的所有左浮动盒的bottom外边下方。
 clear:right;要求该盒的top border边位于源文档中在此之前的元素形成的所有右浮动盒的bottom外边下方。
 clear:both;要求该盒的top border边位于源文档中在此之前的元素形成的所有左浮动盒和右浮动盒的bottom外边下方。
@@ -112,10 +107,10 @@ clear:both;要求该盒的top border边位于源文档中在此之前的元素�
 2.display:inline-block
 3.position:absolute
 4.float:left
+```
 
-```
 **[BFC](http://www.cnblogs.com/Candybunny/p/6222939.html)**
-```
+```css
 BFC是block formatting context的简称
 每个渲染区域用formatting context表示，他决定了其子元素如何定位，以及和其他元素的关系和相互作用在正常流中的盒子要么属于块级格式化上下文，要么属于内联格式化上下文。
 他可以使相邻元素，父子元素的外边框不合并，内生成BFC
@@ -127,6 +122,7 @@ BFC是block formatting context的简称
   position:absolute或fixed */
 
 ```
+
 ## css3
 - transition 过度 (注意开关性质的没有过度，例如display:none/diplay)
     - transition:1s 
@@ -144,7 +140,7 @@ BFC是block formatting context的简称
     - transform:  translate(tx[, ty]) 平移 相对定位
         - transform:translateX(tx)
         - transform:translateY(ty)
-```
+
 ## CSS变量
 ```css
 :root{

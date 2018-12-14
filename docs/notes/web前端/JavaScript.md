@@ -1,5 +1,6 @@
-[阮一峰-javascript](http://javascript.ruanyifeng.com//)  
+[阮一峰-javascript](http://javascript.ruanyifeng.com//) 
 [MDN-javascript](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript)
+
 #  语法
 #### 表达式（expression）
 指一个为了得到返回值的计算式，一定会返回一个值。凡是JavaScript语言中预期为值的地方，都可以使用表达式。比如，赋值语句的等号右边，预期是一个值，因此可以放置各种表达式。
@@ -33,19 +34,20 @@ console.log(x) // 2
 ++y // 2
 console.log(y) //2
 ```
-**布尔运算符**   
+**布尔运算符** 
 布尔运算符用于将表达式转为布尔值，一共包含四个运算符。(*注意：不完全转换为布尔值*)
+
 - && (与)：如果第一个运算子的布尔值为true，则返回第二个运算子的值（注意是值，不是布尔值）；如果第一个运算子的布尔值为false，则直接返回第一个运算子的值，且不再对第二个运算子求值。可以取代if结构
-  - 可以用于检测或判断是否满足条件  =="判断"&&alert("触发")==
-  - 待添加
+  - 可以用于检测或判断是否满足条件  `"判断"&&alert("触发")`
+  - // ...
 - || (或)：如果第一个运算子的布尔值为true，则返回第一个运算子的值，且不再对第二个运算子求值；如果第一个运算子的布尔值为false，则返回第二个运算子的值。  
-  - 可以用于初始化值，==var a;a=a||100 //如果a没有赋值的话则会被初始化值为100==
+  - 可以用于初始化值，`var a;a=a||100 //如果a没有赋值的话则会被初始化值为100`
   - 待添加
 - !(非)：也叫取反运算符，将布尔值变为相反值，不管什么类型的值取反运算后，都变成了布尔值。
   - 如果对一个值连续做两次取反运算，等于将其转为对应的布尔值 ==!!"将此转换为true布尔值"==
   - 待添加
-- ?:(三元运算符)  
-## 相等运算符判断规则
+- ?:(三元运算符) 
+## 相等运算(==)符判断规则
 - 如果两个值类型相同，则执行严格相等的运算
 - 如果两个值的类型不同
   1. 如果一个是null，一个是undefined，那么相等  
@@ -77,10 +79,11 @@ switch(true){   //判断
 }
 注意：
 case结尾有：分号
-break;  //跳出循环，必有
-default:  //以上case条件都不满足则执行，必有
+break;  //跳出循环
+default:  //以上case条件都不满足则执行
 ```
 **while 永久循环**
+
 ```
 var i=0;
 while(i<10){ //括号里的表达式为true的话则永久执行大括号
@@ -99,6 +102,7 @@ do{
 ```
 **条件执行for语句**
 ```
+for(var i=0;i<10;i++){console.log(i)}
 ```
 **break跳出循环，后面不再做循环**  
 **continue跳过本次循环**
@@ -112,14 +116,16 @@ do{
 # 定时器
 ### setTimeout 
 延迟x秒执行
-### setInterval  
+### setInterval 
 每x秒执行一次
 # 对象
-delete obj.name     //命令用于删除对象的属性，删除成功后返回true。  
-Object.keys(obj);    //查看所有属性
+delete obj.name     //delete命令用于删除对象的属性，删除成功后返回true。 
+Object.keys(obj);    //查看所有属性(并非属性的值)
+
 # JSON
-JSON.parse(obj) //方法用于将JSON字符串转化成对象。  
-JSON.stringify(obj) //JSON.stringify方法用于将一个值转为字符串。该字符串符合 JSON 格式，并且可以被JSON.parse方法还原。  
+JSON.parse(obj) //方法用于将JSON字符串转化成对象。 
+JSON.stringify(obj) //方法用于将对象转为字符串。该字符串符合 JSON 格式，并且可以被JSON.parse方法还原。 
+
 # 数组
 - arr.push("") //方法将一个或多个元素添加到数组的末尾，并返回新数组的长度。
 - arr.pop() //方法从数组中删除最后一个元素，并返回该元素的值。此方法更改数组的长度。
@@ -142,10 +148,8 @@ JSON.stringify(obj) //JSON.stringify方法用于将一个值转为字符串。�
 - .reduce() //遍历数组，调用回调函数，将数组元素组合成一个值，reduce从索引最小值开始，reduceRight反向，方法有两个参数
     - 回调函数：把两个值合为一个，返回结果
     - value，一个初始值,可选
-# 函数节流
-throttle 和 [debounce](http://js.jirengu.com/tacohunahe/1/edit?js,output)
+# 函数节流 （throttle 和 [debounce](http://js.jirengu.com/tacohunahe/1/edit?js,output)）
 # String
-截取
 - .charAt(0) //获取第一个字符串
 - .charCodeAt(0) //获取第一个字符串的Unicode编码
 - .substr(1,2) //截取字符串，第一个是初始位置，第二个是长度
