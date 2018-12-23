@@ -95,6 +95,16 @@ router.beforeEach((to, from, next) => {
     next // 一定要调用该方法来 resolve 这个钩子。执行效果依赖 next 方法的调用参数。
 })
 ```
+## 全局配置
+```
+Vue.config.ignoredElements = [
+  /^wired-/
+]
+```
+## 全局API
+- Vue.extend
+- Vue.directive
+- Vue.filter
 
 # vue-cli3
 - 安装		npm install -g @vue/cli
