@@ -86,7 +86,8 @@
       - e.cancelable 属性表明该事件是否可以被取消默认行为
     - e.stopPropagation() 取消事件进一步捕获或冒泡
     - e.target 事件的目标元素 常用做事件代理
-- **常用事件**
+- [**常用事件**](https://wangdoc.com/javascript/events/index.html)
+
     - click 鼠标单击
     - dblclick 鼠标双击
     - mousedown 鼠标指针在目标元素上触发(包括子元素)
