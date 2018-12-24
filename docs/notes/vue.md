@@ -63,6 +63,7 @@ Vue.filter('dataReverse',(data)=>{
 ### 页面加载触发
 - beforeMount——页面加载前触发
 - mounted————页面加载完成后触发(到这里后的是Vue完成组装好的DOM)
+    - 如果存在异步加载组件可以使用`this.$nextTick(function () { })`
 ### 页面数组更改时触发
 - beforeUpdate——页面数据发生更改前触发
 - updated————页面数据发生更改后触发
@@ -105,6 +106,22 @@ Vue.config.ignoredElements = [
 - Vue.extend
 - Vue.directive
 - Vue.filter
+
+## 实力属性
+
+- [vm.$data](https://cn.vuejs.org/v2/api/#vm-data) 
+- [vm.$props](https://cn.vuejs.org/v2/api/#vm-props) 获取props对象属性
+- [vm.$el](https://cn.vuejs.org/v2/api/#vm-el)	获取当前组件的对象属性
+- [vm.$options](https://cn.vuejs.org/v2/api/#vm-options)
+- [vm.$parent](https://cn.vuejs.org/v2/api/#vm-parent)
+- [vm.$root](https://cn.vuejs.org/v2/api/#vm-root)
+- [vm.$children](https://cn.vuejs.org/v2/api/#vm-children)
+- [vm.$slots](https://cn.vuejs.org/v2/api/#vm-slots)  获取插槽对象属性
+- [vm.$scopedSlots](https://cn.vuejs.org/v2/api/#vm-scopedSlots) 
+- [vm.$refs](https://cn.vuejs.org/v2/api/#vm-refs)	获取带ref标识的对象属性
+- [vm.$isServer](https://cn.vuejs.org/v2/api/#vm-isServer)
+- [vm.$attrs](https://cn.vuejs.org/v2/api/#vm-attrs)
+- [vm.$listeners](https://cn.vuejs.org/v2/api/#vm-listeners)
 
 # vue-cli3
 - 安装		npm install -g @vue/cli
