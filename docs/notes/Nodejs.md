@@ -36,6 +36,11 @@
         - npm install -g nrm
         - nrm ls
         - nrm use taobao
+- 参数
+    - --loglevel silent //简化log消息（**没有消息是最好的消息**）
+        - -s //简写
+    - --loglevel verbose //详细log消息
+        - -d //简写
 
 其他npm命令 http://javascript.ruanyifeng.com/nodejs/npm.html
 
