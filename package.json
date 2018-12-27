@@ -9,16 +9,12 @@
   "dependencies": {
     "vuepress": "^0.14.4"
   },
-  "devDependencies": {
-    "gh-pages": "^2.0.1"
-  },
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
-    "deploy": "gh-pages -d docs/.vuepress/dist",
-    "deploy:build": "npm run docs:build && gh-pages -d docs/.vuepress/dist",
-    "deploy:build2": "bash deploy.sh"
+    "deploy:build": "bash deploy.sh",
   },
   "repository": {
     "type": "git",
