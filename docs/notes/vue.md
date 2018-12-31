@@ -136,5 +136,3 @@ Vue.config.ignoredElements = [
 
 
 
-
-
