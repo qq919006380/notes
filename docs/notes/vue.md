@@ -7,7 +7,7 @@ options vue object——new Vue({})
     - data:{key:"数据"}   //可选
     - data:function(){return{key:"数据"}} //可选
 - methods 	// 在 `methods` 对象中定义方法
-- components:{}     //声明组件  components:{'templateName':template}
+- components:{}     //声明局部组件  components:{'templateName':template}
 - template：		//模板或调用组件 {'templateName':template}
 - watch		//监控数据,主要监控值的变化
 	- 深度监控,主要监控引用类型，对象，数组等
