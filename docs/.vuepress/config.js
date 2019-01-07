@@ -3,12 +3,11 @@ module.exports = {
   title: '夏天夏',  // 设置网站标题
   description: '编程是一门手艺活',
   themeConfig: {
-    repo: 'qq919006380/notes', // 添加 github 链接
+    // repo: 'qq919006380/notes', // 添加 github 链接
     nav: [
       { text: 'Home', link: '/' },//主页
       { text: 'Blog', link: '/blog/' },
       { text: 'Notes', link: '/notes/' },
-      { text: 'About', link: 'about/about.md' },
     ],
     
     sidebar: {
