@@ -25,6 +25,7 @@
     - 
 - npm uninstall  删除包 
 - npm install   下载package.json记录的包
+- npm root -g  查看全局包的安装目录
 ## npm 命令 
  - npm init 初始化创建一个包
  - npm init -y 初始化创建一个默认的包
