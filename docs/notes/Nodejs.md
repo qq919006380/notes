@@ -48,7 +48,7 @@
 ## 发布npm包
 - npm adduser	添加登录npm用户
 - npm publish
-> 注意：发布前需要查看当前源是否npm，npm包名字是否已经被占用
+> 注意：发布前需要查看当前源是否npm，npm包名字是否已经被占用,版本号是否与发布前版本号相同，package.JSON文件中的main字段是包的加载的入口文件默认是index.js
 
 ## 测试npm包
 （在准备发布的包根目录下使用）npm link  当前的包发布到全局目录  
