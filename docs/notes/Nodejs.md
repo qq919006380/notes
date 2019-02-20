@@ -46,7 +46,8 @@
 其他npm命令 http://javascript.ruanyifeng.com/nodejs/npm.html
 
 ## 发布npm包
-- npm adduser	添加登录npm用户
+- npm adduser	//添加登录npm用户
+- npm whoami  //查看当前登录的用户
 - npm publish
 > 注意：发布前需要查看当前源是否npm，npm包名字是否已经被占用,版本号是否与发布前版本号相同，package.JSON文件中的main字段是包的加载的入口文件默认是index.js
 
