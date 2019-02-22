@@ -1,7 +1,7 @@
 ---
 home: true
-title: 夏天夏123
-description: 厕所唱山歌
+title: 夏天夏
+description: Hello World
 component: home
 bgimg: ./mt-blog/docs/bg.jpeg
 nav:

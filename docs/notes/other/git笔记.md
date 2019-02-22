@@ -35,7 +35,7 @@ git config user.email
  git push   // push到远端GitHub的master上
  
  --------------常用参数说明------------------------------------
- git add -A:[<path>] # [<path>]表示把<path>中所有tracked文件中被修改过或已删除文件和所有untracted的文件信息添加到索引库。省略<path>表示.,即当前目录。
+ git add -A:`[<path>]` # [<path>]表示把<path>中所有tracked文件中被修改过或已删除文件和所有untracted的文件信息添加到索引库。省略<path>表示.,即当前目录。
  git add -i #我们可以通过git add -i 命令查看当前目录中被所有修改过或已删除文件但没有提交的文件，并通过其revert子命令可以查看当前目录中所有untracted的文件，同时进入一个子命令系统。
  git commit -v #查看存档并且添加存档信息
 ```
@@ -59,11 +59,11 @@ git config user.email
 # **分支管理**
 - 查看分支：git branch
 - 查看分支包括隐藏分支：git branch -a
-- 创建分支：git branch <name>
-- 切换分支：git checkout <name>
-- 创建+切换分支：git checkout -b <name>
-- 合并某分支到当前分支：git merge <name>
-- 删除分支：git branch -d <name>
+- 创建分支：git branch `<name>`
+- 切换分支：git checkout `<name>`
+- 创建+切换分支：git checkout -b `<name>`
+- 合并某分支到当前分支：git merge `<name>`
+- 删除分支：git branch -d `<name>`
 - 查看分支合并途：git log --graph
 - 查看远程库的信息：git remote
 - 查看远程库详细的信息：git remote -v

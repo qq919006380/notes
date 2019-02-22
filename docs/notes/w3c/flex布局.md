@@ -1,4 +1,4 @@
-# flex 布局  [Grid 布局](https://jirengu.github.io/css-you-should-know/zh-cn/building-a-home-page-with-grid.html)
+# flex 布局
 ## 概念
 - main axis————主轴
 - main size————主尺寸
@@ -49,3 +49,6 @@
 - flex————flex-grow,flex-shrink,flex-basis上面三个的缩写
 - order————顺序
 - align-self————自身的对齐方式
+
+
+# [Grid 布局](https://jirengu.github.io/css-you-should-know/zh-cn/building-a-home-page-with-grid.html)
