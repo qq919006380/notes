@@ -12,4 +12,3 @@ var num=123
 ## 虚拟ＤＯＭ
 ## map, reduce, filter 等高阶函数
 
-123132

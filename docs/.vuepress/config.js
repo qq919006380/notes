@@ -33,7 +33,6 @@ module.exports = {
           // collapsable: false,//侧边栏自动收缩展开
           children: [
             // '',
-            ["tc39/DOM_API.md", "DOM_API"],
             ["tc39/DOM和事件.md", "DOM和事件"],
             ["tc39/ES6.md", "ES6"],
             ["tc39/JavaScript.md", "JavaScript"],
@@ -46,6 +45,8 @@ module.exports = {
             ['w3c/flex布局.md', 'flex布局'],
             ['w3c/HTML5_CSS3.md', 'HTML5_CSS3'],
             ["w3c/svg.md", "svg"],
+            ["w3c/WEB_API.md", "WEB_API"],
+
 
             ['other/ajax.md', 'ajax'],
             ["other/git笔记.md", "git笔记"],
