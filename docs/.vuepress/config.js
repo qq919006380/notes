@@ -22,9 +22,9 @@ module.exports = {
       "/blog/": [
         "", //README
         ["angular1.x使用", "angular1.x的使用总结"],
-        ["three", "three"],
-        ["ng", "ng_title"],
-        ["闭包", "闭包"]
+        ["前端工程化", "前端工程化"],
+        ["闭包", "闭包"],
+        ["lorem", "lorem"]
       ],
       "/notes/": [
         "",
