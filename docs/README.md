@@ -11,6 +11,6 @@ nav:
     link: https://www.zhihu.com/people/xia-tian-xia-13
   - text: github
     link: https://github.com/qq919006380
-  - text: 关于我
-    link: /about/
+  - text: 我的项目
+    link: https://github.com/qq919006380/pencil-vue
 ---

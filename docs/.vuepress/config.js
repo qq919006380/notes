@@ -3,11 +3,11 @@ module.exports = {
   title: "夏天夏", // 设置网站标题
   description: "编程是一门手艺活",
   themeConfig: {
-    repo: "qq919006380/notes", // 添加 github 链接
+    // repo: "qq919006380/notes", // 添加 github 链接
     docsDir: "docs",
     editLinks: true,
-    editLinkText: "帮助我改善此页面",
-    lastUpdated: "上次更新", // string | boolean
+    // editLinkText: "帮助我改善此页面",
+    // lastUpdated: "上次更新", // string | boolean
     nav: [
       { text: "Home", link: "/" }, //主页
       { text: "Blog", link: "/blog/" },
@@ -71,7 +71,7 @@ module.exports = {
             // '',
             ["前端资源.md", "前端资源"],
             ["书籍.md", "书籍"],
-            ["开发环境.md", "个人开发环境"]
+            ["开发环境.md", "插件"]
           ]
         }
       ]
