@@ -23,7 +23,7 @@ module.exports = {
         "", //README
         ["angular1.x使用", "angular1.x的使用总结"],
         ["前端工程化", "前端工程化"],
-        ["闭包", "闭包"],
+        // ["闭包", "闭包"],
         ["lorem", "lorem"]
       ],
       "/notes/": [
