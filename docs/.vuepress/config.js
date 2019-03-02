@@ -23,13 +23,16 @@ module.exports = {
         "", //README
         ["angular1.x使用", "angular1.x的使用总结"],
         ["前端工程化", "前端工程化"],
+        ["关于技术的取舍","关于技术的取舍"],
         // ["闭包", "闭包"],
+        ["切换node版本","切换node版本"],
+        ["我喜欢的parcel","我喜欢的parcel"],
         ["lorem", "lorem"]
       ],
       "/notes/": [
-        "",
+        // "",
         {
-          title: "笔记",
+          title: "记录",
           // collapsable: false,//侧边栏自动收缩展开
           children: [
             // '',
