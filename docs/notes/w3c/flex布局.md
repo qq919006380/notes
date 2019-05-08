@@ -13,29 +13,29 @@
 ## flex container的属性
 > **启动flex布局第一步：**  
 > 在父元素css添加 display:flex 开启flex模式
-- flex-direction————方向
-  -  row————横向展示（默认）
+- **flex-direction**————方向
+  -  row————横向展示（默认,注意:当你调转行或列的方向后，flex-start和flex-end对应的方向也被调转了。） 
   -  row-reverse————反向横展示
-  -  column————纵向展示
+  -  column————纵向展示(注意当flex以列为方向时，`justify-content`控制纵向对齐，`align-items`控制横向对齐。)
   -  column-reverse————反向纵展示
 - flex-wrap————换行
   - nowrap————不换行（默认）
   - wrap————换行
-- ==flex-flow————方向和换行的简写==
+- flex-flow————方向和换行的简写
   - 如：flex-flow:column wrap
-- justify-content————主轴方向的对齐方式
+- **justify-content**————主轴方向的对齐方式
   - space-between————均匀排列，每个元素首个元素放置于起点，末尾元素放置于终点
   - space-around————均匀排列，每个元素周围分配相同的空间
   - space-evenly————均匀排列，每个元素之间的间隔相等
   - flex-start————从行首起始位置开始排列
   - flex-end————从行尾位置开始排列
-  - content————居中排列 
-- align-items————侧抽对齐方式
+  - center————居中排列 
+- **align-items**————侧抽对齐方式
   - flex-start————元素向侧轴起点对齐。
   - flex-end————元素向侧轴终点对齐。
   - center————元素在侧轴居中。如果元素在侧轴上的高度高于其容器，那么在两个方向上溢出距离相同。
   - stretch————弹性元素被在侧轴方向被拉伸到与容器相同的高度或宽度。（默认）
-- align-container————多行/列内容对齐方式（用的较少）
+- **align-container**————多行/列内容对齐方式（用的较少）
   - flex-start————所有行从垂直轴起点开始填充。第一行的垂直轴起点边和容器的垂直轴起点边对齐。接下来的每一行紧跟前一行。
   - flex-end————所有行从垂直轴末尾开始填充。最后一行的垂直轴终点和容器的垂直轴终点对齐。同时所有后续行与前一个对齐。
   - center————所有行朝向容器的中心填充。每行互相紧挨，相对于容器居中对齐。容器的垂直轴起点边和第一行的距离相等于容器的垂直轴终点边和最后一行的距离。
