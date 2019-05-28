@@ -104,6 +104,7 @@ router.beforeEach((to, from, next) => {
 ```
 ## 全局配置
 ```
+// 对writd-开头的标签不会报未注册组件的错误
 Vue.config.ignoredElements = [
   /^wired-/
 ]
@@ -113,7 +114,7 @@ Vue.config.ignoredElements = [
 - Vue.directive
 - Vue.filter
 
-## 实力属性
+## 实例属性
 
 - [vm.$data](https://cn.vuejs.org/v2/api/#vm-data) 
 - [vm.$props](https://cn.vuejs.org/v2/api/#vm-props) 获取props对象属性
@@ -128,6 +129,9 @@ Vue.config.ignoredElements = [
 - [vm.$isServer](https://cn.vuejs.org/v2/api/#vm-isServer)
 - [vm.$attrs](https://cn.vuejs.org/v2/api/#vm-attrs)
 - [vm.$listeners](https://cn.vuejs.org/v2/api/#vm-listeners)
+
+## computed、watch、methods的区别
+
 
 # vue-cli3
 - 安装		npm install -g @vue/cli
