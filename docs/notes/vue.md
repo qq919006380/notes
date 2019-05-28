@@ -131,7 +131,12 @@ Vue.config.ignoredElements = [
 - [vm.$listeners](https://cn.vuejs.org/v2/api/#vm-listeners)
 
 ## computed、watch、methods的区别
+- 理论上computed能做的watch也能做，watch能做的computed也能做，只是应用场景不同。
+- computed是watch、methods综合的优化版，只有渲染的变量变了才回执行。
 
+watch——监听
+computed——计算
+methods——方法
 
 # vue-cli3
 - 安装		npm install -g @vue/cli
