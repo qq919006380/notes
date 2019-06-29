@@ -33,7 +33,7 @@ remotessh
 ```
 
 ##  secure copy(scp)
-本地复制到远程
+本地复制到远程（参数-r为传送文件夹）
 ```shell
 scp local_file user@remote:remote_folder
 或者
