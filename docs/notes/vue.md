@@ -138,7 +138,11 @@ watch——监听
 computed——计算
 methods——方法
 
-# vue-cli3
+## VUE动画
+- css
+    - transition
+
+## vue-cli3
 - 安装		npm install -g @vue/cli
 - 查看版本		vue --version		
 - 创建项目		vue create hello-world
