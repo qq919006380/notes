@@ -152,6 +152,8 @@ methods——方法
 	- vue add router
 	- vue add vuex
 
-
+## 坑
+vue中要修改按引用传值的类型要用this.$set()，这样数据和视图才能同时刷新
+其中对象修改属性值可以不用set函数
 
 
