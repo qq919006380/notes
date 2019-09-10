@@ -1,0 +1,1 @@
+- sudo apt-get install build-essential —— Ubuntu/linux中编译c/c++程序,只需要安装该软件包就可以了。 
