@@ -1,5 +1,5 @@
 module.exports = {
-  base: "/notes/", // 设置站点根路径
+  // base: "/notes/", // 设置站点根路径 注意：如果有域名则不需要
   title: "夏天夏", // 设置网站标题
   description: "编程是一门手艺活",
   themeConfig: {
