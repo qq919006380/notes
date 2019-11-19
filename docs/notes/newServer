@@ -10,7 +10,7 @@ $ tmux
 # 唤起快捷键
 $ ctrl + b
 
-Ctrl+b d：分离当前会话。
+Ctrl+b d：分离当前会话。(挂起并退出)
 Ctrl+b s：列出所有会话。
 Ctrl+b $：重命名当前会话。
 ```
