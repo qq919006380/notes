@@ -4,6 +4,7 @@
     - 注意：远程主机将用户的公钥，保存在登录后的用户主目录的$HOME/.ssh/authorized_keys文件中
 - 生成公钥`ssh-keygen`
 - 将公钥传送到远程主机host上面`ssh-copy-id user@remote -p port`
+    - 注意：如果不需要端口则省略 -p port
 
 ## 配置别名
 ```bash
