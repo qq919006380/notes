@@ -16,6 +16,7 @@
 - git reset --hard 3628164 //切换版本 3628164等于版本号的前几位数字，没必要写全git会自动查找
 - git reflog // 列出你每一次存档的命令，包括前几位数的版本号
 > git config --global core.quotepath false //解决中文文件名乱码
+> git config core.ignorecase false   git默认对大小写不敏感，会将大写的名称改成小写提交，可配置为对大小写敏感
 
 ## **修改全局用户名和邮箱**
 ```

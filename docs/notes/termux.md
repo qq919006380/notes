@@ -13,3 +13,4 @@
 -   杀死会话  tmux kill-session -t <session-name-or-number>
 -   接入会话  tmux attach -t <session-name-or-number>
 -   重命名会话 tmux rename-session -t 0 <new-name>
+
