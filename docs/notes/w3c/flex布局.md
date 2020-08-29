@@ -51,5 +51,22 @@
 - order————顺序
 - align-self————自身的对齐方式
 
-
+## flex布局最后一行左对齐
+```css
+/* 方法一 space-between */
+.container{
+  display:flex;
+  flex-wrap: wrap;
+  background:#999
+}
+.box{
+  width:30%;
+  height:100px;
+  background:pink;
+  margin-top:15px
+}
+.box:not(:nth-child(3n)){
+  margin-right:calc(10% / 2)
+}
+```
 # [Grid 布局](https://jirengu.github.io/css-you-should-know/zh-cn/building-a-home-page-with-grid.html)

@@ -41,7 +41,7 @@ PX：pixel的缩写，意为像素1px等于1像素
 em：是相对单位，相对于父元素，如果父元素没有设置font-siz则再继承父元素上一级，直到继承html设置的font-size或者默认的16px。
 rem：相对单位，相对于html标签。在css中可以用:root来选择根元素html，更具语义化。
 vw：相对单位，相对于浏览器的屏幕宽度，1vw则等于浏览器屏幕宽度1%，vh则相对于浏览器高度
-```
+
 # CSS样式
 **文本溢出...**
 ```css
@@ -49,11 +49,13 @@ white-space: nowrap;    //溢出不换行
 overflow: hidden;       //溢出隐藏
 text-overflow: ellipsis;    //溢出用...来代替
 ```
+
 **display**
 ```css
 块级元素：block，list-item，table
 行内元素：inline，inline-table，inline-block
 ```
+
 **文本样式**
 ```css
 ————text-decoration 属性用于设置文字划线样式。
@@ -97,7 +99,7 @@ middle 单元格垂直居中
 opacity:0 //透明度为0，有0到1的过度（占位）
 visibility：hidden  //和opacity：0类似（占位）设置为visible变为可见。只能像开关一样设置为可见或不可见
 display：none   //脱离文档流，消失不占位
-background-color：rgba（0，0，0，0，0.2）   //只是背景色透明
+background-color:rgba（0,0,0,0,0.2）   //只是背景色透明
 ```
 **浮动**
 ```css
@@ -111,7 +113,7 @@ clear:both;要求该盒的top border边位于源文档中在此之前的元素�
 2.display:inline-block
 3.position:absolute
 4.float:left
-```
+
 
 **[BFC](http://www.cnblogs.com/Candybunny/p/6222939.html)**
 ```css
@@ -121,10 +123,9 @@ BFC是block formatting context的简称
   border:solid 1px
   padding:1px
   overflow:hidden
-  float:left（属性不为none都可以）
+  float:left(属性不为none都可以)
   display:inline-block或flex
-  position:absolute或fixed */
-
+  position:absolute或fixed 
 ```
 
 ## css3
