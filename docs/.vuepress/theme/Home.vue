@@ -2,7 +2,7 @@
   <div class="home">
     <div class="hero">
       <img v-if="data.heroImage" :src="$withBase(data.heroImage)" alt="hero">
-      <img class="Avatar" src="./images/hero.jpeg"></img>
+      <img class="Avatar" src="./images/hero.jpg"></img>
       <h3>{{ data.heroText || $title || 'Hello' }}</h3>
       <div class="description">{{ data.tagline || $description || 'Welcome to your VuePress site' }}</div>
       <div class="button-wrapper">
@@ -115,8 +115,7 @@ export default {
     }
 
     .Avatar {
-      width: 120px;
-      height: 120px;
+      
       border-radius: 60px;
       border: 4px solid #f2f6fc;
     }
