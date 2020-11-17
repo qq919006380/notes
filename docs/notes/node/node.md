@@ -1,0 +1,38 @@
+### 学习nodejs专用
+一、commonjs 导出/导入
+```javascript
+//a.js
+function add(a,b){
+return a+b
+}
+module.exports=add
+//b.js
+const add= require('./a')
+const sun =add(10,23)
+console.log(sun)
+```
+### 创建基础服务
+```javascript
+const http =require('http')
+const server =http.createServer((req,res)=>{
+    res.end('hello world')
+})
+console.log('ok 8000')
+server.listen(8000)
+
+```
+
+### createServer的参数Request 和Response
+- Request 是客户端向服务端请求的数据
+	- req.method请求方式
+	- req.ur请求的URL
+	- req.on('data',chunk=>{console.log(chunk)})	监控信息流事件函数
+	- req.on('end',chunk=>{ res.end('hello') })	监控信息流结束函数
+- Response是服务端向客户端返回的数据
+- 
+
+### GET
+- 客户端向server端获取数据
+- 通过querystring来传递数据，如a.html?id=qwe&name=zhangsan
+- 浏览器直接访问就发起GET请求
+### POST
