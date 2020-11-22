@@ -24,10 +24,14 @@ server.listen(8000)
 
 ### createServer的参数Request 和Response
 - Request 是客户端向服务端请求的数据
-	- req.method请求方式
-	- req.ur请求的URL
-	- req.on('data',chunk=>{console.log(chunk)})	监控信息流事件函数
-	- req.on('end',chunk=>{ res.end('hello') })	监控信息流结束函数
+  - 方法
+    - req.method请求方式
+    - req.ur请求的URL
+  - 事件监听函数
+    - req.on('data',chunk=>{console.log(chunk)})	监控信息流事件函数
+    - req.on('end',chunk=>{ res.end('hello') })	监控信息流结束函数
+  - 函数方法
+    - res
 - Response是服务端向客户端返回的数据
 - 
 
@@ -35,4 +39,5 @@ server.listen(8000)
 - 客户端向server端获取数据
 - 通过querystring来传递数据，如a.html?id=qwe&name=zhangsan
 - 浏览器直接访问就发起GET请求
+
 ### POST
