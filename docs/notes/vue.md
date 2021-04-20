@@ -154,6 +154,67 @@ methods——方法
 
 ## 坑
 vue中要修改按引用传值的类型要用this.$set()，这样数据和视图才能同时刷新
-其中对象修改属性值可以不用set函数
+其中对象修改已存在的key的属性值可以不用set函数
+
+我在组件里面用watch监控了data，但是在组件外面用v－if之后监控就失效了
+
+如果一个组件内部监控watch了异步请求的props，外面加了v-if的话，组件内部的watch不会触发。
+
+```vue
+<template>
+  <div>
+    {{ data }}
+  </div>
+</template>
+
+<script>
+export default {
+  props:["data"],
+  watch:{
+      data:{
+          handler(val){
+              console.log(val)
+          },
+          deep:true
+      }
+  }
+};
+</script>
+
+<style>
+</style>
+```
+
+
+
+```vue
+<template>
+  <div>
+    <cp v-if="isVisibel" :data="arr"></cp>
+  </div>
+</template>
+
+<script>
+import cp from "./cp.vue";
+export default {
+  components: { cp },
+  data() {
+    return {
+      arr: {},
+      isVisibel: false,
+    };
+  },
+  mounted() {
+    setTimeout(() => {
+      this.isVisibel = true;//当v-if等于true的时候，组件内部还没渲染到watch就得到了this.obj的值，所以不会触发组件内部的watch。
+        this.$set(this.arr, "a", "aaa");//因此要给这行套上$nextTick等组件渲染完成了，watch才会触发。
+    }, 300);
+  },
+};
+</script>
+
+```
+
+
 
 
