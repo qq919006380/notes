@@ -9,8 +9,8 @@
     - d 挂起 （或者输入tmux detach）
     - $ 重命名会话
 - 关闭并删除窗口 ctrl+d
-- 新建会话 tmux new -s <session-name>
--   杀死会话  tmux kill-session -t <session-name-or-number>
--   接入会话  tmux attach -t <session-name-or-number>
--   重命名会话 tmux rename-session -t 0 <new-name>
+- 新建会话 tmux new -s `<session-name>`
+-   杀死会话  tmux kill-session -t `<session-name-or-number>`
+-   接入会话  tmux attach -t `<session-name-or-number>`
+-   重命名会话 tmux rename-session -t 0 `<new-name>`
 
