@@ -12,5 +12,5 @@ nav:
   - text: github
     link: https://github.com/qq919006380
   - text: 我的项目
-    link: https://github.com/qq919006380/pencil-vue
+    link: https://pencil-vue.cn/
 ---
