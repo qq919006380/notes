@@ -9,23 +9,19 @@ module.exports = {
     // editLinkText: "帮助我改善此页面",
     // lastUpdated: "上次更新", // string | boolean
     nav: [
-      { text: "Home", link: "/" }, //主页
-      { text: "Blog", link: "/blog/" },
-      { text: "Notes", link: "/notes/" }
+      { text: "主页", link: "/" }, //主页
+      { text: "个人博客", link: "/blog/" },
+      { text: "笔记/记录", link: "/notes/" }
     ],
 
     sidebar: {
-      // '/': [
-      //   '',
-      //   ['主页','主页'],
-      // ],
       "/blog/": [
         "", //README
         ["angular1.x使用", "angular1.x的使用总结"],
         ["前端工程化", "前端工程化"],
         ["关于技术的取舍","关于技术的取舍"],
-        // ["闭包", "闭包"],
-        // ["闭包", "宏任务和微任务，z-index的7个权限"],
+        ["闭包", "闭包"],
+        // ["宏任务和微任务", "宏任务和微任务"],
         ["切换node版本","切换node版本"],
         ["我喜欢的parcel","我喜欢的parcel"],
         ["我所不了解的技术","2018年我所不了解的技术"],
@@ -34,12 +30,10 @@ module.exports = {
         ["2020年总结", "2020年总结"],
       ],
       "/notes/": [
-        // "",
         {
           title: "记录",
           // collapsable: false,//侧边栏自动收缩展开
           children: [
-            // '',
             ["tc39/DOM和事件.md", "DOM和事件"],
             ["tc39/ES6.md", "ES6"],
             ["tc39/JavaScript.md", "JavaScript"],
@@ -53,6 +47,7 @@ module.exports = {
             ['w3c/HTML5_CSS3.md', 'HTML5_CSS3'],
             ["w3c/svg.md", "svg"],
             ["w3c/WEB_API.md", "WEB_API"],
+            ['w3c/zIndex的7个权限.md','zIndex的7个权限'],
 
 
             ['other/ajax.md', 'ajax'],
