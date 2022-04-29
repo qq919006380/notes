@@ -226,10 +226,6 @@ console.log(""+d.getFullYear()+ //年
            )
 ```
 
-# 闭包
-
-闭包就是一个访问父函数局部变量的函数
-
 # this call&apply&bind
 
 ```
