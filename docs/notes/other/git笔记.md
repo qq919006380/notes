@@ -18,6 +18,12 @@
 > git config --global core.quotepath false //解决中文文件名乱码
 > git config core.ignorecase false   git默认对大小写不敏感，会将大写的名称改成小写提交，可配置为对大小写敏感
 
+
+## 三个很有用的 git 命令。
+- git grep <关键词> ：搜索含有关键词的文件。
+- git blame <文件名>：查看指定文件每一行的提交人和提交时间。
+- git log -p <文件名>：查看指定文件的每一次提交和改动。
+
 ## **修改全局用户名和邮箱**
 ```
     git config --global user.email "919006380@qq.com"
