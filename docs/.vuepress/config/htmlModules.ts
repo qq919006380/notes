@@ -31,7 +31,7 @@ const htmlModule: VdoingThemeConfig["htmlModules"] = {
     ">联系我</p>
    <div> 欢迎一起交流学习，加我微信：zwei919</div>
     如果觉得我的文章对你有帮助，可以
-     <a href="https://game.xugaoyi.com" arget="_blank" >请我喝杯咖啡</a>
+     <a href="https://github.com/qq919006380/buy-me-a-coffee" target="_blank" >请我喝杯咖啡</a>
     </p>
     </div>`,
   // `<!-- 纵向自适应 -->
