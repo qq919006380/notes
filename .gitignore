@@ -1,14 +1,18 @@
-# filter diary folder
-/diary
+# npm
+package-lock.json
+node_modules
+
+# yarn
+yarn.lock
+
+# vscode
+.vscode
+
+# vuepress
 docs/.vuepress/dist
 
-/node_modules
-package-lock.json
+# 百度链接推送
+urls.txt
 
-.vscode/launch.json
-
-
-#test
-docs/test.txt
-docs/.vuepress/test.txt
-/npm-debug.log
+# mac
+.DS_Store
