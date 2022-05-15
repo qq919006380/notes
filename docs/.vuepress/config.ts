@@ -34,19 +34,19 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
           {
             text: "技术分享",
             items: [
-              { text: "解释闭包", link: "/pages/fa532d/" },
+              { text: "小白都能看懂的闭包", link: "/pages/fa532d/" },
               { text: "不错的文章或博客", link: "/pages/d81b60/" },
-              { text: "关于后台管理应用", link: "/pages/5627f3" },
-              { text: "关于技术的取舍", link: "/pages/fb0623" },
-              { text: "前端工程化", link: "/pages/495485" },
-              { text: "切换node版本", link: "/pages/c458cd" },
-              { text: "如何优雅的写事件代理", link: "/pages/d7b35b" },
-              { text: "我所不了解的技术", link: "/pages/e7e70a" },
-              { text: "我喜欢的parcel", link: "/pages/03aae3" },
-              { text: "angular1使用", link: "/pages/a61c40" },
-              { text: "node服务端", link: "/pages/c478a0" },
-              { text: "npm_script", link: "/pages/367d88" },
-              { text: "webApp", link: "/pages/247a03" },
+              { text: "关于后台管理应用", link: "/pages/aef645/" },
+              { text: "关于技术的取舍", link: "/pages/fb0623/" },
+              { text: "前端工程化", link: "/pages/495485/" },
+              { text: "切换node版本", link: "/pages/c458cd/" },
+              { text: "如何优雅的写事件代理", link: "/pages/d7b35b/" },
+              { text: "我所不了解的技术", link: "/pages/e7e70a/" },
+              { text: "我喜欢的parcel", link: "/pages/03aae3/" },
+              { text: "angular1使用", link: "/pages/a61c40/" },
+              { text: "node服务端", link: "/pages/c478a0/" },
+              { text: "npm_script", link: "/pages/367d88/" },
+              { text: "webApp", link: "/pages/247a03/" },
             ],
           },
           {
@@ -84,7 +84,7 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
       },
     ],
     sidebarDepth: 2, // 侧边栏显示深度，默认1，最大2（显示到h3标题）
-    logo: "/img/logo.png", // 导航栏logo
+    logo: "/img/a.jpg", // 导航栏logo
     repo: "qq919006380/notes", // 导航栏右侧生成Github链接
     searchMaxSuggestions: 10, // 搜索结果显示最大数
     lastUpdated: "上次更新", // 开启更新时间，并配置前缀文字   string | boolean (取值为git提交时间)
@@ -131,7 +131,7 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
 
     // 博主信息 (显示在首页侧边栏)
     blogger: {
-      avatar: "https://cdn.jsdelivr.net/gh/xugaoyi/image_store/blog/20200103123203.jpg",
+      avatar: "/img/a.jpg",
       name: "夏天夏",
       slogan: "总想做点什么，但是很懒",
     },
@@ -178,7 +178,7 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
 
   // 注入到页面<head>中的标签，格式[tagName, { attrName: attrValue }, innerHTML?]
   head: [
-    ["link", { rel: "icon", href: "/img/favicon.ico" }], //favicons，资源放在public文件夹
+    ["link", { rel: "icon", href: "/img/a.jpg" }], //favicons，资源放在public文件夹
     [
       "meta",
       {
