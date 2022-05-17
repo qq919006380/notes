@@ -26,5 +26,9 @@
     "vuepress-plugin-zooming": "^1.1.7",
     "vuepress-theme-vdoing": "^1.11.3",
     "yamljs": "^0.3.0"
+  },
+  "dependencies": {
+    "busuanzi.pure.js": "^1.0.3",
+    "vuepress-plugin-reading-progress": "^1.0.10"
   }
 }
