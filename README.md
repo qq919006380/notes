@@ -1,1 +1,1 @@
-### 预览地址：[个人主页](https://www.weibaichao.com)
+### 预览地址：[点击预览](https://www.weibaichao.com)
