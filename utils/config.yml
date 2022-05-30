@@ -4,7 +4,7 @@
 path:
   - docs # 第一个成员必须是docs
   - 02.学习笔记
-  - 01.JavaScript
+  - 07.其他
 
 # 要删除的字段 (数组)
 delete:
@@ -14,7 +14,7 @@ delete:
 data:
   categories: 
     - 学习笔记
-    - JavaScript
+    - 其他
   author:
     name: 夏天夏
     link: https://github.com/qq919006380
