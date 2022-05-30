@@ -78,9 +78,8 @@ export default ({
               { text: "我所不了解的技术", link: "/pages/e7e70a/" },
               { text: "我喜欢的parcel", link: "/pages/03aae3/" },
               { text: "angular1使用", link: "/pages/a61c40/" },
-              { text: "node服务端", link: "/pages/c478a0/" },
+             
               { text: "npm_script", link: "/pages/367d88/" },
-              { text: "webApp", link: "/pages/247a03/" },
             ],
           },
           {
@@ -101,7 +100,7 @@ export default ({
           { text: "ES6", link: "/pages/7b6303/" },
           { text: "CSS", link: "/pages/5516f8/" },
           { text: "框架", link: "/pages/1b420d/" },
-          { text: "node", link: "/pages/372e3c/" },
+          { text: "Node", link: "/pages/67ce30/" },
           { text: "服务", link: "/pages/3b063c/" },
           { text: "其他", link: "/pages/fb011d/" },
         ],
