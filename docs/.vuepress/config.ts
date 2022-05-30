@@ -9,7 +9,8 @@ import baiduCode from "./config/baiduCode"; // 百度统计hm码
 import htmlModules from "./config/htmlModules"; // 自定义插入的html块
 import { readFileList, readTotalFileWords, readEachFileWords } from './webSiteInfo/readFile';
 
-export default defineConfig4CustomTheme<VdoingThemeConfig>({
+// export default defineConfig4CustomTheme<VdoingThemeConfig>({
+export default ({
   theme: "vdoing", // 使用npm主题包
   // theme: resolve(__dirname, '../../vdoing'), // 使用本地主题包
 
