@@ -69,7 +69,6 @@ export default ({
             text: "技术分享",
             items: [
               { text: "小白都能看懂的闭包", link: "/pages/fa532d/" },
-              { text: "不错的文章或博客", link: "/pages/d81b60/" },
               { text: "关于后台管理应用", link: "/pages/aef645/" },
               { text: "关于技术的取舍", link: "/pages/fb0623/" },
               { text: "前端工程化", link: "/pages/495485/" },
