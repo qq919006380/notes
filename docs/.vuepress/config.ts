@@ -77,8 +77,16 @@ export default ({
               { text: "我所不了解的技术", link: "/pages/e7e70a/" },
               { text: "我喜欢的parcel", link: "/pages/03aae3/" },
               { text: "angular1使用", link: "/pages/a61c40/" },
-             
-              { text: "npm_script", link: "/pages/367d88/" },
+              { text: "npmScript打造前端工作流", link: "/pages/367d88/" },
+            ],
+
+          },
+          {
+            text: "发布一个node插件",
+            items: [
+              { text: "发布一个npm包", link: "/pages/c63419" },
+              { text: "如何打包一个插件工具库", link: "/pages/dd8138" },
+              { text: "打包工具的选择", link: "/pages/9f5618" },
             ],
           },
           {
