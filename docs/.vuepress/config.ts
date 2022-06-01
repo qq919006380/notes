@@ -84,9 +84,9 @@ export default ({
           {
             text: "发布一个node插件",
             items: [
-              { text: "发布一个npm包", link: "/pages/c63419" },
-              { text: "如何打包一个插件工具库", link: "/pages/dd8138" },
-              { text: "打包工具的选择", link: "/pages/9f5618" },
+              { text: "发布一个npm包", link: "/pages/c63419/" },
+              { text: "如何打包一个插件工具库", link: "/pages/dd8138/" },
+              { text: "打包工具的选择", link: "/pages/9f5618/" },
             ],
           },
           {
