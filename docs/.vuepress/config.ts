@@ -77,7 +77,7 @@ export default ({
               { text: "我所不了解的技术", link: "/pages/e7e70a/" },
               { text: "我喜欢的parcel", link: "/pages/03aae3/" },
               { text: "angular1使用", link: "/pages/a61c40/" },
-              { text: "npmScript打造前端工作流", link: "/pages/367d88/" },
+              { text: "npm script打造前端工作流", link: "/pages/367d88/" },
             ],
 
           },
