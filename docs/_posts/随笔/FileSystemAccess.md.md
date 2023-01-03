@@ -1,3 +1,16 @@
+---
+title: md
+date: 2022-10-07 11:49:22
+permalink: /pages/231ec6/
+sidebar: auto
+categories:
+  - 随笔
+tags:
+  - 
+author: 
+  name: 夏天夏
+  link: https://github.com/qq919006380
+---
 -  showOpenFilePicker() 获取文件句柄
 -  showSaveFilePicker() 保存文件句柄
 -  getFile() //获取文件内容

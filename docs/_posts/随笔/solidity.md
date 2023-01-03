@@ -1,3 +1,16 @@
+---
+title: solidity
+date: 2022-09-08 21:53:45
+permalink: /pages/a7c4c0/
+sidebar: auto
+categories:
+  - 随笔
+tags:
+  - 
+author: 
+  name: 夏天夏
+  link: https://github.com/qq919006380
+---
 Solidity变量类型
 - 数值类型
     - 布尔值(bool)

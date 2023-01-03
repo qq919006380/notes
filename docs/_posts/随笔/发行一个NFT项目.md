@@ -1,3 +1,16 @@
+---
+title: 发行一个NFT项目
+date: 2022-09-12 14:32:29
+permalink: /pages/c291b1/
+sidebar: auto
+categories:
+  - 随笔
+tags:
+  - 
+author: 
+  name: 夏天夏
+  link: https://github.com/qq919006380
+---
 ## 准备文件 
 - image
 - json 
