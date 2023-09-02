@@ -11,7 +11,8 @@ author:
   name: 夏天夏
   link: https://github.com/qq919006380
 ---
-Solidity变量类型
+## [官方翻译文档](https://docs.soliditylang.org/zh/v0.8.19/index.html)
+## 变量类型
 - 数值类型
     - 布尔值(bool)
     - 整数型
@@ -20,12 +21,12 @@ Solidity变量类型
         - uint256 256位正整数
     - 函数类型(solidity文档里把函数归到数值)
     - 定长字节 bytes32 bytes8 bytes1 
-    -  定长字节
 - 引用类型
     - 数组
     - 结构体
     - 地址类型
-       - payable可以转账ETH的地址
+      - address 普通地址
+      - payable address 可以转账的地址,比普通地址多了 transfer 和 send 两个成员方法
         
 - 映射类型
     - solidity里的哈希表
@@ -38,7 +39,9 @@ Solidity变量类型
   - internal(默认) 只能从合约内部访问，继承的合约可以用（也可用于修饰状态变量）
 #### 函数的权限 （默认是能读能写）
   - pure 不能读取写入储存在链上的状态变量
+    - pure 函数通常用于执行纯粹的计算任务，例如数学计算或数据转换，而不会对区块链状态产生影响。
   - view 能读，但不能写
+    - view 函数通常用于查询合约的状态或执行计算，而不会产生状态变化
   - payable 可支付的
 
 #### 函数的输出
