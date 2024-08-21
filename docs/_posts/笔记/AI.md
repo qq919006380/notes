@@ -1,3 +1,18 @@
+---
+title: 虚拟主播AI信息收集
+date: 2023-12-29 13:05:03
+permalink: /pages/de62db/
+sidebar: auto
+categories:
+  - 笔记
+tags:
+  - 
+author: 
+  name: 夏天夏
+  link: https://github.com/qq919006380
+---
+
+## TTS
 [google](https://cloud.google.com/solutions/ai?hl=zh-CN)
 [AI Vtuber](https://www.cnblogs.com/ikaros-521/p/17746640.html)
 [resemble.ai](https://www.resemble.ai/)

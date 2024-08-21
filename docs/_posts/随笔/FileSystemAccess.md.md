@@ -1,5 +1,5 @@
 ---
-title: md
+title: 使用 File System Access API 进行文件读写操作
 date: 2022-10-07 11:49:22
 permalink: /pages/231ec6/
 sidebar: auto
@@ -11,6 +11,9 @@ author:
   name: 夏天夏
   link: https://github.com/qq919006380
 ---
+
+使用 File System Access API 来实现文件的读取和保存操作。
+
 -  showOpenFilePicker() 获取文件句柄
 -  showSaveFilePicker() 保存文件句柄
 -  getFile() //获取文件内容
