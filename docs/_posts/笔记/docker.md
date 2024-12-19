@@ -1,3 +1,16 @@
+---
+title: docker
+date: 2024-12-19 20:48:20
+permalink: /pages/67470e/
+sidebar: auto
+categories:
+  - 笔记
+tags:
+  - 
+author: 
+  name: 夏天夏
+  link: https://github.com/qq919006380
+---
 # 1. 管理 Docker 镜像
 
 ## 列出镜像：

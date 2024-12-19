@@ -1,3 +1,16 @@
+---
+title: mysql笔记
+date: 2024-12-19 20:48:20
+permalink: /pages/5b0b39/
+sidebar: auto
+categories:
+  - 笔记
+tags:
+  - 
+author: 
+  name: 夏天夏
+  link: https://github.com/qq919006380
+---
 ## 常用命令
 
 ### 增

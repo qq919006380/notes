@@ -1,3 +1,16 @@
+---
+title: electron
+date: 2024-12-19 20:48:20
+permalink: /pages/ed8713/
+sidebar: auto
+categories:
+  - 笔记
+tags:
+  - 
+author: 
+  name: 夏天夏
+  link: https://github.com/qq919006380
+---
 [将已经做好的vue项目打包成c/s架构](https://www.cxyzjd.com/article/qq_41579104/107340431)
 
 

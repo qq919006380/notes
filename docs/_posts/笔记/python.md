@@ -1,3 +1,16 @@
+---
+title: python
+date: 2024-12-19 20:48:20
+permalink: /pages/1f830c/
+sidebar: auto
+categories:
+  - 笔记
+tags:
+  - 
+author: 
+  name: 夏天夏
+  link: https://github.com/qq919006380
+---
 ## 虚拟环境
 Python 3.3 以上内置venv 模块,在虚拟环境中，你可以使用 pip 来安装所需的库和依赖项。这些库将在虚拟环境中独立存在，不会影响全局 Python 安装。
 ## 创建虚拟环境

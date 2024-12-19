@@ -1,3 +1,16 @@
+---
+title: react
+date: 2024-12-19 20:48:20
+permalink: /pages/c3a5f2/
+sidebar: auto
+categories:
+  - 笔记
+tags:
+  - 
+author: 
+  name: 夏天夏
+  link: https://github.com/qq919006380
+---
 ## react哲学
 - 按ui来划分组件层级
 - 

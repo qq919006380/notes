@@ -1,3 +1,16 @@
+---
+title: AI
+date: 2024-12-19 20:48:20
+permalink: /pages/eb8e38/
+sidebar: auto
+categories:
+  - 笔记
+tags:
+  - 
+author: 
+  name: 夏天夏
+  link: https://github.com/qq919006380
+---
 [google](https://cloud.google.com/solutions/ai?hl=zh-CN)
 [AI Vtuber](https://www.cnblogs.com/ikaros-521/p/17746640.html)
 [resemble.ai](https://www.resemble.ai/)

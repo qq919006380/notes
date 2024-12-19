@@ -104,11 +104,11 @@ export default ({
         link: "/notes/",
         items: [
           { text: "JavaScript", link: "/pages/71e5ba/" },
-          { text: "ES6", link: "/pages/7b6303/" },
           { text: "CSS", link: "/pages/5516f8/" },
           { text: "框架", link: "/pages/1b420d/" },
           { text: "Node", link: "/pages/67ce30/" },
           { text: "服务", link: "/pages/3b063c/" },
+          { text: "web3", link: "/pages/693942/" },
           { text: "其他", link: "/pages/fb011d/" },
         ],
       },
