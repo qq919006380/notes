@@ -1,0 +1,89 @@
+---
+import SidebarLink from './SidebarLink.astro';
+import type { SidebarItem } from '../utils/sidebar';
+
+interface Props {
+  text: string;
+  items: SidebarItem[];
+  collapsed: boolean;
+}
+
+const { text, items, collapsed } = Astro.props;
+---
+
+<details class="sidebar-group" open={!collapsed}>
+  <summary class="sidebar-group-title">
+    <span class="sidebar-arrow"></span>
+    <span>{text}</span>
+    <span class="sidebar-count">{items.length}</span>
+  </summary>
+  <div class="sidebar-group-items">
+    {items.map((item) => (
+      <SidebarLink text={item.text} link={item.link} active={item.active} />
+    ))}
+  </div>
+</details>
+
+<style>
+  .sidebar-group {
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .sidebar-group:last-child {
+    border-bottom: none;
+  }
+
+  .sidebar-group-title {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+    font-size: 0.9rem;
+    cursor: pointer;
+    color: var(--text-color);
+    list-style: none;
+    user-select: none;
+  }
+
+  /* Remove default marker */
+  .sidebar-group-title::-webkit-details-marker {
+    display: none;
+  }
+
+  .sidebar-group-title::marker {
+    display: none;
+    content: '';
+  }
+
+  .sidebar-group-title:hover {
+    color: var(--accent-color);
+  }
+
+  .sidebar-arrow {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-left: 5px solid var(--text-color);
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .sidebar-group[open] > .sidebar-group-title .sidebar-arrow {
+    transform: rotate(90deg);
+  }
+
+  .sidebar-count {
+    margin-left: auto;
+    font-size: 0.75rem;
+    font-weight: normal;
+    color: var(--text-color);
+    opacity: 0.4;
+  }
+
+  .sidebar-group-items {
+    padding-bottom: 0.25rem;
+  }
+</style>

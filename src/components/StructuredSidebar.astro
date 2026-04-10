@@ -1,0 +1,59 @@
+---
+import SidebarGroup from './SidebarGroup.astro';
+import { buildSidebarTree } from '../utils/sidebar';
+
+interface Props {
+  collection: 'blog' | 'notes' | 'posts';
+  currentSlug?: string;
+}
+
+const { collection, currentSlug } = Astro.props;
+const groups = await buildSidebarTree(collection, currentSlug);
+---
+
+{groups.length > 0 && (
+  <aside class="structured-sidebar">
+    <nav aria-label="文章导航">
+      {groups.map((group) => (
+        <SidebarGroup
+          text={group.text}
+          items={group.items}
+          collapsed={group.collapsed}
+        />
+      ))}
+    </nav>
+  </aside>
+)}
+
+<style>
+  .structured-sidebar {
+    width: var(--sidebar-width);
+    min-width: var(--sidebar-width);
+    position: sticky;
+    top: calc(var(--navbar-height) + 1rem);
+    max-height: calc(100vh - var(--navbar-height) - 2rem);
+    overflow-y: auto;
+    background-color: var(--main-bg);
+    border-radius: 8px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
+    padding: 0.75rem 0;
+    flex-shrink: 0;
+  }
+
+  /* Thin scrollbar inside sidebar */
+  .structured-sidebar::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .structured-sidebar::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.15);
+    border-radius: 2px;
+  }
+
+  /* Hide on mobile/tablet — Navbar slide panel handles navigation */
+  @media (max-width: 1024px) {
+    .structured-sidebar {
+      display: none;
+    }
+  }
+</style>
