@@ -1,0 +1,98 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* ============================================
+   Design Tokens - migrated from vdoing palette.styl
+   Light mode only (Amendment 6)
+   ============================================ */
+
+:root {
+  /* Brand colors */
+  --accent-color: #11A8CD;
+  --active-color: #ff5722;
+  --badge-tip-color: #42b983;
+  --banner-text-color: #fff;
+  --reading-progress-color: #b160ea;
+
+  /* Layout */
+  --navbar-height: 3.6rem;
+  --sidebar-width: 18rem;
+  --content-width: 860px;
+  --home-page-width: 1100px;
+  --right-menu-width: 230px;
+
+  /* Light mode colors */
+  --body-bg: #f4f4f4;
+  --main-bg: rgba(255,255,255,1);
+  --sidebar-bg: rgba(255,255,255,0.8);
+  --blur-bg: rgba(255,255,255,0.9);
+  --text-color: #004050;
+  --text-lighten-color: #0085AD;
+  --border-color: rgba(0,0,0,0.15);
+  --code-bg: #f6f6f6;
+  --code-color: #525252;
+}
+
+/* Base element styles */
+body {
+  background-color: var(--body-bg);
+  color: var(--text-color);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+a {
+  color: var(--accent-color);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Prose (article content) overrides */
+.prose {
+  --tw-prose-body: var(--text-color);
+  --tw-prose-headings: var(--text-color);
+  --tw-prose-links: var(--accent-color);
+  --tw-prose-code: var(--code-color);
+  max-width: var(--content-width);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,0.2);
+  border-radius: 3px;
+}
+
+/* Custom blocks (replaces VuePress ::: containers) */
+.custom-block.warning {
+  padding: 1rem 1.5rem;
+  border-left: 4px solid #e6a23c;
+  background-color: #fdf6ec;
+  border-radius: 4px;
+  margin: 1rem 0;
+  color: #e6a23c;
+}
+
+.custom-block.tip {
+  padding: 1rem 1.5rem;
+  border-left: 4px solid var(--badge-tip-color);
+  background-color: #f0faf4;
+  border-radius: 4px;
+  margin: 1rem 0;
+}
+
+.custom-block.danger {
+  padding: 1rem 1.5rem;
+  border-left: 4px solid #f56c6c;
+  background-color: #fef0f0;
+  border-radius: 4px;
+  margin: 1rem 0;
+  color: #f56c6c;
+}
