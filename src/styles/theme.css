@@ -1,0 +1,87 @@
+/* ============================================
+   Theme Design Tokens
+   夏天夏博客设计系统 — 单一数据源
+   所有颜色、尺寸、字体在此定义，全站通过 var() 引用
+   ============================================ */
+
+:root {
+  /* ---- Brand Colors ---- */
+  --accent-color: #0969A5;          /* 主题色（链接、高亮、按钮） — WCAG AA 5.2:1 对比度 */
+  --active-color: #ff5722;          /* 激活/选中色 */
+  --badge-tip-color: #42b983;       /* 提示徽章色 */
+  --banner-text-color: #fff;        /* Banner 区域文字色 */
+  --reading-progress-color: #b160ea; /* 阅读进度条色（紫色） */
+
+  /* ---- Text Colors ---- */
+  --text-color: #004050;            /* 正文主色 */
+  --text-lighten-color: #00708C;    /* 辅助文字色（副标题、描述） */
+  --code-color: #525252;            /* 代码文字色 */
+
+  /* ---- Background Colors ---- */
+  --body-bg: #f4f4f4;              /* 页面底层背景 */
+  --main-bg: rgba(255,255,255,1);  /* 内容区/卡片背景 */
+  --sidebar-bg: rgba(255,255,255,0.8); /* 侧边栏背景 */
+  --blur-bg: rgba(255,255,255,0.9);    /* 模糊遮罩背景（导航栏） */
+  --code-bg: #f6f6f6;             /* 代码块背景 */
+
+  /* ---- Border ---- */
+  --border-color: rgba(0,0,0,0.15); /* 通用边框色 */
+
+  /* ---- Layout Dimensions ---- */
+  --navbar-height: 3.6rem;         /* 导航栏高度 = 57.6px */
+  --sidebar-width: 18rem;          /* 左侧结构化侧边栏宽度 = 288px */
+  --content-width: 860px;          /* 文章正文最大宽度 */
+  --home-page-width: 1100px;       /* 首页/列表页最大宽度 */
+  --right-menu-width: 230px;       /* 右侧 TOC/信息栏宽度 */
+
+  /* ---- Typography ---- */
+  --font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  --font-family-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo,
+    monospace;
+  --font-size-base: 1rem;          /* 16px */
+  --font-size-sm: 0.875rem;        /* 14px */
+  --font-size-xs: 0.8rem;          /* 12.8px */
+  --font-size-lg: 1.1rem;          /* 17.6px */
+  --line-height-base: 1.6;
+  --line-height-tight: 1.3;
+
+  /* ---- Spacing ---- */
+  --spacing-xs: 0.25rem;           /* 4px */
+  --spacing-sm: 0.5rem;            /* 8px */
+  --spacing-md: 1rem;              /* 16px */
+  --spacing-lg: 1.5rem;            /* 24px */
+  --spacing-xl: 2rem;              /* 32px */
+
+  /* ---- Border Radius ---- */
+  --radius-sm: 4px;                /* 小圆角（标签、徽章） */
+  --radius-md: 8px;                /* 中圆角（卡片、代码块） */
+  --radius-lg: 1rem;               /* 大圆角（搜索框） */
+  --radius-full: 50%;              /* 圆形（头像） */
+
+  /* ---- Shadows ---- */
+  --shadow-card: 0 1px 6px rgba(0,0,0,0.05);   /* 卡片阴影 */
+  --shadow-dropdown: 0 4px 12px rgba(0,0,0,0.1); /* 下拉菜单阴影 */
+  --shadow-btn: 0 2px 8px rgba(0,0,0,0.1);       /* 按钮阴影 */
+
+  /* ---- Transitions ---- */
+  --transition-fast: 0.2s ease;
+  --transition-base: 0.3s ease;
+
+  /* ---- Z-Index Scale ---- */
+  --z-dropdown: 200;
+  --z-navbar: 100;
+  --z-back-to-top: 100;
+  --z-mobile-overlay: 150;
+  --z-mobile-panel: 200;
+  --z-reading-progress: 9999;
+  --z-tip-popup: 99999;
+  --z-love-heart: 99999;
+
+  /* ---- Responsive Breakpoints (reference only, use @media in CSS) ---- */
+  /* mobile:  375px  */
+  /* tablet:  768px  */
+  /* laptop:  1024px */
+  /* desktop: 1440px */
+}
