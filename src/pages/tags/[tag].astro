@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostList from '../../components/PostList.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const blog = await getCollection('blog');
+  const notes = await getCollection('notes');
+  const posts = await getCollection('posts');
+
+  const allArticles = [...blog, ...notes, ...posts]
+    .filter(a => a.data.article !== false && !a.data.draft);
+
+  const tags = new Set<string>();
+  for (const article of allArticles) {
+    for (const tag of article.data.tags) {
+      if (tag) tags.add(tag);
+    }
+  }
+
+  return [...tags].map(tag => ({
+    params: { tag },
+    props: {
+      tag,
+      articles: allArticles
+        .filter(a => a.data.tags.includes(tag))
+        .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()),
+    },
+  }));
+}
+
+const { tag, articles } = Astro.props;
+---
+
+<BaseLayout title={`标签: ${tag}`}>
+  <div class="tag-page">
+    <h1 class="page-title">标签: {tag}</h1>
+    <p class="total-count">共 {articles.length} 篇文章</p>
+    <PostList articles={articles} />
+  </div>
+</BaseLayout>
+
+<style>
+  .tag-page {
+    padding-top: calc(var(--navbar-height) + 2rem);
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .page-title {
+    font-size: 1.8rem;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+  }
+
+  .total-count {
+    color: var(--text-color);
+    opacity: 0.6;
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+  }
+</style>

@@ -1,0 +1,80 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostList from '../../components/PostList.astro';
+import Sidebar from '../../components/Sidebar.astro';
+import SiteInfo from '../../components/SiteInfo.astro';
+import RecentArticles from '../../components/RecentArticles.astro';
+import Pagination from '../../components/Pagination.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const pageSize = 10;
+  const blog = await getCollection('blog');
+  const notes = await getCollection('notes');
+  const posts = await getCollection('posts');
+
+  const all = [...blog, ...notes, ...posts]
+    .filter(a => a.data.article !== false && !a.data.draft)
+    .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+  const totalPages = Math.ceil(all.length / pageSize);
+
+  return Array.from({ length: totalPages }, (_, i) => ({
+    params: { page: String(i + 1) },
+    props: {
+      articles: all.slice(i * pageSize, (i + 1) * pageSize),
+      currentPage: i + 1,
+      totalPages,
+    },
+  }));
+}
+
+const { articles, currentPage, totalPages } = Astro.props;
+
+// Redirect page 1 to homepage
+if (currentPage === 1) {
+  return Astro.redirect('/');
+}
+---
+
+<BaseLayout pageClass="home-page">
+  <div class="home-content">
+    <div class="home-wrapper">
+      <div class="home-main">
+        <PostList articles={articles} />
+        <Pagination currentPage={currentPage} totalPages={totalPages} baseUrl="/page/" />
+      </div>
+
+      <Sidebar>
+        <SiteInfo />
+        <RecentArticles />
+      </Sidebar>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .home-content {
+    padding-top: calc(var(--navbar-height) + 2rem);
+    max-width: var(--home-page-width);
+    margin: 0 auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .home-wrapper {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .home-main {
+    flex: 1;
+    min-width: 0;
+  }
+
+  @media (max-width: 1024px) {
+    .home-wrapper {
+      flex-direction: column;
+    }
+  }
+</style>

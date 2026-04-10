@@ -1,0 +1,107 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { formatDate } from '../utils/date';
+
+const blog = await getCollection('blog');
+const notes = await getCollection('notes');
+const posts = await getCollection('posts');
+
+const allArticles = [...blog, ...notes, ...posts]
+  .filter(a => a.data.article !== false && !a.data.draft)
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+// Group by year
+const byYear = new Map<number, typeof allArticles>();
+for (const article of allArticles) {
+  const year = new Date(article.data.date).getFullYear();
+  if (!byYear.has(year)) byYear.set(year, []);
+  byYear.get(year)!.push(article);
+}
+const years = [...byYear.keys()].sort((a, b) => b - a);
+---
+
+<BaseLayout title="归档">
+  <div class="archives-page">
+    <h1 class="page-title">归档</h1>
+    <p class="total-count">共 {allArticles.length} 篇文章</p>
+
+    {years.map(year => (
+      <div class="year-group">
+        <h2 class="year-title">{year}</h2>
+        <ul class="article-list">
+          {byYear.get(year)!.map(article => (
+            <li class="article-item">
+              <span class="article-date">{formatDate(article.data.date, 'MM-DD')}</span>
+              <a href={`/pages/${article.data.slug}/`} class="article-link">
+                {article.data.title}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+</BaseLayout>
+
+<style>
+  .archives-page {
+    padding-top: calc(var(--navbar-height) + 2rem);
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .page-title {
+    font-size: 1.8rem;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+  }
+
+  .total-count {
+    color: var(--text-color);
+    opacity: 0.6;
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+  }
+
+  .year-title {
+    font-size: 1.3rem;
+    color: var(--accent-color);
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 1rem;
+  }
+
+  .article-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem 0;
+  }
+
+  .article-item {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.4rem 0;
+  }
+
+  .article-date {
+    font-size: 0.85rem;
+    color: var(--text-color);
+    opacity: 0.5;
+    font-family: monospace;
+    white-space: nowrap;
+  }
+
+  .article-link {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+
+  .article-link:hover {
+    color: var(--accent-color);
+  }
+</style>
