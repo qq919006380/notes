@@ -9,7 +9,7 @@ const currentYear = new Date().getFullYear();
   <div class="footer-inner">
     <div class="social-icons">
       {social.map(item => (
-        <a href={item.link} target="_blank" rel="noopener" title={item.title}>
+        <a href={item.link} target="_blank" rel="noopener" title={item.title} aria-label={item.title}>
           <i class={`iconfont ${item.icon}`}></i>
         </a>
       ))}

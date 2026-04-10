@@ -48,7 +48,7 @@ const nav = SITE_CONFIG.nav;
         </div>
       ))}
       <!-- GitHub link -->
-      <a href="https://github.com/qq919006380/notes" target="_blank" rel="noopener" class="nav-link github-link">
+      <a href="https://github.com/qq919006380/notes" target="_blank" rel="noopener" class="nav-link github-link" aria-label="GitHub">
         <i class="iconfont icon-github"></i>
       </a>
     </div>
@@ -64,7 +64,7 @@ const nav = SITE_CONFIG.nav;
 <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
 
 <!-- Mobile nav panel -->
-<div class="mobile-nav-panel" id="mobile-nav-panel">
+<div class="mobile-nav-panel" id="mobile-nav-panel" inert
   <div class="mobile-nav-header">
     <button id="mobile-nav-close" aria-label="关闭导航">&times;</button>
   </div>
@@ -377,11 +377,13 @@ const nav = SITE_CONFIG.nav;
   function openNav() {
     overlay?.classList.add('active');
     panel?.classList.add('active');
+    panel?.removeAttribute('inert');
   }
 
   function closeNav() {
     overlay?.classList.remove('active');
     panel?.classList.remove('active');
+    panel?.setAttribute('inert', '');
   }
 
   toggle?.addEventListener('click', openNav);
