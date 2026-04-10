@@ -43,11 +43,27 @@ body {
 
 a {
   color: var(--accent-color);
-  text-decoration: none;
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 a:hover {
   text-decoration: underline;
+}
+
+/* Navigation links: no underline */
+nav a,
+.nav-link,
+.dropdown-link,
+.mobile-nav-link,
+.mobile-dropdown-link,
+.sidebar-link,
+.category-link,
+.tag-link,
+.back-to-top,
+.banner-arrow,
+.github-link {
+  text-decoration: none;
 }
 
 /* Prose link underline for accessibility */
@@ -101,4 +117,61 @@ a:hover {
   border-radius: 4px;
   margin: 1rem 0;
   color: #f56c6c;
+}
+
+/* Sticky footer: body uses flex column, main fills remaining space */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+body > main {
+  flex: 1;
+}
+
+/* Code block polish */
+.prose pre {
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.prose code:not(pre code) {
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  background-color: var(--code-bg);
+  font-size: 0.875em;
+}
+
+/* Pagefind global overrides (ensures specificity over pagefind-ui.css) */
+.pagefind-ui .pagefind-ui__form::before {
+  opacity: 0.5 !important;
+  width: 16px !important;
+  height: 16px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  left: 8px !important;
+}
+
+.pagefind-ui .pagefind-ui__message {
+  padding: 0.5rem 0.75rem !important;
+  font-size: 0.8rem !important;
+}
+
+.pagefind-ui .pagefind-ui__result {
+  padding: 0.75rem !important;
+  border-top: 1px solid var(--border-color) !important;
+}
+
+.pagefind-ui .pagefind-ui__result-link {
+  font-size: 0.9rem !important;
+  color: var(--accent-color) !important;
+}
+
+.pagefind-ui .pagefind-ui__result-excerpt {
+  font-size: 0.8rem !important;
+  color: var(--text-lighten-color) !important;
 }

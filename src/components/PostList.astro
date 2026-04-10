@@ -99,8 +99,7 @@ const { articles } = Astro.props;
 
   .post-item-meta {
     font-size: 0.8rem;
-    color: var(--text-color);
-    opacity: 0.6;
+    color: color-mix(in srgb, var(--text-color) 80%, white);
     display: flex;
     gap: 0.75rem;
   }
@@ -117,12 +116,14 @@ const { articles } = Astro.props;
 
   .post-item-excerpt {
     font-size: 0.9rem;
-    color: var(--text-color);
-    opacity: 0.8;
+    color: color-mix(in srgb, var(--text-color) 80%, white);
     margin: 0.5rem 0 0;
     line-height: 1.6;
     overflow: hidden;
     text-overflow: ellipsis;
     word-break: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
   }
 </style>

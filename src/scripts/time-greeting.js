@@ -7,29 +7,31 @@
   // Inject tip styles
   var style = document.createElement('style');
   style.textContent =
-    '.index-tip{position:fixed;display:flex;align-items:center;top:-10px;left:50%;opacity:0;min-width:320px;transform:translateX(-50%);transition:opacity .3s linear,top .4s;z-index:99999;padding:15px 15px 15px 20px;border:1px solid #ebeef5;border-radius:4px;line-height:17px;pointer-events:none}' +
+    '.index-tip{position:fixed;display:flex;align-items:center;top:-60px;left:50%;opacity:0;min-width:320px;max-width:90vw;transform:translateX(-50%);transition:opacity .3s linear,top .4s ease;z-index:99999;padding:15px 15px 15px 20px;border:1px solid #ebeef5;border-radius:8px;line-height:17px;pointer-events:none;box-shadow:0 2px 12px rgba(0,0,0,0.1)}' +
     '.index-tip p{line-height:17px;margin:0;font-size:14px}' +
     '.tip-icon{margin-right:10px;line-height:17px}' +
     '.tip-info{background-color:#edf2fc;border-color:#ebeef5}' +
-    '.tip-info .tip-info-content{color:#909399}' +
+    '.tip-info .tip-info-content{color:#606266}' +
     '@media(max-width:640px){.index-tip{min-width:auto;width:90vw}}';
   document.head.appendChild(style);
 
   function addTip(content, type, startHeight, dieTime) {
-    startHeight = startHeight || 50;
+    startHeight = startHeight || 70;
     dieTime = dieTime || 3000;
 
     var tips = document.querySelectorAll('.index-tip');
-    var lastTop = tips.length === 0
-      ? 0
-      : parseInt(tips[tips.length - 1].getAttribute('data-top') || '0');
-    var newTop = lastTop + (tips.length !== 0
-      ? tips[tips.length - 1].offsetHeight + 17
-      : startHeight);
+    var newTop;
+    if (tips.length === 0) {
+      newTop = startHeight;
+    } else {
+      var lastTip = tips[tips.length - 1];
+      var lastTop = parseInt(lastTip.getAttribute('data-top') || String(startHeight));
+      newTop = lastTop + lastTip.offsetHeight + 12;
+    }
 
     var div = document.createElement('div');
     div.className = 'index-tip tip-' + type;
-    div.style.top = lastTop + 'px';
+    div.style.top = '-60px';
     div.setAttribute('data-top', newTop);
 
     var icons = {

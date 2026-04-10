@@ -13,10 +13,7 @@ const nav = SITE_CONFIG.nav;
       <span>{SITE_CONFIG.title}</span>
     </a>
 
-    <!-- Search box placeholder (Pagefind will mount here) -->
-    <div class="search-box" id="search-box"></div>
-
-    <!-- Nav links -->
+    <!-- Nav links (centered) -->
     <div class="nav-links" id="nav-links">
       {nav.map(item => (
         <div class={`nav-item ${item.items ? 'has-dropdown' : ''}`}>
@@ -47,7 +44,11 @@ const nav = SITE_CONFIG.nav;
           )}
         </div>
       ))}
-      <!-- GitHub link -->
+    </div>
+
+    <!-- Right section: search + GitHub -->
+    <div class="nav-right">
+      <div class="search-box" id="search-box"></div>
       <a href="https://github.com/qq919006380/notes" target="_blank" rel="noopener" class="nav-link github-link" aria-label="GitHub">
         <i class="iconfont icon-github"></i>
       </a>
@@ -64,7 +65,7 @@ const nav = SITE_CONFIG.nav;
 <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
 
 <!-- Mobile nav panel -->
-<div class="mobile-nav-panel" id="mobile-nav-panel" inert
+<div class="mobile-nav-panel" id="mobile-nav-panel" inert>
   <div class="mobile-nav-header">
     <button id="mobile-nav-close" aria-label="关闭导航">&times;</button>
   </div>
@@ -130,6 +131,7 @@ const nav = SITE_CONFIG.nav;
     margin: 0 auto;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     height: 100%;
     padding: 0 1.5rem;
   }
@@ -143,6 +145,7 @@ const nav = SITE_CONFIG.nav;
     color: var(--text-color);
     text-decoration: none;
     white-space: nowrap;
+    flex-shrink: 0;
   }
 
   .site-name:hover {
@@ -155,9 +158,17 @@ const nav = SITE_CONFIG.nav;
     border-radius: 50%;
   }
 
+  /* Right section: search + GitHub */
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+  }
+
   .search-box {
-    flex: 1;
-    margin: 0 1.5rem;
+    position: relative;
+    width: 200px;
   }
 
   .nav-links {
@@ -353,17 +364,103 @@ const nav = SITE_CONFIG.nav;
     text-decoration: none;
   }
 
+  /* ===== Pagefind UI style overrides ===== */
+  .search-box :global(.pagefind-ui) {
+    /* Reset Pagefind wrapper defaults */
+    --pagefind-ui-scale: 0.75;
+    --pagefind-ui-primary: var(--accent-color);
+    --pagefind-ui-border-width: 1px;
+    --pagefind-ui-border-radius: 1rem;
+  }
+
+  .search-box :global(.pagefind-ui__form) {
+    position: relative;
+  }
+
+  .search-box :global(.pagefind-ui__search-input) {
+    width: 100% !important;
+    max-width: 200px !important;
+    height: 2rem !important;
+    border-radius: 1rem !important;
+    border: 1px solid var(--border-color) !important;
+    font-size: 0.85rem !important;
+    padding: 0 1rem 0 2rem !important;
+    background-color: rgba(0,0,0,0.03) !important;
+    color: var(--text-color) !important;
+    box-sizing: border-box !important;
+    outline: none !important;
+  }
+
+  .search-box :global(.pagefind-ui__search-input):focus {
+    border-color: var(--accent-color) !important;
+    background-color: rgba(255,255,255,0.95) !important;
+  }
+
+  .search-box :global(.pagefind-ui__search-input)::placeholder {
+    color: var(--text-lighten-color);
+    opacity: 0.6;
+  }
+
+  /* Transparent navbar mode: search input */
+  .navbar.transparent .search-box :global(.pagefind-ui__search-input) {
+    border-color: rgba(255,255,255,0.5) !important;
+    color: #fff !important;
+    background-color: rgba(255,255,255,0.1) !important;
+  }
+
+  .navbar.transparent .search-box :global(.pagefind-ui__search-input)::placeholder {
+    color: rgba(255,255,255,0.7);
+  }
+
+  .navbar.transparent .search-box :global(.pagefind-ui__search-input):focus {
+    border-color: rgba(255,255,255,0.8) !important;
+    background-color: rgba(255,255,255,0.2) !important;
+  }
+
+  /* Hide Pagefind clear button and extra chrome in compact mode */
+  .search-box :global(.pagefind-ui__search-clear) {
+    display: none !important;
+  }
+
+  .search-box :global(.pagefind-ui__drawer) {
+    position: absolute !important;
+    top: calc(100% + 0.5rem) !important;
+    right: 0 !important;
+    left: auto !important;
+    width: 400px !important;
+    max-height: 60vh !important;
+    overflow-y: auto !important;
+    background: var(--main-bg) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12) !important;
+    z-index: 300 !important;
+  }
+
+  /* Hide the Pagefind logo/branding inside form */
+  .search-box :global(.pagefind-ui__suppressed) {
+    display: none !important;
+  }
+
   @media (max-width: 768px) {
     .nav-links {
       display: none;
     }
 
-    .search-box {
+    .nav-right .search-box {
       display: none;
     }
 
     .sidebar-button {
       display: flex;
+    }
+
+    .nav-right {
+      gap: 0;
+    }
+
+    .nav-right .github-link {
+      display: none;
     }
   }
 </style>
