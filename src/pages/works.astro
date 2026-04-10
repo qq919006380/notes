@@ -1,0 +1,13 @@
+---
+import CatalogueLayout from '../layouts/CatalogueLayout.astro';
+import PostList from '../components/PostList.astro';
+import { getCollection } from 'astro:content';
+
+const articles = (await getCollection('works'))
+  .filter(a => !a.data.draft)
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+---
+
+<CatalogueLayout title="我的作品" description="业余时间开发的组件、工具等" imgUrl="/img/other.png">
+  <PostList articles={articles} />
+</CatalogueLayout>

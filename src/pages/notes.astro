@@ -1,0 +1,44 @@
+---
+import CatalogueLayout from '../layouts/CatalogueLayout.astro';
+import PostList from '../components/PostList.astro';
+import { getCollection } from 'astro:content';
+
+const articles = (await getCollection('notes'))
+  .filter(a => a.data.article !== false && !a.data.draft)
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+// Group by subcategory (categories[1]) per Amendment 13
+const groups = new Map<string, typeof articles>();
+for (const article of articles) {
+  const subCat = article.data.categories[1] || '其他';
+  if (!groups.has(subCat)) groups.set(subCat, []);
+  groups.get(subCat)!.push(article);
+}
+// Sort articles within each group by sortOrder
+for (const [, items] of groups) {
+  items.sort((a, b) => a.data.sortOrder - b.data.sortOrder);
+}
+---
+
+<CatalogueLayout title="学习笔记" description="碎片知识，资源整合" imgUrl="/img/ui.png">
+  {[...groups.entries()].map(([groupName, groupArticles]) => (
+    <div class="catalogue-group">
+      <h2 class="group-title">{groupName}</h2>
+      <PostList articles={groupArticles} />
+    </div>
+  ))}
+</CatalogueLayout>
+
+<style>
+  .catalogue-group {
+    margin-bottom: 2rem;
+  }
+
+  .group-title {
+    font-size: 1.2rem;
+    color: var(--accent-color);
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 1rem;
+  }
+</style>
