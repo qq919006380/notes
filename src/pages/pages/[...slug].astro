@@ -1,0 +1,64 @@
+---
+import { getCollection, render } from 'astro:content';
+import PostLayout from '../../layouts/PostLayout.astro';
+
+export async function getStaticPaths() {
+  const collections = ['blog', 'notes', 'posts', 'works'] as const;
+  const allArticles: { article: any; collection: string }[] = [];
+
+  for (const collectionName of collections) {
+    const articles = await getCollection(collectionName);
+    for (const article of articles) {
+      if (article.data.slug) {
+        allArticles.push({ article, collection: collectionName });
+      }
+    }
+  }
+
+  // Sort all articles by date (newest first) for prev/next navigation
+  allArticles.sort(
+    (a, b) =>
+      new Date(b.article.data.date).getTime() -
+      new Date(a.article.data.date).getTime(),
+  );
+
+  return allArticles.map((item, index) => {
+    const prev = index < allArticles.length - 1 ? allArticles[index + 1] : null;
+    const next = index > 0 ? allArticles[index - 1] : null;
+
+    return {
+      params: { slug: item.article.data.slug },
+      props: {
+        article: item.article,
+        collection: item.collection,
+        prevArticle: prev
+          ? { title: prev.article.data.title, slug: prev.article.data.slug }
+          : null,
+        nextArticle: next
+          ? { title: next.article.data.title, slug: next.article.data.slug }
+          : null,
+      },
+    };
+  });
+}
+
+const { article, collection, prevArticle, nextArticle } = Astro.props;
+const { Content, headings } = await render(article);
+---
+
+<PostLayout
+  title={article.data.title}
+  date={article.data.date}
+  categories={article.data.categories}
+  tags={article.data.tags}
+  titleTag={article.data.titleTag}
+  author={article.data.author}
+  headings={headings}
+  rawContent={article.body || ''}
+  prevArticle={prevArticle}
+  nextArticle={nextArticle}
+  collection={collection !== 'works' ? collection : undefined}
+  currentSlug={article.data.slug}
+>
+  <Content />
+</PostLayout>

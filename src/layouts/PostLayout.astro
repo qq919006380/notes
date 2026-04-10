@@ -1,5 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import StructuredSidebar from '../components/StructuredSidebar.astro';
 import Sidebar from '../components/Sidebar.astro';
 import RightMenu from '../components/RightMenu.astro';
 import ArticleNav from '../components/ArticleNav.astro';
@@ -17,6 +18,8 @@ interface Props {
   rawContent: string;
   prevArticle?: { title: string; slug: string } | null;
   nextArticle?: { title: string; slug: string } | null;
+  collection?: 'blog' | 'notes' | 'posts';
+  currentSlug?: string;
 }
 
 const {
@@ -30,6 +33,8 @@ const {
   rawContent,
   prevArticle,
   nextArticle,
+  collection,
+  currentSlug,
 } = Astro.props;
 
 const wordCount = formatWordCount(rawContent);
@@ -39,6 +44,9 @@ const readTime = readingTime(rawContent);
 <BaseLayout title={title}>
   <div class="post-page">
     <div class="content-wrapper">
+      {collection && (
+        <StructuredSidebar collection={collection} currentSlug={currentSlug} />
+      )}
       <article class="post-content">
         <!-- Article header -->
         <header class="post-header">
@@ -221,3 +229,10 @@ const readTime = readingTime(rawContent);
     }
   }
 </style>
+
+<script>
+  import mediumZoom from 'medium-zoom';
+  mediumZoom('.prose img:not(.no-zoom)', {
+    background: 'rgba(0,0,0,0.6)',
+  });
+</script>
