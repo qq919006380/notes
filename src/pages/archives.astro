@@ -60,8 +60,7 @@ const years = [...byYear.keys()].sort((a, b) => b - a);
   }
 
   .total-count {
-    color: var(--text-color);
-    opacity: 0.6;
+    color: color-mix(in srgb, var(--text-color) 80%, white);
     font-size: 0.9rem;
     margin-bottom: 2rem;
   }
@@ -89,8 +88,7 @@ const years = [...byYear.keys()].sort((a, b) => b - a);
 
   .article-date {
     font-size: 0.85rem;
-    color: var(--text-color);
-    opacity: 0.5;
+    color: color-mix(in srgb, var(--text-color) 80%, white);
     font-family: monospace;
     white-space: nowrap;
   }

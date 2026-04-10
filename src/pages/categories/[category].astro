@@ -56,8 +56,7 @@ const { category, articles } = Astro.props;
   }
 
   .total-count {
-    color: var(--text-color);
-    opacity: 0.6;
+    color: color-mix(in srgb, var(--text-color) 80%, white);
     font-size: 0.9rem;
     margin-bottom: 2rem;
   }

@@ -8,7 +8,7 @@ export const BREAKPOINTS = {
 };
 
 export const DESIGN_TOKENS = {
-  accentColor: 'rgb(17, 168, 205)',
+  accentColor: 'rgb(9, 105, 165)',
   progressColor: 'rgb(177, 96, 234)',
   navbarHeight: 57.6, // 3.6rem * 16
   sidebarWidth: 288, // 18rem * 16

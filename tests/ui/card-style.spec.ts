@@ -60,6 +60,9 @@ test.describe('Card Style (.card-box)', () => {
   });
 
   test('SiteInfo 使用 card-box 样式', async ({ page }) => {
+    // SiteInfo 仅在首页渲染
+    await page.goto(`${BASE_URL}/`);
+    await page.setViewportSize({ width: 1280, height: 800 });
     const siteInfo = page.locator('.site-info.card-box');
     await expect(siteInfo).toBeVisible();
   });

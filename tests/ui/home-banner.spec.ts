@@ -42,13 +42,17 @@ test.describe('Home Banner', () => {
   });
 
   test('.typed 打字机光标元素存在且有动画属性', async ({ page }) => {
-    // 先确认元素已挂载（evaluate 在元素不存在时会抛出异常）
+    // 先确认元素已挂载
     const typed = page.locator('.typed').first();
     await expect(typed).toBeAttached();
-    const animName = await typed.evaluate(
-      (el) => window.getComputedStyle(el).animationName
-    );
-    expect(animName).not.toBe('none');
+    // 打字机动画完成后（~3s）才会设置 typedBlink 动画
+    // 等待 JS 设置 animation 属性
+    await expect(async () => {
+      const animName = await typed.evaluate(
+        (el) => window.getComputedStyle(el).animationName
+      );
+      expect(animName).not.toBe('none');
+    }).toPass({ timeout: 5000 });
   });
 
   test('Banner 展示站点标题 "夏天夏"', async ({ page }) => {

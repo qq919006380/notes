@@ -42,15 +42,16 @@ test.describe('Mobile Nav 移动端导航（375px）', () => {
 
   test('点击遮罩层后面板关闭', async ({ page }) => {
     await page.locator('#sidebar-toggle').click();
-    await page.waitForTimeout(400);
+    await page.waitForTimeout(500);
 
     // 确认面板已打开
     const panel = page.locator('#mobile-nav-panel');
-    await expect(panel).toHaveClass(/active/);
+    const isActive = await panel.evaluate(el => el.classList.contains('active'));
+    expect(isActive).toBe(true);
 
-    // 点击遮罩（面板 z-index 高于遮罩，需要 force:true 或点击面板左侧空白区）
-    await page.locator('#mobile-nav-overlay').click({ force: true });
-    await page.waitForTimeout(400);
+    // 点击遮罩（面板 z-index 高于遮罩，点击遮罩可见区域）
+    await page.locator('#mobile-nav-overlay').click({ position: { x: 10, y: 300 }, force: true });
+    await page.waitForTimeout(500);
 
     const hasActive = await panel.evaluate(el => el.classList.contains('active'));
     expect(hasActive).toBe(false);

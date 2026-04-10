@@ -10,15 +10,18 @@ interface Props {
   title?: string;
   description?: string;
   pageClass?: string;
+  ogType?: string;
 }
 
 const {
   title = SITE_CONFIG.title,
   description = SITE_CONFIG.description,
   pageClass = '',
+  ogType = 'website',
 } = Astro.props;
 
 const fullTitle = title === SITE_CONFIG.title ? title : `${title} | ${SITE_CONFIG.title}`;
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
 ---
 
 <!DOCTYPE html>
@@ -34,7 +37,11 @@ const fullTitle = title === SITE_CONFIG.title ? title : `${title} | ${SITE_CONFI
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_3077305_pt8umhrn4k9.css" />
   <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
   <script is:inline src="/pagefind/pagefind-ui.js"></script>
-  <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site).href} />
+  <link rel="canonical" href={canonicalUrl} />
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:type" content={ogType} />
   <title>{fullTitle}</title>
 </head>
 <body class={pageClass}>

@@ -30,6 +30,8 @@ test.describe('Right Sidebar', () => {
   });
 
   test('SiteInfo 显示文章数量（数字 > 0）', async ({ page }) => {
+    // SiteInfo 仅在首页渲染，不在 /blog/ 目录页
+    await page.goto(`${BASE_URL}/`);
     const siteInfo = page.locator('.site-info');
     await expect(siteInfo).toBeVisible();
     const text = await siteInfo.textContent();
@@ -39,7 +41,9 @@ test.describe('Right Sidebar', () => {
   });
 
   test('SiteInfo 显示运行天数（数字 > 0）', async ({ page }) => {
+    await page.goto(`${BASE_URL}/`);
     const siteInfo = page.locator('.site-info');
+    await expect(siteInfo).toBeVisible();
     const text = await siteInfo.textContent();
     const match = text?.match(/(\d+)\s*天/);
     expect(match).not.toBeNull();
@@ -47,7 +51,9 @@ test.describe('Right Sidebar', () => {
   });
 
   test('SiteInfo 显示总字数（包含 k 或 w 单位）', async ({ page }) => {
+    await page.goto(`${BASE_URL}/`);
     const siteInfo = page.locator('.site-info');
+    await expect(siteInfo).toBeVisible();
     const text = await siteInfo.textContent();
     // 字数格式：xxk字 或 x.xw字 或 纯数字
     expect(text).toMatch(/\d+(\.\d+)?[kw]?\s*字/);

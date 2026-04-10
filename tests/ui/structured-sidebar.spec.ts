@@ -30,7 +30,7 @@ test.describe('Structured Sidebar (Left Tree)', () => {
     const borderColor = await page.locator('.sidebar-link.active').evaluate(
       (el) => window.getComputedStyle(el).borderLeftColor
     );
-    expect(borderColor).toBe('rgb(17, 168, 205)');
+    expect(borderColor).toBe('rgb(9, 105, 165)');
   });
 
   test('分组标题显示文章数量', async ({ page }) => {

@@ -79,8 +79,7 @@ const { text, items, collapsed } = Astro.props;
     margin-left: auto;
     font-size: 0.75rem;
     font-weight: normal;
-    color: var(--text-color);
-    opacity: 0.4;
+    color: color-mix(in srgb, var(--text-color) 80%, white);
   }
 
   .sidebar-group-items {

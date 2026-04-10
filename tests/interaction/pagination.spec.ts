@@ -46,8 +46,10 @@ test.describe('Pagination 分页', () => {
     await page.goto('/');
     await page.waitForLoadState('networkidle');
 
-    // 获取第 1 页的文章标题
-    const page1Titles = await page.locator('[class*="post-title"], [class*="article-title"], h2 a, .post-item a').allTextContents();
+    // 获取第 1 页的文章链接 URL（不同页面的文章 slug 不同）
+    const page1Hrefs = await page.locator('.post-item-title a').evaluateAll(
+      (els) => els.map(el => el.getAttribute('href'))
+    );
 
     // 访问第 2 页
     const page2Url = '/page/2/';
@@ -61,11 +63,13 @@ test.describe('Pagination 分页', () => {
       return;
     }
 
-    const page2Titles = await page.locator('[class*="post-title"], [class*="article-title"], h2 a, .post-item a').allTextContents();
+    const page2Hrefs = await page.locator('.post-item-title a').evaluateAll(
+      (els) => els.map(el => el.getAttribute('href'))
+    );
 
-    if (page1Titles.length > 0 && page2Titles.length > 0) {
-      // 两页的文章应该有差异
-      const hasOverlap = page1Titles.some(t => page2Titles.includes(t));
+    if (page1Hrefs.length > 0 && page2Hrefs.length > 0) {
+      // 两页的文章 URL 应该完全不同
+      const hasOverlap = page1Hrefs.some(h => page2Hrefs.includes(h));
       expect(hasOverlap).toBe(false);
     }
   });

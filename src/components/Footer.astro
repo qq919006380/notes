@@ -50,7 +50,7 @@ const currentYear = new Date().getFullYear();
   .social-icons a {
     color: var(--text-color);
     font-size: 1.2rem;
-    opacity: 0.7;
+    opacity: 0.8;
     transition: opacity 0.3s, color 0.3s;
     text-decoration: none;
   }
@@ -63,14 +63,17 @@ const currentYear = new Date().getFullYear();
 
   .copyright {
     font-size: 0.85rem;
-    color: var(--text-color);
-    opacity: 0.7;
+    color: color-mix(in srgb, var(--text-color) 80%, white);
+  }
+
+  .copyright a,
+  .powered-by a {
+    color: var(--accent-color);
   }
 
   .powered-by {
     font-size: 0.75rem;
-    color: var(--text-color);
-    opacity: 0.5;
+    color: color-mix(in srgb, var(--text-color) 80%, white);
     margin-top: 0.5rem;
   }
 </style>

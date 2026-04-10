@@ -41,7 +41,7 @@ const wordCount = formatWordCount(rawContent);
 const readTime = readingTime(rawContent);
 ---
 
-<BaseLayout title={title}>
+<BaseLayout title={title} ogType="article">
   <div class="post-page">
     <div class="content-wrapper">
       {collection && (
@@ -160,8 +160,7 @@ const readTime = readingTime(rawContent);
     flex-wrap: wrap;
     gap: 1rem;
     font-size: 0.85rem;
-    color: var(--text-color);
-    opacity: 0.7;
+    color: color-mix(in srgb, var(--text-color) 80%, white);
     margin-bottom: 1rem;
   }
 
@@ -219,8 +218,7 @@ const readTime = readingTime(rawContent);
     padding-top: 1rem;
     border-top: 1px solid var(--border-color);
     font-size: 0.8rem;
-    color: var(--text-color);
-    opacity: 0.5;
+    color: color-mix(in srgb, var(--text-color) 80%, white);
   }
 
   @media (max-width: 1024px) {

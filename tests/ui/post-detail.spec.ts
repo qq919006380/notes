@@ -17,7 +17,7 @@ test.describe('Post Detail Page', () => {
     const bg = await tag.evaluate(
       (el) => window.getComputedStyle(el).backgroundColor
     );
-    expect(bg).toBe('rgb(17, 168, 205)');
+    expect(bg).toBe('rgb(9, 105, 165)');
   });
 
   test('titleTag 文字颜色为白色', async ({ page }) => {

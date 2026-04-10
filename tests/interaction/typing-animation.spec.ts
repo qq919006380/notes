@@ -31,15 +31,14 @@ test.describe('Typing Animation 打字机动画', () => {
   });
 
   test('.typed 元素有 animation 属性', async ({ page }) => {
-    // 等待动画完成一个周期
-    await page.waitForTimeout(2000);
-
-    const animation = await page.locator('#banner-description .typed').evaluate(el => {
-      return window.getComputedStyle(el).animation;
-    });
-
-    // animation 包含 typedBlink
-    expect(animation).toContain('typedBlink');
+    // 打字动画完成后（~3s）JS 才会设置 typedBlink 动画
+    const cursor = page.locator('#banner-description .typed');
+    await expect(async () => {
+      const animation = await cursor.evaluate(el => {
+        return window.getComputedStyle(el).animation;
+      });
+      expect(animation).toContain('typedBlink');
+    }).toPass({ timeout: 5000 });
   });
 
   test('完整文字 "Hello world!" 最终出现', async ({ page }) => {
