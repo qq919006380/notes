@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "types": ["@playwright/test", "node"]
+  },
+  "include": ["./**/*.ts", "../scripts/permalink-map.json"],
+  "exclude": ["../node_modules"]
+}
