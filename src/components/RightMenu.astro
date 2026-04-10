@@ -1,0 +1,68 @@
+---
+interface Props {
+  headings: { depth: number; slug: string; text: string }[];
+}
+
+const { headings } = Astro.props;
+const tocHeadings = headings.filter(h => h.depth >= 2 && h.depth <= 4);
+---
+
+{tocHeadings.length > 0 && (
+  <div class="right-menu card-box">
+    <p class="right-menu-title">目录</p>
+    <ul class="toc-list">
+      {tocHeadings.map(h => (
+        <li class={`toc-item depth-${h.depth}`}>
+          <a href={`#${h.slug}`} class="toc-link">{h.text}</a>
+        </li>
+      ))}
+    </ul>
+  </div>
+)}
+
+<style>
+  .card-box {
+    background-color: var(--main-bg);
+    border-radius: 8px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .right-menu-title {
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    margin: 0 0 0.5rem 0;
+  }
+
+  .toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .toc-item {
+    line-height: 1.8;
+  }
+
+  .toc-item.depth-3 {
+    padding-left: 1rem;
+  }
+
+  .toc-item.depth-4 {
+    padding-left: 2rem;
+  }
+
+  .toc-link {
+    font-size: 0.8rem;
+    color: var(--text-color);
+    opacity: 0.8;
+    text-decoration: none;
+  }
+
+  .toc-link:hover {
+    color: var(--accent-color);
+    opacity: 1;
+  }
+</style>

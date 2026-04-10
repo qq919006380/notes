@@ -1,0 +1,26 @@
+<div class="reading-progress" id="reading-progress"></div>
+
+<style>
+  .reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: var(--reading-progress-color, #b160ea);
+    z-index: 9999;
+    transition: width 0.1s linear;
+  }
+</style>
+
+<script>
+  const bar = document.getElementById('reading-progress');
+  if (bar) {
+    window.addEventListener('scroll', () => {
+      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+      bar.style.width = `${progress}%`;
+    });
+  }
+</script>

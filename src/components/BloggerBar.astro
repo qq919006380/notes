@@ -1,0 +1,48 @@
+---
+import { SITE_CONFIG } from '../utils/site-config';
+
+const { author } = SITE_CONFIG;
+---
+
+<div class="blogger-bar card-box">
+  <a href={author.link} target="_blank" rel="noopener">
+    <img src={author.avatar} alt={author.name} class="blogger-avatar" />
+  </a>
+  <p class="blogger-name">{author.name}</p>
+  <p class="blogger-slogan">{author.slogan}</p>
+</div>
+
+<style>
+  .card-box {
+    background-color: var(--main-bg);
+    border-radius: 8px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .blogger-bar {
+    text-align: center;
+  }
+
+  .blogger-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 0.5rem;
+  }
+
+  .blogger-name {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--text-color);
+    margin: 0.25rem 0;
+  }
+
+  .blogger-slogan {
+    font-size: 0.85rem;
+    color: var(--text-color);
+    opacity: 0.7;
+    margin: 0;
+  }
+</style>

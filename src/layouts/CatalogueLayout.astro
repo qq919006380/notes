@@ -1,0 +1,90 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Sidebar from '../components/Sidebar.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  imgUrl?: string;
+}
+
+const { title, description, imgUrl } = Astro.props;
+---
+
+<BaseLayout title={title}>
+  <div class="catalogue-page">
+    <div class="content-wrapper">
+      <div class="catalogue-content">
+        <!-- Header -->
+        <header class="catalogue-header">
+          {imgUrl && <img src={imgUrl} alt={title} class="catalogue-img" />}
+          <div class="catalogue-info">
+            <h1>{title}</h1>
+            {description && <p>{description}</p>}
+          </div>
+        </header>
+
+        <!-- Content (article list) -->
+        <slot />
+      </div>
+
+      <Sidebar />
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .catalogue-page {
+    padding-top: calc(var(--navbar-height) + 1rem);
+    max-width: var(--home-page-width);
+    margin: 0 auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .content-wrapper {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .catalogue-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .catalogue-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    background-color: var(--main-bg);
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+    margin-bottom: 1.5rem;
+  }
+
+  .catalogue-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+  }
+
+  .catalogue-info h1 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.5rem;
+    color: var(--text-color);
+  }
+
+  .catalogue-info p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    opacity: 0.7;
+  }
+
+  @media (max-width: 1024px) {
+    .content-wrapper {
+      flex-direction: column;
+    }
+  }
+</style>

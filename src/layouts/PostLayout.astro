@@ -1,0 +1,223 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Sidebar from '../components/Sidebar.astro';
+import RightMenu from '../components/RightMenu.astro';
+import ArticleNav from '../components/ArticleNav.astro';
+import { formatDateTime } from '../utils/date';
+import { formatWordCount, readingTime } from '../utils/content';
+
+interface Props {
+  title: string;
+  date: Date;
+  categories?: string[];
+  tags?: string[];
+  titleTag?: string;
+  author?: { name: string; link?: string };
+  headings: { depth: number; slug: string; text: string }[];
+  rawContent: string;
+  prevArticle?: { title: string; slug: string } | null;
+  nextArticle?: { title: string; slug: string } | null;
+}
+
+const {
+  title,
+  date,
+  categories = [],
+  tags = [],
+  titleTag,
+  author,
+  headings,
+  rawContent,
+  prevArticle,
+  nextArticle,
+} = Astro.props;
+
+const wordCount = formatWordCount(rawContent);
+const readTime = readingTime(rawContent);
+---
+
+<BaseLayout title={title}>
+  <div class="post-page">
+    <div class="content-wrapper">
+      <article class="post-content">
+        <!-- Article header -->
+        <header class="post-header">
+          <h1 class="post-title">
+            {titleTag && <span class="title-tag">{titleTag}</span>}
+            {title}
+          </h1>
+          <div class="post-meta">
+            <span class="meta-item">
+              <i class="iconfont icon-riqi"></i>
+              {formatDateTime(date)}
+            </span>
+            <span class="meta-item">
+              <i class="iconfont icon-shu"></i>
+              {wordCount} 字
+            </span>
+            <span class="meta-item">
+              <i class="iconfont icon-shijian"></i>
+              {readTime}
+            </span>
+            {author && (
+              <span class="meta-item">
+                <i class="iconfont icon-zuozhe"></i>
+                <a href={author.link} target="_blank" rel="noopener">{author.name}</a>
+              </span>
+            )}
+          </div>
+          {categories.length > 0 && (
+            <div class="post-categories">
+              {categories.map(cat => (
+                <a href={`/categories/${cat}/`} class="category-link">{cat}</a>
+              ))}
+            </div>
+          )}
+        </header>
+
+        <!-- Article body -->
+        <div class="prose">
+          <slot />
+        </div>
+
+        <!-- Tags -->
+        {tags.length > 0 && (
+          <div class="post-tags">
+            {tags.map(tag => (
+              <a href={`/tags/${tag}/`} class="tag-link">{tag}</a>
+            ))}
+          </div>
+        )}
+
+        <!-- Prev/Next navigation -->
+        <ArticleNav prevArticle={prevArticle} nextArticle={nextArticle} />
+
+        <!-- Footer -->
+        <div class="post-footer">
+          <span class="last-updated">上次更新: {formatDateTime(date)}</span>
+        </div>
+      </article>
+
+      <!-- Right sidebar with TOC -->
+      <Sidebar showBlogger={false} showContact={false}>
+        <RightMenu headings={headings} />
+      </Sidebar>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .post-page {
+    padding-top: calc(var(--navbar-height) + 1rem);
+    max-width: var(--home-page-width);
+    margin: 0 auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .content-wrapper {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .post-content {
+    flex: 1;
+    min-width: 0;
+    background-color: var(--main-bg);
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+  }
+
+  .post-title {
+    font-size: 1.8rem;
+    margin: 0 0 1rem 0;
+    color: var(--text-color);
+  }
+
+  .title-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    font-size: 0.75rem;
+    background-color: var(--accent-color);
+    color: #fff;
+    border-radius: 4px;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+    font-weight: normal;
+  }
+
+  .post-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-size: 0.85rem;
+    color: var(--text-color);
+    opacity: 0.7;
+    margin-bottom: 1rem;
+  }
+
+  .meta-item i {
+    margin-right: 0.25rem;
+  }
+
+  .post-categories {
+    margin-bottom: 1.5rem;
+  }
+
+  .category-link {
+    display: inline-block;
+    padding: 2px 10px;
+    font-size: 0.8rem;
+    background-color: var(--body-bg);
+    color: var(--accent-color);
+    border-radius: 4px;
+    margin-right: 0.5rem;
+    text-decoration: none;
+  }
+
+  .category-link:hover {
+    background-color: var(--accent-color);
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .post-tags {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+  }
+
+  .tag-link {
+    display: inline-block;
+    padding: 2px 10px;
+    font-size: 0.8rem;
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+    border-radius: 4px;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    text-decoration: none;
+  }
+
+  .tag-link:hover {
+    background-color: var(--accent-color);
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .post-footer {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+    font-size: 0.8rem;
+    color: var(--text-color);
+    opacity: 0.5;
+  }
+
+  @media (max-width: 1024px) {
+    .content-wrapper {
+      flex-direction: column;
+    }
+  }
+</style>

@@ -1,0 +1,86 @@
+---
+import { getCollection } from 'astro:content';
+import { formatDate } from '../utils/date';
+
+const blog = await getCollection('blog');
+const notes = await getCollection('notes');
+const posts = await getCollection('posts');
+
+const recent = [...blog, ...notes, ...posts]
+  .filter(a => a.data.article !== false && !a.data.draft)
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+  .slice(0, 5);
+---
+
+<div class="recent-articles card-box">
+  <div class="recent-title">
+    <i class="iconfont icon-zuixin" style="font-size: 0.875rem"></i>
+    <span>最近更新</span>
+  </div>
+  <ul class="recent-list">
+    {recent.map(a => (
+      <li class="recent-item">
+        <a href={`/pages/${a.data.slug}/`} class="recent-link">{a.data.title}</a>
+        <span class="recent-date">{formatDate(a.data.date, 'MM-DD')}</span>
+      </li>
+    ))}
+  </ul>
+</div>
+
+<style>
+  .card-box {
+    background-color: var(--main-bg);
+    border-radius: 8px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .recent-title {
+    font-weight: bold;
+    color: #888;
+    padding-bottom: 0.5rem;
+    text-align: center;
+  }
+
+  .recent-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .recent-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.5rem;
+    padding: 0.4rem 0;
+    border-bottom: 1px dashed var(--border-color);
+  }
+
+  .recent-item:last-child {
+    border-bottom: none;
+  }
+
+  .recent-link {
+    font-size: 0.8rem;
+    color: var(--text-color);
+    text-decoration: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .recent-link:hover {
+    color: var(--accent-color);
+  }
+
+  .recent-date {
+    font-size: 0.75rem;
+    color: var(--text-color);
+    opacity: 0.5;
+    flex-shrink: 0;
+  }
+</style>

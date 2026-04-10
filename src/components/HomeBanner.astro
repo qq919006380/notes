@@ -1,0 +1,163 @@
+---
+import { SITE_CONFIG } from '../utils/site-config';
+
+const { indexImg, bodyBgImg } = SITE_CONFIG;
+---
+
+<section class="banner" id="banner" style={`background-image: url('${bodyBgImg}')`}>
+  <!-- Time-based color overlay (JS will set the background-color) -->
+  <div class="banner-color" id="banner-color"></div>
+
+  <!-- Banner content -->
+  <div class="banner-content">
+    <h1 class="banner-title">{SITE_CONFIG.title}</h1>
+    <p class="banner-description" id="banner-description">
+      <span></span><span class="typed">|</span>
+    </p>
+  </div>
+
+  <!-- Scroll-down arrow -->
+  <a class="banner-arrow" id="banner-arrow"></a>
+</section>
+
+<style>
+  .banner {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .banner-color {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .banner-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: var(--banner-text-color);
+    margin-top: -5vh;
+  }
+
+  .banner-title {
+    font-size: 2.5rem;
+    font-weight: 300;
+    letter-spacing: 0.2rem;
+    margin: 0 0 1rem 0;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  }
+
+  .banner-description {
+    font-size: 1.4rem;
+    margin: 0;
+    min-height: 2rem;
+    text-shadow: 0 1px 5px rgba(0,0,0,0.3);
+  }
+
+  .typed {
+    opacity: 1;
+    animation: typedBlink 1s infinite;
+  }
+
+  @keyframes typedBlink {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+
+  /* Scroll-down arrow */
+  .banner-arrow {
+    position: absolute;
+    left: 50%;
+    bottom: 15%;
+    margin-left: -10px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    z-index: 3;
+    animation: bounce-in 5s 3s infinite;
+  }
+
+  .banner-arrow::before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    display: block;
+    border-right: 3px solid #fff;
+    border-top: 3px solid #fff;
+    transform: rotate(135deg);
+    position: absolute;
+    bottom: 10px;
+  }
+
+  .banner-arrow::after {
+    content: "";
+    width: 20px;
+    height: 20px;
+    display: block;
+    border-right: 3px solid #fff;
+    border-top: 3px solid #fff;
+    transform: rotate(135deg);
+  }
+
+  @keyframes bounce-in {
+    0% { transform: translateY(0); }
+    20% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+    80% { transform: translateY(0); }
+    100% { transform: translateY(0); }
+  }
+
+  @media (max-width: 768px) {
+    .banner-title {
+      font-size: 1.8rem;
+    }
+
+    .banner-description {
+      font-size: 1.1rem;
+    }
+
+    .banner {
+      background-attachment: scroll;
+    }
+  }
+</style>
+
+<script>
+  // Scroll arrow click: scroll past the banner
+  const arrow = document.getElementById('banner-arrow');
+  const bannerEl = document.getElementById('banner');
+  if (arrow && bannerEl) {
+    arrow.addEventListener('click', () => {
+      window.scrollTo({
+        top: bannerEl.clientHeight,
+        behavior: 'smooth',
+      });
+    });
+  }
+
+  // Navbar transparent effect on homepage banner
+  const navbar = document.getElementById('navbar');
+  if (navbar && bannerEl) {
+    function updateNavbar() {
+      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      if (scrollTop < bannerEl.clientHeight - 60) {
+        navbar.classList.add('transparent');
+      } else {
+        navbar.classList.remove('transparent');
+      }
+    }
+    updateNavbar();
+    window.addEventListener('scroll', updateNavbar);
+  }
+</script>

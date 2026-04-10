@@ -1,0 +1,46 @@
+---
+import '../styles/global.css';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import ReadingProgress from '../components/ReadingProgress.astro';
+import BackToTop from '../components/BackToTop.astro';
+import { SITE_CONFIG } from '../utils/site-config';
+
+interface Props {
+  title?: string;
+  description?: string;
+  pageClass?: string;
+}
+
+const {
+  title = SITE_CONFIG.title,
+  description = SITE_CONFIG.description,
+  pageClass = '',
+} = Astro.props;
+
+const fullTitle = title === SITE_CONFIG.title ? title : `${title} | ${SITE_CONFIG.title}`;
+---
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <meta name="keywords" content="前端博客,个人技术博客,前端,前端开发,前端框架,web前端,前端面试题,技术文档,学习,面试,JavaScript,js,ES6,TypeScript,vue,python,css3,html5,Node,git,github,markdown" />
+  <meta name="theme-color" content="#11a8cd" />
+  <meta name="referrer" content="no-referrer-when-downgrade" />
+  <link rel="icon" href="/img/a.jpg" />
+  <link rel="stylesheet" href="https://at.alicdn.com/t/font_3077305_pt8umhrn4k9.css" />
+  <title>{fullTitle}</title>
+</head>
+<body class={pageClass}>
+  <ReadingProgress />
+  <Navbar />
+  <main>
+    <slot />
+  </main>
+  <Footer />
+  <BackToTop />
+</body>
+</html>

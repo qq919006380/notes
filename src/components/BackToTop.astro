@@ -1,0 +1,42 @@
+<button class="back-to-top" id="back-to-top" aria-label="返回顶部" style="display:none">
+  <i class="iconfont icon-huidaodingbu"></i>
+</button>
+
+<style>
+  .back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+    background-color: var(--main-bg);
+    color: var(--text-color);
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    z-index: 100;
+    transition: opacity 0.3s;
+  }
+
+  .back-to-top:hover {
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+  }
+</style>
+
+<script>
+  const btn = document.getElementById('back-to-top');
+  if (btn) {
+    window.addEventListener('scroll', () => {
+      btn.style.display = document.documentElement.scrollTop > 300 ? 'flex' : 'none';
+    });
+    btn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+</script>

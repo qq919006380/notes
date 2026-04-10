@@ -1,0 +1,68 @@
+---
+interface Props {
+  prevArticle?: { title: string; slug: string } | null;
+  nextArticle?: { title: string; slug: string } | null;
+}
+
+const { prevArticle, nextArticle } = Astro.props;
+---
+
+{(prevArticle || nextArticle) && (
+  <nav class="article-nav">
+    <div class="nav-prev">
+      {prevArticle && (
+        <a href={`/pages/${prevArticle.slug}/`}>
+          <span class="nav-label">上一篇</span>
+          <span class="nav-title">{prevArticle.title}</span>
+        </a>
+      )}
+    </div>
+    <div class="nav-next">
+      {nextArticle && (
+        <a href={`/pages/${nextArticle.slug}/`}>
+          <span class="nav-label">下一篇</span>
+          <span class="nav-title">{nextArticle.title}</span>
+        </a>
+      )}
+    </div>
+  </nav>
+)}
+
+<style>
+  .article-nav {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+    gap: 1rem;
+  }
+
+  .nav-prev, .nav-next {
+    flex: 1;
+  }
+
+  .nav-next {
+    text-align: right;
+  }
+
+  .nav-label {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--text-color);
+    opacity: 0.5;
+  }
+
+  .nav-title {
+    color: var(--accent-color);
+    font-size: 0.9rem;
+  }
+
+  .article-nav a {
+    text-decoration: none;
+  }
+
+  .article-nav a:hover .nav-title {
+    text-decoration: underline;
+  }
+</style>

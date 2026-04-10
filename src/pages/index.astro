@@ -1,15 +1,66 @@
 ---
-// Placeholder index page - will be replaced by full layout in Sub-Plan 03
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HomeBanner from '../components/HomeBanner.astro';
+import Sidebar from '../components/Sidebar.astro';
+import SiteInfo from '../components/SiteInfo.astro';
+import RecentArticles from '../components/RecentArticles.astro';
+import PostList from '../components/PostList.astro';
+import Pagination from '../components/Pagination.astro';
+import { getCollection } from 'astro:content';
+
+const PAGE_SIZE = 10;
+
+const blog = await getCollection('blog');
+const notes = await getCollection('notes');
+const posts = await getCollection('posts');
+
+const allArticles = [...blog, ...notes, ...posts]
+  .filter(a => a.data.article !== false && !a.data.draft)
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+const currentPage = 1;
+const totalPages = Math.ceil(allArticles.length / PAGE_SIZE);
+const articles = allArticles.slice(0, PAGE_SIZE);
 ---
 
-<html lang="zh-CN">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>夏天夏</title>
-  </head>
-  <body>
-    <h1>夏天夏 - 博客迁移中</h1>
-    <p>Astro scaffold initialized.</p>
-  </body>
-</html>
+<BaseLayout pageClass="home-page">
+  <HomeBanner />
+
+  <div class="home-content">
+    <div class="home-wrapper">
+      <div class="home-main">
+        <PostList articles={articles} />
+        <Pagination currentPage={currentPage} totalPages={totalPages} baseUrl="/page/" />
+      </div>
+
+      <Sidebar>
+        <SiteInfo />
+        <RecentArticles />
+      </Sidebar>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .home-content {
+    max-width: var(--home-page-width);
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+
+  .home-wrapper {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .home-main {
+    flex: 1;
+    min-width: 0;
+  }
+
+  @media (max-width: 1024px) {
+    .home-wrapper {
+      flex-direction: column;
+    }
+  }
+</style>

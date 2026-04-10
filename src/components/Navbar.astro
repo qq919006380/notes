@@ -1,0 +1,390 @@
+---
+import { SITE_CONFIG } from '../utils/site-config';
+
+const currentPath = Astro.url.pathname;
+const nav = SITE_CONFIG.nav;
+---
+
+<nav class="navbar" id="navbar">
+  <div class="navbar-inner">
+    <!-- Logo + site name -->
+    <a href="/" class="site-name">
+      <img src={SITE_CONFIG.author.avatar} alt="logo" class="nav-logo" />
+      <span>{SITE_CONFIG.title}</span>
+    </a>
+
+    <!-- Search box placeholder (Pagefind will mount here) -->
+    <div class="search-box" id="search-box"></div>
+
+    <!-- Nav links -->
+    <div class="nav-links" id="nav-links">
+      {nav.map(item => (
+        <div class={`nav-item ${item.items ? 'has-dropdown' : ''}`}>
+          <a
+            href={item.link}
+            class={`nav-link ${currentPath === item.link ? 'active' : ''}`}
+          >
+            {item.text}
+          </a>
+          {item.items && (
+            <div class="dropdown-menu">
+              {item.items.map(group => (
+                <div class="dropdown-group">
+                  {group.text && !group.items && (
+                    <a href={group.link} class="dropdown-link">{group.text}</a>
+                  )}
+                  {group.items && (
+                    <>
+                      <p class="dropdown-group-title">{group.text}</p>
+                      {group.items.map(child => (
+                        <a href={child.link} class="dropdown-link">{child.text}</a>
+                      ))}
+                    </>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      ))}
+      <!-- GitHub link -->
+      <a href="https://github.com/qq919006380/notes" target="_blank" rel="noopener" class="nav-link github-link">
+        <i class="iconfont icon-github"></i>
+      </a>
+    </div>
+
+    <!-- Mobile menu toggle -->
+    <button class="sidebar-button" id="sidebar-toggle" aria-label="Toggle sidebar">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile nav overlay -->
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+
+<!-- Mobile nav panel -->
+<div class="mobile-nav-panel" id="mobile-nav-panel">
+  <div class="mobile-nav-header">
+    <button id="mobile-nav-close" aria-label="关闭导航">&times;</button>
+  </div>
+  <div class="mobile-nav-links">
+    {nav.map(item => (
+      <div class="mobile-nav-item">
+        <a href={item.link} class="mobile-nav-link">{item.text}</a>
+        {item.items && (
+          <div class="mobile-dropdown">
+            {item.items.map(group => (
+              <div class="mobile-dropdown-group">
+                {group.text && !group.items && (
+                  <a href={group.link} class="mobile-dropdown-link">{group.text}</a>
+                )}
+                {group.items && (
+                  <>
+                    <p class="mobile-group-title">{group.text}</p>
+                    {group.items.map(child => (
+                      <a href={child.link} class="mobile-dropdown-link">{child.text}</a>
+                    ))}
+                  </>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--navbar-height);
+    background-color: var(--blur-bg);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+    z-index: 100;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .navbar.transparent {
+    background-color: transparent;
+    border-bottom: none;
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+
+  .navbar.transparent .site-name {
+    color: #fff;
+  }
+
+  .navbar.transparent .nav-links .nav-link {
+    color: #fff;
+  }
+
+  .navbar-inner {
+    max-width: var(--home-page-width);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 1.5rem;
+  }
+
+  .site-name {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--text-color);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .site-name:hover {
+    text-decoration: none;
+  }
+
+  .nav-logo {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+  }
+
+  .search-box {
+    flex: 1;
+    margin: 0 1.5rem;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .nav-item {
+    position: relative;
+  }
+
+  .nav-link {
+    padding: 0.5rem 0.75rem;
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 0.9rem;
+    white-space: nowrap;
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    color: var(--accent-color);
+    text-decoration: none;
+  }
+
+  .has-dropdown:hover .dropdown-menu {
+    display: block;
+  }
+
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--main-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 0.5rem 0;
+    min-width: 180px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    z-index: 200;
+  }
+
+  .dropdown-group {
+    padding: 0.25rem 0;
+  }
+
+  .dropdown-group + .dropdown-group {
+    border-top: 1px solid var(--border-color);
+  }
+
+  .dropdown-group-title {
+    padding: 0.25rem 1rem;
+    font-size: 0.8rem;
+    color: var(--text-lighten-color);
+    font-weight: bold;
+    margin: 0;
+  }
+
+  .dropdown-link {
+    display: block;
+    padding: 0.25rem 1rem;
+    color: var(--text-color);
+    font-size: 0.85rem;
+    text-decoration: none;
+  }
+
+  .dropdown-link:hover {
+    color: var(--accent-color);
+    background-color: var(--body-bg);
+    text-decoration: none;
+  }
+
+  .github-link {
+    font-size: 1.2rem;
+  }
+
+  /* Mobile toggle button */
+  .sidebar-button {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    padding: 0.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .sidebar-button span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background-color: var(--text-color);
+    transition: transform 0.3s;
+  }
+
+  .navbar.transparent .sidebar-button span {
+    background-color: #fff;
+  }
+
+  /* Mobile overlay */
+  .mobile-nav-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 150;
+  }
+
+  .mobile-nav-overlay.active {
+    display: block;
+  }
+
+  /* Mobile panel */
+  .mobile-nav-panel {
+    position: fixed;
+    top: 0;
+    right: -280px;
+    width: 280px;
+    height: 100vh;
+    background-color: var(--main-bg);
+    z-index: 200;
+    overflow-y: auto;
+    transition: right 0.3s ease;
+    box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+  }
+
+  .mobile-nav-panel.active {
+    right: 0;
+  }
+
+  .mobile-nav-header {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem;
+  }
+
+  .mobile-nav-header button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-color);
+    padding: 0.25rem 0.5rem;
+  }
+
+  .mobile-nav-links {
+    padding: 0 1rem 1rem;
+  }
+
+  .mobile-nav-item {
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .mobile-nav-link {
+    display: block;
+    padding: 0.75rem 0;
+    color: var(--text-color);
+    font-size: 0.95rem;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .mobile-nav-link:hover {
+    color: var(--accent-color);
+    text-decoration: none;
+  }
+
+  .mobile-dropdown {
+    padding-left: 1rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .mobile-group-title {
+    font-size: 0.8rem;
+    color: var(--text-lighten-color);
+    font-weight: bold;
+    margin: 0.5rem 0 0.25rem;
+  }
+
+  .mobile-dropdown-link {
+    display: block;
+    padding: 0.3rem 0;
+    font-size: 0.85rem;
+    color: var(--text-color);
+    text-decoration: none;
+  }
+
+  .mobile-dropdown-link:hover {
+    color: var(--accent-color);
+    text-decoration: none;
+  }
+
+  @media (max-width: 768px) {
+    .nav-links {
+      display: none;
+    }
+
+    .search-box {
+      display: none;
+    }
+
+    .sidebar-button {
+      display: flex;
+    }
+  }
+</style>
+
+<script>
+  const toggle = document.getElementById('sidebar-toggle');
+  const overlay = document.getElementById('mobile-nav-overlay');
+  const panel = document.getElementById('mobile-nav-panel');
+  const close = document.getElementById('mobile-nav-close');
+
+  function openNav() {
+    overlay?.classList.add('active');
+    panel?.classList.add('active');
+  }
+
+  function closeNav() {
+    overlay?.classList.remove('active');
+    panel?.classList.remove('active');
+  }
+
+  toggle?.addEventListener('click', openNav);
+  overlay?.addEventListener('click', closeNav);
+  close?.addEventListener('click', closeNav);
+</script>

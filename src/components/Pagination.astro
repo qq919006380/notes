@@ -1,0 +1,69 @@
+---
+interface Props {
+  currentPage: number;
+  totalPages: number;
+  baseUrl: string;
+}
+
+const { currentPage, totalPages, baseUrl } = Astro.props;
+
+function pageUrl(page: number) {
+  return page === 1 ? baseUrl : `${baseUrl}${page}/`;
+}
+
+const pages: number[] = [];
+for (let i = 1; i <= totalPages; i++) {
+  pages.push(i);
+}
+---
+
+{totalPages > 1 && (
+  <nav class="pagination">
+    {currentPage > 1 && (
+      <a href={pageUrl(currentPage - 1)} class="page-link prev">上一页</a>
+    )}
+    {pages.map(p => (
+      <a
+        href={pageUrl(p)}
+        class={`page-link ${p === currentPage ? 'active' : ''}`}
+      >
+        {p}
+      </a>
+    ))}
+    {currentPage < totalPages && (
+      <a href={pageUrl(currentPage + 1)} class="page-link next">下一页</a>
+    )}
+  </nav>
+)}
+
+<style>
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 2rem 0;
+  }
+
+  .page-link {
+    padding: 0.4rem 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    color: var(--text-color);
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .page-link:hover {
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+    text-decoration: none;
+  }
+
+  .page-link.active {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    color: #fff;
+  }
+</style>

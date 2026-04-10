@@ -1,0 +1,76 @@
+---
+import { SITE_CONFIG } from '../utils/site-config';
+
+const { footer, social } = SITE_CONFIG;
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="social-icons">
+      {social.map(item => (
+        <a href={item.link} target="_blank" rel="noopener" title={item.title}>
+          <i class={`iconfont ${item.icon}`}></i>
+        </a>
+      ))}
+    </div>
+
+    <div class="copyright">
+      <span>Copyright &copy; {footer.createYear}-{currentYear}</span>
+      <span set:html={footer.copyrightInfo} />
+    </div>
+
+    <div class="powered-by">
+      Powered by <a href="https://astro.build" target="_blank" rel="noopener">Astro</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    padding: 2rem 1.5rem;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+    background-color: var(--main-bg);
+    margin-top: 3rem;
+  }
+
+  .footer-inner {
+    max-width: var(--home-page-width);
+    margin: 0 auto;
+  }
+
+  .social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .social-icons a {
+    color: var(--text-color);
+    font-size: 1.2rem;
+    opacity: 0.7;
+    transition: opacity 0.3s, color 0.3s;
+    text-decoration: none;
+  }
+
+  .social-icons a:hover {
+    color: var(--accent-color);
+    opacity: 1;
+    text-decoration: none;
+  }
+
+  .copyright {
+    font-size: 0.85rem;
+    color: var(--text-color);
+    opacity: 0.7;
+  }
+
+  .powered-by {
+    font-size: 0.75rem;
+    color: var(--text-color);
+    opacity: 0.5;
+    margin-top: 0.5rem;
+  }
+</style>

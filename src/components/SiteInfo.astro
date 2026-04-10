@@ -1,0 +1,84 @@
+---
+import { getCollection } from 'astro:content';
+import { SITE_CONFIG } from '../utils/site-config';
+import { daysSince } from '../utils/date';
+import { countWords } from '../utils/content';
+
+const blog = await getCollection('blog');
+const notes = await getCollection('notes');
+const posts = await getCollection('posts');
+
+const allArticles = [...blog, ...notes, ...posts]
+  .filter(a => a.data.article !== false && !a.data.draft);
+
+const articleCount = allArticles.length;
+const runDays = daysSince(SITE_CONFIG.blogCreate);
+
+let totalWords = 0;
+for (const article of allArticles) {
+  if (article.body) {
+    const [cn, en] = countWords(article.body);
+    totalWords += cn + en;
+  }
+}
+const totalWordsDisplay = totalWords >= 10000
+  ? `${Math.round(totalWords / 1000) / 10}w`
+  : totalWords >= 1000
+    ? `${Math.round(totalWords / 100) / 10}k`
+    : `${totalWords}`;
+---
+
+<div class="site-info card-box">
+  <div class="site-info-title">
+    <i class="iconfont icon-award" style="font-size: 0.875rem; font-weight: 900"></i>
+    <span>站点信息</span>
+  </div>
+  <div class="site-info-item">
+    <span class="item-label">文章数目：</span>
+    <span class="item-value">{articleCount} 篇</span>
+  </div>
+  <div class="site-info-item">
+    <span class="item-label">已运行时间：</span>
+    <span class="item-value">{runDays > 0 ? `${runDays} 天` : '不到一天'}</span>
+  </div>
+  <div class="site-info-item">
+    <span class="item-label">本站总字数：</span>
+    <span class="item-value">{totalWordsDisplay} 字</span>
+  </div>
+</div>
+
+<style>
+  .card-box {
+    background-color: var(--main-bg);
+    border-radius: 8px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .site-info {
+    font-size: 0.875rem;
+  }
+
+  .site-info-title {
+    text-align: center;
+    color: #888;
+    font-weight: bold;
+    padding-bottom: 0.625rem;
+  }
+
+  .site-info-item {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 0.5rem;
+  }
+
+  .item-label {
+    color: var(--text-color);
+  }
+
+  .item-value {
+    color: var(--text-color);
+    opacity: 0.8;
+  }
+</style>
