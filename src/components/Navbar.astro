@@ -387,4 +387,17 @@ const nav = SITE_CONFIG.nav;
   toggle?.addEventListener('click', openNav);
   overlay?.addEventListener('click', closeNav);
   close?.addEventListener('click', closeNav);
+
+  // Initialize Pagefind search
+  const searchBox = document.getElementById('search-box');
+  if (searchBox && (window as any).PagefindUI) {
+    new (window as any).PagefindUI({
+      element: '#search-box',
+      showSubResults: true,
+      translations: {
+        placeholder: '搜索文档...',
+        zero_results: '没有找到相关结果',
+      },
+    });
+  }
 </script>
