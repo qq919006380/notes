@@ -8,7 +8,7 @@
 
 :root {
   /* Brand colors */
-  --accent-color: #11A8CD;
+  --accent-color: #0969A5;
   --active-color: #ff5722;
   --badge-tip-color: #42b983;
   --banner-text-color: #fff;
@@ -27,7 +27,7 @@
   --sidebar-bg: rgba(255,255,255,0.8);
   --blur-bg: rgba(255,255,255,0.9);
   --text-color: #004050;
-  --text-lighten-color: #0085AD;
+  --text-lighten-color: #00708C;
   --border-color: rgba(0,0,0,0.15);
   --code-bg: #f6f6f6;
   --code-color: #525252;
@@ -48,6 +48,12 @@ a {
 
 a:hover {
   text-decoration: underline;
+}
+
+/* Prose link underline for accessibility */
+.prose a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 /* Prose (article content) overrides */
