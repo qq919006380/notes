@@ -23,8 +23,8 @@ test.describe('分类页面数据验证', () => {
   });
 
   test('点击分类链接后跳转到对应分类文章列表页', async ({ page }) => {
-    // 获取第一个分类链接
-    const firstCategoryLink = page.locator('a[href*="/categories/"]').first();
+    // 用 .categories-grid a 避免匹配 navbar 下拉菜单中的隐藏链接
+    const firstCategoryLink = page.locator('.categories-grid a').first();
     await expect(firstCategoryLink).toBeVisible();
 
     const href = await firstCategoryLink.getAttribute('href');

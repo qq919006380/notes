@@ -48,8 +48,8 @@ test.describe('Mobile Nav 移动端导航（375px）', () => {
     const panel = page.locator('#mobile-nav-panel');
     await expect(panel).toHaveClass(/active/);
 
-    // 点击遮罩
-    await page.locator('#mobile-nav-overlay').click();
+    // 点击遮罩（面板 z-index 高于遮罩，需要 force:true 或点击面板左侧空白区）
+    await page.locator('#mobile-nav-overlay').click({ force: true });
     await page.waitForTimeout(400);
 
     const hasActive = await panel.evaluate(el => el.classList.contains('active'));

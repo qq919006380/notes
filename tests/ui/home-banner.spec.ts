@@ -41,8 +41,11 @@ test.describe('Home Banner', () => {
     await expect(bannerColor).toBeAttached();
   });
 
-  test('.typed 元素有 animation 动画属性', async ({ page }) => {
-    const animName = await page.locator('.typed').evaluate(
+  test('.typed 打字机光标元素存在且有动画属性', async ({ page }) => {
+    // 先确认元素已挂载（evaluate 在元素不存在时会抛出异常）
+    const typed = page.locator('.typed').first();
+    await expect(typed).toBeAttached();
+    const animName = await typed.evaluate(
       (el) => window.getComputedStyle(el).animationName
     );
     expect(animName).not.toBe('none');

@@ -79,7 +79,8 @@ test.describe('Image Zoom 图片缩放（medium-zoom）', () => {
     const overlay = page.locator('.medium-zoom-overlay');
     const overlayCount = await overlay.count();
     if (overlayCount > 0) {
-      await overlay.click();
+      // medium-zoom: 点击遮罩可能被图片拦截，改用 Escape 关闭
+      await page.keyboard.press('Escape');
       await page.waitForTimeout(500);
 
       // 遮罩消失

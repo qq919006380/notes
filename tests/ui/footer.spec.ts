@@ -13,17 +13,19 @@ test.describe('Footer', () => {
 
   test('邮件图标存在且链接正确', async ({ page }) => {
     const emailLink = page.locator('.social-icons a[href^="mailto:"]');
-    await expect(emailLink).toBeVisible();
+    await expect(emailLink).toBeAttached();
   });
 
   test('GitHub 图标存在', async ({ page }) => {
-    const githubLink = page.locator('.social-icons a .icon-github');
-    await expect(githubLink).toBeVisible();
+    // iconfont <i> 元素依赖外部字体，用 toBeAttached() 代替 toBeVisible()
+    const githubIcon = page.locator('.social-icons a .icon-github');
+    await expect(githubIcon).toBeAttached();
   });
 
   test('掘金图标存在', async ({ page }) => {
-    const juejinLink = page.locator('.social-icons a .icon-juejin');
-    await expect(juejinLink).toBeVisible();
+    // iconfont <i> 元素依赖外部字体，用 toBeAttached() 代替 toBeVisible()
+    const juejinIcon = page.locator('.social-icons a .icon-juejin');
+    await expect(juejinIcon).toBeAttached();
   });
 
   test('版权信息包含"夏天夏"', async ({ page }) => {

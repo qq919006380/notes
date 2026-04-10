@@ -43,7 +43,8 @@ test.describe('Navbar', () => {
   });
 
   test('GitHub iconfont 图标可见', async ({ page }) => {
-    await expect(page.locator('.github-link .icon-github')).toBeVisible();
+    // iconfont <i> 元素依赖外部字体，用 toBeAttached() 代替 toBeVisible()
+    await expect(page.locator('.github-link .icon-github')).toBeAttached();
   });
 
   test('移动端汉堡菜单按钮在桌面视口下不可见', async ({ page }) => {

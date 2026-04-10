@@ -23,9 +23,13 @@ test.describe('文章渲染验证', () => {
         expect(text?.trim().length).toBeGreaterThan(10);
       });
 
-      test('正文至少有一个段落', async ({ page }) => {
-        const paragraphs = page.locator('.prose p, article p');
-        const count = await paragraphs.count();
+      test('正文至少有一个块级元素（p/ul/ol/pre/blockquote）', async ({ page }) => {
+        // aef645 全是标题+列表，没有 <p>，改为检查任意块级内容元素
+        const blocks = page.locator(
+          '.prose p, .prose ul, .prose ol, .prose pre, .prose blockquote,' +
+          'article p, article ul, article ol, article pre, article blockquote'
+        );
+        const count = await blocks.count();
         expect(count).toBeGreaterThanOrEqual(1);
       });
 

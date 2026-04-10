@@ -22,7 +22,8 @@ test.describe('Reading Progress 阅读进度条', () => {
     const width = await page.locator('#reading-progress').evaluate(el => {
       return (el as HTMLElement).style.width;
     });
-    expect(width).toBe('0%');
+    // JS 未触发 scroll 时 style.width 为空字符串（CSS 设置了 width:0）
+    expect(width).toMatch(/^(0%|0|)$/);
   });
 
   test('滚动到 50% 时进度条宽度约为 50%（误差 ±15%）', async ({ page }) => {

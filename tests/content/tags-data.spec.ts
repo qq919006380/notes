@@ -35,7 +35,8 @@ test.describe('标签页面数据验证', () => {
   });
 
   test('点击标签后跳转到对应标签文章列表页', async ({ page }) => {
-    const firstTagLink = page.locator('a[href*="/tags/"]').first();
+    // 用 .tags-cloud a 避免匹配 navbar 下拉菜单中的隐藏链接
+    const firstTagLink = page.locator('.tags-cloud a').first();
     await expect(firstTagLink).toBeVisible();
 
     const href = await firstTagLink.getAttribute('href');

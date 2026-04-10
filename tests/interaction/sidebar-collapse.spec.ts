@@ -18,20 +18,26 @@ test.describe('Sidebar 侧边栏折叠', () => {
   });
 
   test('点击关闭状态的 <summary> 后 <details> 打开', async ({ page }) => {
-    // 找一个关闭的 details
-    const closedDetails = page.locator('details:not([open])').first();
-    const count = await closedDetails.count();
-    if (count === 0) {
-      // 所有 details 都已展开，跳过
+    const allDetails = page.locator('details');
+    const totalCount = await allDetails.count();
+    if (totalCount === 0) {
       test.skip();
       return;
     }
 
-    const summary = closedDetails.locator('summary').first();
+    // 若所有 details 都已展开，先通过 JS 关闭第一个
+    const firstDetails = allDetails.first();
+    const isAlreadyOpen = await firstDetails.evaluate(el => (el as HTMLDetailsElement).open);
+    if (isAlreadyOpen) {
+      await firstDetails.evaluate(el => { (el as HTMLDetailsElement).open = false; });
+      await page.waitForTimeout(100);
+    }
+
+    const summary = firstDetails.locator('summary').first();
     await summary.click();
     await page.waitForTimeout(300);
 
-    const isOpen = await closedDetails.evaluate(el => (el as HTMLDetailsElement).open);
+    const isOpen = await firstDetails.evaluate(el => (el as HTMLDetailsElement).open);
     expect(isOpen).toBe(true);
   });
 

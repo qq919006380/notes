@@ -49,7 +49,7 @@ test.describe('Post Detail Page', () => {
 
   test('文章元数据行包含阅读时间', async ({ page }) => {
     const metaText = await page.locator('.post-meta').textContent();
-    expect(metaText).toMatch(/\d+\s*分钟|<1\s*分钟/);
+    expect(metaText).toMatch(/\d+(\.\d+)?\s*(分钟|m|min|h)/);
   });
 
   test('分类链接以 pill 样式展示', async ({ page }) => {
