@@ -32,7 +32,10 @@ const { indexImg, bodyBgImg } = SITE_CONFIG;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
+    /* overflow: hidden is intentionally removed — it breaks background-attachment: fixed
+       by creating a new stacking/formatting context that prevents fixed backgrounds.
+       Arrow bounce overflow is constrained via clip-path instead. */
+    clip-path: inset(0);
   }
 
   /* Dark gradient overlay for text readability */
