@@ -1,0 +1,2 @@
+# Redirect www to non-www (Cloudflare Pages)
+https://www.weibaichao.com/* https://weibaichao.com/:splat 301
