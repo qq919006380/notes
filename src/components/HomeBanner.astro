@@ -164,6 +164,22 @@ const { indexImg, bodyBgImg } = SITE_CONFIG;
     });
   }
 
+  // Time-based banner color overlay (ported from IndexBigImg.vue:bgTimeColor)
+  const bannerColor = document.getElementById('banner-color');
+  if (bannerColor) {
+    const h = new Date().getHours();
+    const colors = [
+      'transparent',              // 白天 6-16
+      'rgba(255, 148, 48, .2)',   // 黄昏 16-19
+      'rgba(0, 0, 0, .3)',        // 晚上 19-24
+      'rgba(0, 0, 0, .5)',        // 深夜 0-6
+    ];
+    if (h >= 6 && h < 16) bannerColor.style.backgroundColor = colors[0];
+    else if (h >= 16 && h < 19) bannerColor.style.backgroundColor = colors[1];
+    else if (h >= 19) bannerColor.style.backgroundColor = colors[2];
+    else bannerColor.style.backgroundColor = colors[3];
+  }
+
   // Navbar transparent effect on homepage banner
   const navbar = document.getElementById('navbar');
   if (navbar && bannerEl) {
