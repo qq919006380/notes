@@ -4,12 +4,12 @@ import PostLayout from '../../layouts/PostLayout.astro';
 
 export async function getStaticPaths() {
   const collections = ['blog', 'notes', 'posts', 'works'] as const;
-  const allArticles: { article: any; collection: string }[] = [];
+  const allArticles: { article: Awaited<ReturnType<typeof getCollection>>[number]; collection: string }[] = [];
 
   for (const collectionName of collections) {
     const articles = await getCollection(collectionName);
     for (const article of articles) {
-      if (article.data.slug) {
+      if (article.data.slug && !article.data.draft && article.data.article !== false) {
         allArticles.push({ article, collection: collectionName });
       }
     }
@@ -48,6 +48,7 @@ const { Content, headings } = await render(article);
 
 <PostLayout
   title={article.data.title}
+  description={article.data.description}
   date={article.data.date}
   categories={article.data.categories}
   tags={article.data.tags}

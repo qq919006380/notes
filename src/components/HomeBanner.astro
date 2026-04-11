@@ -17,7 +17,7 @@ const { indexImg, bodyBgImg } = SITE_CONFIG;
   </div>
 
   <!-- Scroll-down arrow -->
-  <a class="banner-arrow" id="banner-arrow"></a>
+  <button class="banner-arrow" id="banner-arrow" type="button" aria-label="向下滚动"></button>
 </section>
 
 <style>
@@ -32,10 +32,12 @@ const { indexImg, bodyBgImg } = SITE_CONFIG;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* overflow: hidden is intentionally removed — it breaks background-attachment: fixed
-       by creating a new stacking/formatting context that prevents fixed backgrounds.
-       Arrow bounce overflow is constrained via clip-path instead. */
-    clip-path: inset(0);
+    /* No overflow: hidden and no clip-path: inset(0) here.
+       Both create a stacking context that breaks background-attachment: fixed —
+       the browser would paint the background relative to the element instead of
+       the viewport, making the image scroll away instead of staying fixed.
+       The arrow animates upward (translateY(-20px)) and stays well within the
+       banner bounds, so no clipping is needed. */
   }
 
   /* Dark gradient overlay for text readability */
@@ -107,6 +109,8 @@ const { indexImg, bodyBgImg } = SITE_CONFIG;
     cursor: pointer;
     z-index: 4;
     animation: bounce-in 5s 3s infinite;
+    background: none;
+    border: none;
   }
 
   .banner-arrow::before {
@@ -152,6 +156,16 @@ const { indexImg, bodyBgImg } = SITE_CONFIG;
       background-attachment: scroll;
     }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    .banner-arrow {
+      animation: none;
+    }
+    .typed {
+      animation: none;
+      opacity: 1;
+    }
+  }
 </style>
 
 <script>
@@ -183,6 +197,14 @@ const { indexImg, bodyBgImg } = SITE_CONFIG;
     else bannerColor.style.backgroundColor = colors[3];
   }
 
+  // Apply parallax background to body so it persists when scrolled past banner
+  if (bannerEl) {
+    document.body.style.backgroundImage = bannerEl.style.backgroundImage;
+    document.body.style.backgroundSize = 'cover';
+    document.body.style.backgroundPosition = 'center';
+    document.body.style.backgroundAttachment = 'fixed';
+  }
+
   // Navbar transparent effect on homepage banner
   const navbar = document.getElementById('navbar');
   if (navbar && bannerEl) {
@@ -195,6 +217,12 @@ const { indexImg, bodyBgImg } = SITE_CONFIG;
       }
     }
     updateNavbar();
-    window.addEventListener('scroll', updateNavbar);
+    let navTicking = false;
+    window.addEventListener('scroll', () => {
+      if (!navTicking) {
+        requestAnimationFrame(() => { updateNavbar(); navTicking = false; });
+        navTicking = true;
+      }
+    }, { passive: true });
   }
 </script>

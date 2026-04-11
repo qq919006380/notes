@@ -1,14 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
-import { getAllCategories } from '../../utils/content';
+import { getAllArticles, getAllCategories } from '../../utils/content';
 
-const blog = await getCollection('blog');
-const notes = await getCollection('notes');
-const posts = await getCollection('posts');
-
-const allArticles = [...blog, ...notes, ...posts]
-  .filter(a => a.data.article !== false && !a.data.draft);
+const allArticles = await getAllArticles();
 
 const categories = getAllCategories(allArticles);
 const sortedCategories = [...categories.entries()].sort((a, b) => b[1] - a[1]);
@@ -67,7 +61,7 @@ const sortedCategories = [...categories.entries()].sort((a, b) => b[1] - a[1]);
     border-radius: 6px;
     color: var(--text-color);
     text-decoration: none;
-    transition: all 0.2s;
+    transition: border-color var(--transition-fast), color var(--transition-fast);
   }
 
   .category-card:hover {

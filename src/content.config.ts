@@ -7,6 +7,7 @@ const articleSchema = z.object({
   date: z.coerce.date(),
   categories: z.array(z.string()).default([]),
   tags: z.array(z.coerce.string()).default([]),
+  description: z.string().optional(),
   titleTag: z.string().optional(),
   author: z.object({
     name: z.string(),

@@ -5,24 +5,17 @@ import Sidebar from '../../components/Sidebar.astro';
 import SiteInfo from '../../components/SiteInfo.astro';
 import RecentArticles from '../../components/RecentArticles.astro';
 import Pagination from '../../components/Pagination.astro';
-import { getCollection } from 'astro:content';
+import { getAllArticles } from '../../utils/content';
+import { PAGE_SIZE } from '../../utils/site-config';
 
 export async function getStaticPaths() {
-  const pageSize = 10;
-  const blog = await getCollection('blog');
-  const notes = await getCollection('notes');
-  const posts = await getCollection('posts');
-
-  const all = [...blog, ...notes, ...posts]
-    .filter(a => a.data.article !== false && !a.data.draft)
-    .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
-
-  const totalPages = Math.ceil(all.length / pageSize);
+  const all = await getAllArticles();
+  const totalPages = Math.ceil(all.length / PAGE_SIZE);
 
   return Array.from({ length: totalPages }, (_, i) => ({
     params: { page: String(i + 1) },
     props: {
-      articles: all.slice(i * pageSize, (i + 1) * pageSize),
+      articles: all.slice(i * PAGE_SIZE, (i + 1) * PAGE_SIZE),
       currentPage: i + 1,
       totalPages,
     },

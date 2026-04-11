@@ -6,17 +6,10 @@ import SiteInfo from '../components/SiteInfo.astro';
 import RecentArticles from '../components/RecentArticles.astro';
 import PostList from '../components/PostList.astro';
 import Pagination from '../components/Pagination.astro';
-import { getCollection } from 'astro:content';
+import { getAllArticles } from '../utils/content';
+import { PAGE_SIZE } from '../utils/site-config';
 
-const PAGE_SIZE = 10;
-
-const blog = await getCollection('blog');
-const notes = await getCollection('notes');
-const posts = await getCollection('posts');
-
-const allArticles = [...blog, ...notes, ...posts]
-  .filter(a => a.data.article !== false && !a.data.draft)
-  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+const allArticles = await getAllArticles();
 
 const currentPage = 1;
 const totalPages = Math.ceil(allArticles.length / PAGE_SIZE);

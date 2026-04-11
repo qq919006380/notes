@@ -72,15 +72,15 @@
 
     var msg;
     if (hours >= 6 && hours < 12) {
-      msg = '\u65e9\u4e0a\u597d\u5440~~\uff0c\u73b0\u5728\u662f ' + time + '\uff0c\u5403\u65e9\u9910\u4e86\u5417\uff1f';
+      msg = '早上好呀~~，现在是 ' + time + '，吃早餐了吗？';
     } else if (hours >= 12 && hours < 16) {
-      msg = '\u4e0b\u5348\u597d\u5440~~\uff0c\u73b0\u5728\u662f ' + time + '\uff0c\u7e41\u5fd9\u7684\u4e0b\u5348\u4e5f\u8981\u9002\u5f53\u4f11\u606f\u54e6~~';
+      msg = '下午好呀~~，现在是 ' + time + '，繁忙的下午也要适当休息哦~~';
     } else if (hours >= 16 && hours < 19) {
-      msg = '\u5230\u9ec4\u660f\u4e86~~\uff0c\u73b0\u5728\u662f ' + time + '\uff0c\u8be5\u51c6\u5907\u5403\u996d\u5566~~';
+      msg = '到黄昏了~~，现在是 ' + time + '，该准备吃饭啦~~';
     } else if (hours >= 19 && hours < 24) {
-      msg = '\u665a\u4e0a\u597d\u5440~~\uff0c\u73b0\u5728\u662f ' + time + '\uff0c\u8be5\u51c6\u5907\u6d17\u6f31\u7761\u89c9\u5566~~';
+      msg = '晚上好呀~~，现在是 ' + time + '，该准备洗漱睡觉啦~~';
     } else {
-      msg = '\u522b\u518d\u71ac\u591c\u4e86~~\uff0c\u73b0\u5728\u662f ' + time + '\uff0c\u65e9\u70b9\u7761\u5427~~';
+      msg = '别再熬夜了~~，现在是 ' + time + '，早点睡吧~~';
     }
 
     addTip(msg, 'info', 50, 4000);

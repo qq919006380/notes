@@ -30,7 +30,7 @@ const { articles } = Astro.props;
           <span class="title-tag">{article.data.titleTag}</span>
         )}
         <a href={`/pages/${article.data.slug}/`}>{article.data.title}</a>
-      </h3>
+      </h2>
       <div class="post-item-meta">
         <span>{formatDate(article.data.date)}</span>
         {article.data.categories.length > 0 && (
@@ -60,13 +60,14 @@ const { articles } = Astro.props;
     border-radius: 8px;
     padding: 1.25rem 1.5rem;
     box-shadow: 0 1px 6px rgba(0,0,0,0.05);
-    transition: box-shadow 0.2s;
+    transition: box-shadow var(--transition-fast), transform var(--transition-fast);
     overflow: hidden;
     word-break: break-word;
   }
 
   .post-item:hover {
     box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
   }
 
   .post-item-title {
@@ -79,6 +80,7 @@ const { articles } = Astro.props;
   .post-item-title a {
     color: var(--text-color);
     text-decoration: none;
+    transition: color var(--transition-fast);
   }
 
   .post-item-title a:hover {

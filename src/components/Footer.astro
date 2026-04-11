@@ -9,7 +9,7 @@ const currentYear = new Date().getFullYear();
   <div class="footer-inner">
     <div class="social-icons">
       {social.map(item => (
-        <a href={item.link} target="_blank" rel="noopener" title={item.title} aria-label={item.title}>
+        <a href={item.link} target="_blank" rel="noopener noreferrer" title={item.title} aria-label={item.title}>
           <i class={`iconfont ${item.icon}`}></i>
         </a>
       ))}
@@ -21,7 +21,7 @@ const currentYear = new Date().getFullYear();
     </div>
 
     <div class="powered-by">
-      Powered by <a href="https://astro.build" target="_blank" rel="noopener">Astro</a>
+      Powered by <a href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro</a>
     </div>
   </div>
 </footer>
@@ -51,7 +51,7 @@ const currentYear = new Date().getFullYear();
     color: var(--text-color);
     font-size: 1.2rem;
     opacity: 0.8;
-    transition: opacity 0.3s, color 0.3s;
+    transition: opacity var(--transition-base), color var(--transition-base), transform var(--transition-fast);
     text-decoration: none;
   }
 
@@ -59,6 +59,7 @@ const currentYear = new Date().getFullYear();
     color: var(--accent-color);
     opacity: 1;
     text-decoration: none;
+    transform: scale(1.15);
   }
 
   .copyright {

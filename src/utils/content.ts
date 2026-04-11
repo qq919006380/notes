@@ -1,3 +1,5 @@
+import { getCollection } from 'astro:content';
+
 /**
  * Count words in markdown content.
  * Returns [chineseCount, englishCount]
@@ -86,4 +88,19 @@ export function getAllTags(articles: { data: { tags: string[] } }[]): Map<string
     }
   }
   return tags;
+}
+
+/**
+ * Fetch all publishable articles from blog, notes, posts collections.
+ * Filtered (no drafts, article !== false) and sorted by date descending.
+ */
+export async function getAllArticles() {
+  const [blog, notes, posts] = await Promise.all([
+    getCollection('blog'),
+    getCollection('notes'),
+    getCollection('posts'),
+  ]);
+  return [...blog, ...notes, ...posts]
+    .filter(a => a.data.article !== false && !a.data.draft)
+    .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
 }

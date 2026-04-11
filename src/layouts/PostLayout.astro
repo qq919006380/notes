@@ -5,7 +5,7 @@ import Sidebar from '../components/Sidebar.astro';
 import RightMenu from '../components/RightMenu.astro';
 import ArticleNav from '../components/ArticleNav.astro';
 import { formatDateTime } from '../utils/date';
-import { formatWordCount, readingTime } from '../utils/content';
+import { formatWordCount, readingTime, extractExcerpt } from '../utils/content';
 
 interface Props {
   title: string;
@@ -14,6 +14,7 @@ interface Props {
   tags?: string[];
   titleTag?: string;
   author?: { name: string; link?: string };
+  description?: string;
   headings: { depth: number; slug: string; text: string }[];
   rawContent: string;
   prevArticle?: { title: string; slug: string } | null;
@@ -29,6 +30,7 @@ const {
   tags = [],
   titleTag,
   author,
+  description,
   headings,
   rawContent,
   prevArticle,
@@ -39,9 +41,10 @@ const {
 
 const wordCount = formatWordCount(rawContent);
 const readTime = readingTime(rawContent);
+const metaDescription = description || extractExcerpt(rawContent, 150);
 ---
 
-<BaseLayout title={title} ogType="article">
+<BaseLayout title={title} description={metaDescription} ogType="article">
   <div class="post-page">
     <div class="content-wrapper">
       {collection && (
@@ -181,6 +184,7 @@ const readTime = readingTime(rawContent);
     border-radius: 4px;
     margin-right: 0.5rem;
     text-decoration: none;
+    transition: background-color var(--transition-fast), color var(--transition-fast);
   }
 
   .category-link:hover {
@@ -205,6 +209,7 @@ const readTime = readingTime(rawContent);
     margin-right: 0.5rem;
     margin-bottom: 0.5rem;
     text-decoration: none;
+    transition: background-color var(--transition-fast), color var(--transition-fast);
   }
 
   .tag-link:hover {

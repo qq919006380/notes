@@ -91,3 +91,5 @@ export const SITE_CONFIG = {
   },
   bodyBgImg: '/img/bg.jpg',
 } as const;
+
+export const PAGE_SIZE = 10;

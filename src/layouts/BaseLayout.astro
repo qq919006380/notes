@@ -35,21 +35,30 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
   <meta name="referrer" content="no-referrer-when-downgrade" />
   <link rel="icon" href="/img/a.jpg" />
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_3077305_pt8umhrn4k9.css" />
-  <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
-  <script is:inline src="/pagefind/pagefind-ui.js"></script>
   <link rel="canonical" href={canonicalUrl} />
+  <link rel="alternate" type="application/rss+xml" title="夏天夏" href={new URL('/rss.xml', Astro.site).href} />
   <meta property="og:title" content={fullTitle} />
   <meta property="og:description" content={description} />
   <meta property="og:url" content={canonicalUrl} />
   <meta property="og:type" content={ogType} />
+  <meta property="og:image" content={new URL('/img/a.jpg', Astro.site).href} />
+  <meta property="og:locale" content="zh_CN" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={fullTitle} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={new URL('/img/a.jpg', Astro.site).href} />
+  {pageClass.includes('home-page') && (
+    <link rel="preload" as="image" href="/img/bg.jpg" />
+  )}
   <title>{fullTitle}</title>
 </head>
 <body class={pageClass}>
+  <a href="#main-content" class="skip-to-content">跳到主要内容</a>
   <ReadingProgress />
   <header>
     <Navbar />
   </header>
-  <main>
+  <main id="main-content">
     <slot />
   </main>
   <Footer />
@@ -59,3 +68,19 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
   <script src="../scripts/typing-animation.js"></script>
 </body>
 </html>
+
+<style is:global>
+  .skip-to-content {
+    position: absolute;
+    top: -100%;
+    left: 0;
+    padding: 0.5rem 1rem;
+    background: var(--accent-color);
+    color: #fff;
+    z-index: 99999;
+    text-decoration: none;
+  }
+  .skip-to-content:focus {
+    top: 0;
+  }
+</style>

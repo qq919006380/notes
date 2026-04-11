@@ -18,7 +18,7 @@ for (let i = 1; i <= totalPages; i++) {
 ---
 
 {totalPages > 1 && (
-  <nav class="pagination">
+  <nav class="pagination" aria-label="分页导航">
     {currentPage > 1 && (
       <a href={pageUrl(currentPage - 1)} class="page-link prev">上一页</a>
     )}
@@ -52,7 +52,7 @@ for (let i = 1; i <= totalPages; i++) {
     color: var(--text-color);
     font-size: 0.85rem;
     text-decoration: none;
-    transition: all 0.2s;
+    transition: border-color var(--transition-fast), color var(--transition-fast), background-color var(--transition-fast);
   }
 
   .page-link:hover {

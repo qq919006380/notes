@@ -13,14 +13,6 @@ const { author } = SITE_CONFIG;
 </div>
 
 <style>
-  .card-box {
-    background-color: var(--main-bg);
-    border-radius: 8px;
-    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
-    padding: 1.25rem;
-    margin-bottom: 1rem;
-  }
-
   .blogger-bar {
     text-align: center;
   }
@@ -30,6 +22,11 @@ const { author } = SITE_CONFIG;
     height: 80px;
     border-radius: 50%;
     margin-bottom: 0.5rem;
+    transition: transform 0.25s ease;
+  }
+
+  a:hover .blogger-avatar {
+    transform: scale(1.05);
   }
 
   .blogger-name {

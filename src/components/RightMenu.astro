@@ -21,14 +21,6 @@ const tocHeadings = headings.filter(h => h.depth >= 2 && h.depth <= 4);
 )}
 
 <style>
-  .card-box {
-    background-color: var(--main-bg);
-    border-radius: 8px;
-    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
-    padding: 1.25rem;
-    margin-bottom: 1rem;
-  }
-
   .right-menu-title {
     font-weight: bold;
     font-size: 0.9rem;
@@ -59,6 +51,7 @@ const tocHeadings = headings.filter(h => h.depth >= 2 && h.depth <= 4);
     color: var(--text-color);
     opacity: 0.8;
     text-decoration: none;
+    transition: color var(--transition-fast), opacity var(--transition-fast);
   }
 
   .toc-link:hover {

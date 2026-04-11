@@ -1,15 +1,10 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PostList from '../../components/PostList.astro';
-import { getCollection } from 'astro:content';
+import { getAllArticles } from '../../utils/content';
 
 export async function getStaticPaths() {
-  const blog = await getCollection('blog');
-  const notes = await getCollection('notes');
-  const posts = await getCollection('posts');
-
-  const allArticles = [...blog, ...notes, ...posts]
-    .filter(a => a.data.article !== false && !a.data.draft);
+  const allArticles = await getAllArticles();
 
   const tags = new Set<string>();
   for (const article of allArticles) {

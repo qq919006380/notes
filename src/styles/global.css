@@ -12,6 +12,14 @@ body {
   background-color: var(--body-bg);
   color: var(--text-color);
   font-family: var(--font-family-base);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Home page: transparent body bg so parallax background-image shows through */
+body.home-page {
+  background-color: transparent;
 }
 
 a {
@@ -92,13 +100,7 @@ nav a,
   color: #f56c6c;
 }
 
-/* Sticky footer: body uses flex column, main fills remaining space */
-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
+/* Sticky footer: main fills remaining space */
 body > main {
   flex: 1;
 }
@@ -117,6 +119,15 @@ body > main {
   border-radius: 4px;
   background-color: var(--code-bg);
   font-size: 0.875em;
+}
+
+/* Shared card style */
+.card-box {
+  background-color: var(--main-bg);
+  border-radius: 8px;
+  box-shadow: var(--shadow-card);
+  padding: 1.25rem;
+  margin-bottom: 1rem;
 }
 
 /* Pagefind global overrides (ensures specificity over pagefind-ui.css) */

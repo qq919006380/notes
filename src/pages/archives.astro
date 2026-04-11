@@ -1,15 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
+import { getAllArticles } from '../utils/content';
 import { formatDate } from '../utils/date';
 
-const blog = await getCollection('blog');
-const notes = await getCollection('notes');
-const posts = await getCollection('posts');
-
-const allArticles = [...blog, ...notes, ...posts]
-  .filter(a => a.data.article !== false && !a.data.draft)
-  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+const allArticles = await getAllArticles();
 
 // Group by year
 const byYear = new Map<number, typeof allArticles>();

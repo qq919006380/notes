@@ -1,14 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
-import { getAllTags } from '../../utils/content';
+import { getAllArticles, getAllTags } from '../../utils/content';
 
-const blog = await getCollection('blog');
-const notes = await getCollection('notes');
-const posts = await getCollection('posts');
-
-const allArticles = [...blog, ...notes, ...posts]
-  .filter(a => a.data.article !== false && !a.data.draft);
+const allArticles = await getAllArticles();
 
 const tags = getAllTags(allArticles);
 const sortedTags = [...tags.entries()].sort((a, b) => b[1] - a[1]);
@@ -71,7 +65,7 @@ const sortedTags = [...tags.entries()].sort((a, b) => b[1] - a[1]);
     border-radius: 4px;
     color: var(--accent-color);
     text-decoration: none;
-    transition: all 0.2s;
+    transition: background-color var(--transition-fast), color var(--transition-fast);
   }
 
   .tag-item:hover {
