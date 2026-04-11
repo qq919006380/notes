@@ -4,11 +4,9 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && npx pagefind --site dist",
+    "build": "astro build && pnpm exec pagefind --site dist",
     "preview": "astro preview",
-    "astro": "astro",
-    "dev:old": "vuepress dev docs",
-    "build:old": "vuepress build docs"
+    "astro": "astro"
   },
   "license": "MIT",
   "dependencies": {
@@ -27,6 +25,7 @@
     "@axe-core/playwright": "^4.11.1",
     "@playwright/test": "^1.59.1",
     "@types/node": "^25.6.0",
+    "pagefind": "^1.5.0",
     "typescript": "^5.9.3"
   }
 }

@@ -82,7 +82,7 @@ Verify CSS custom properties on `:root`:
 --navbar-height: 57.6px (3.6rem)
 --sidebar-width: 288px (18rem)
 --content-width: 860px
---home-page-width: 1100px
+--home-page-width: 1200px
 --right-menu-width: 230px
 --body-bg: rgb(244, 244, 244)
 --main-bg: rgb(255, 255, 255)

@@ -13,7 +13,7 @@ export const DESIGN_TOKENS = {
   navbarHeight: 57.6, // 3.6rem * 16
   sidebarWidth: 288, // 18rem * 16
   contentWidth: 860,
-  homePageWidth: 1100,
+  homePageWidth: 1200,
   rightMenuWidth: 230,
   bodyBg: 'rgb(244, 244, 244)',
   mainBg: 'rgb(255, 255, 255)',

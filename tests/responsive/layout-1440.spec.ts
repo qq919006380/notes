@@ -53,13 +53,13 @@ test.describe('Layout @ 1440px (Desktop)', () => {
     }
   });
 
-  test('最大宽度约束生效（--home-page-width: 1100px）', async ({ page }) => {
+  test('最大宽度约束生效（--home-page-width: 1200px）', async ({ page }) => {
     await page.goto(BASE_URL);
     const innerWidth = await page.locator('.navbar-inner').evaluate(
       (el) => el.clientWidth
     );
-    // navbar-inner 的 max-width 为 1100px
-    expect(innerWidth).toBeLessThanOrEqual(1110);
+    // navbar-inner 的 max-width 为 1200px
+    expect(innerWidth).toBeLessThanOrEqual(1210);
   });
 
   test('BloggerBar 头像存在且为圆形', async ({ page }) => {

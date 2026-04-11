@@ -31,7 +31,7 @@
   --navbar-height: 3.6rem;         /* 导航栏高度 = 57.6px */
   --sidebar-width: 18rem;          /* 左侧结构化侧边栏宽度 = 288px */
   --content-width: 860px;          /* 文章正文最大宽度 */
-  --home-page-width: 1100px;       /* 首页/列表页最大宽度 */
+  --home-page-width: 1200px;       /* 首页/列表页最大宽度 */
   --right-menu-width: 230px;       /* 右侧 TOC/信息栏宽度 */
 
   /* ---- Typography ---- */

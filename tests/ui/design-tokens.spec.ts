@@ -75,13 +75,13 @@ test.describe('CSS Design Tokens', () => {
     expect(raw).toContain('860');
   });
 
-  test('--home-page-width 变量值包含 1100px', async ({ page }) => {
+  test('--home-page-width 变量值包含 1200px', async ({ page }) => {
     const raw = await page.evaluate(() =>
       window.getComputedStyle(document.documentElement)
         .getPropertyValue('--home-page-width')
         .trim()
     );
-    expect(raw).toContain('1100');
+    expect(raw).toContain('1200');
   });
 
   test('--right-menu-width 变量值包含 230px', async ({ page }) => {

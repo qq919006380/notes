@@ -67,7 +67,7 @@
 | `--navbar-height` | `3.6rem` (57.6px) | 导航栏高度 |
 | `--sidebar-width` | `18rem` (288px) | 左侧结构化侧边栏 |
 | `--content-width` | `860px` | 文章正文最大宽度 |
-| `--home-page-width` | `1100px` | 首页/列表页最大宽度 |
+| `--home-page-width` | `1200px` | 首页/列表页最大宽度 |
 | `--right-menu-width` | `230px` | 右侧 TOC/信息栏 |
 
 ### 三栏布局（桌面端 >= 1440px）
