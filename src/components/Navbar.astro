@@ -48,8 +48,10 @@ const nav = SITE_CONFIG.nav;
 
     <!-- Right section: search + GitHub -->
     <div class="nav-right">
-      <div class="search-box" id="search-box"></div>
-      <a href="https://github.com/qq919006380/notes" target="_blank" rel="noopener" class="nav-link github-link" aria-label="GitHub">
+      <div class="search-box" id="search-box" role="search" aria-label="搜索">
+        <input type="text" class="search-placeholder" id="search-placeholder" placeholder="搜索文档..." readonly />
+      </div>
+      <a href="https://github.com/qq919006380/notes" target="_blank" rel="noopener noreferrer" class="nav-link github-link" aria-label="GitHub">
         <i class="iconfont icon-github"></i>
       </a>
     </div>
@@ -187,6 +189,7 @@ const nav = SITE_CONFIG.nav;
     text-decoration: none;
     font-size: 0.9rem;
     white-space: nowrap;
+    transition: color var(--transition-fast);
   }
 
   .nav-link:hover,
@@ -195,16 +198,17 @@ const nav = SITE_CONFIG.nav;
     text-decoration: none;
   }
 
-  .has-dropdown:hover .dropdown-menu {
-    display: block;
-  }
-
   .dropdown-menu {
-    display: none;
+    display: block;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-6px);
+    pointer-events: none;
+    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
     position: absolute;
     top: 100%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%) translateY(-6px);
     background-color: var(--main-bg);
     border: 1px solid var(--border-color);
     border-radius: 6px;
@@ -212,6 +216,14 @@ const nav = SITE_CONFIG.nav;
     min-width: 180px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     z-index: 200;
+  }
+
+  .has-dropdown:hover .dropdown-menu,
+  .has-dropdown:focus-within .dropdown-menu {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto;
   }
 
   .dropdown-group {
@@ -273,15 +285,18 @@ const nav = SITE_CONFIG.nav;
 
   /* Mobile overlay */
   .mobile-nav-overlay {
-    display: none;
     position: fixed;
     inset: 0;
     background-color: rgba(0,0,0,0.5);
     z-index: 150;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
   }
 
   .mobile-nav-overlay.active {
-    display: block;
+    opacity: 1;
+    pointer-events: auto;
   }
 
   /* Mobile panel */
@@ -364,6 +379,36 @@ const nav = SITE_CONFIG.nav;
     text-decoration: none;
   }
 
+  /* Search placeholder (before Pagefind loads) */
+  .search-placeholder {
+    width: 100%;
+    max-width: 200px;
+    height: 2rem;
+    border-radius: 1rem;
+    border: 1px solid var(--border-color);
+    font-size: 0.85rem;
+    padding: 0 1rem;
+    background-color: rgba(0,0,0,0.03);
+    color: var(--text-color);
+    box-sizing: border-box;
+    cursor: pointer;
+  }
+
+  .search-placeholder::placeholder {
+    color: var(--text-lighten-color);
+    opacity: 0.6;
+  }
+
+  .navbar.transparent .search-placeholder {
+    border-color: rgba(255,255,255,0.5);
+    color: #fff;
+    background-color: rgba(255,255,255,0.1);
+  }
+
+  .navbar.transparent .search-placeholder::placeholder {
+    color: rgba(255,255,255,0.7);
+  }
+
   /* ===== Pagefind UI style overrides ===== */
   .search-box :global(.pagefind-ui) {
     /* Reset Pagefind wrapper defaults */
@@ -388,12 +433,17 @@ const nav = SITE_CONFIG.nav;
     background-color: rgba(0,0,0,0.03) !important;
     color: var(--text-color) !important;
     box-sizing: border-box !important;
-    outline: none !important;
+    outline: 2px solid transparent !important;
   }
 
   .search-box :global(.pagefind-ui__search-input):focus {
     border-color: var(--accent-color) !important;
     background-color: rgba(255,255,255,0.95) !important;
+  }
+
+  .search-box :global(.pagefind-ui__search-input):focus-visible {
+    outline: 2px solid var(--accent-color) !important;
+    outline-offset: -2px;
   }
 
   .search-box :global(.pagefind-ui__search-input)::placeholder {
@@ -430,11 +480,24 @@ const nav = SITE_CONFIG.nav;
     width: 400px !important;
     max-height: 60vh !important;
     overflow-y: auto !important;
-    background: var(--main-bg) !important;
-    border: 1px solid var(--border-color) !important;
-    border-radius: 8px !important;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.12) !important;
+    background: rgba(255,255,255,0.75) !important;
+    backdrop-filter: blur(16px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+    border: 1px solid rgba(255,255,255,0.3) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12) !important;
     z-index: 300 !important;
+    /* Focus/blur animation */
+    opacity: 0 !important;
+    transform: translateY(-8px) !important;
+    pointer-events: none !important;
+    transition: opacity 0.2s ease-out, transform 0.2s ease-out !important;
+  }
+
+  .search-box.search-active :global(.pagefind-ui__drawer) {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    pointer-events: auto !important;
   }
 
   /* Hide the Pagefind logo/branding inside form */
@@ -487,16 +550,64 @@ const nav = SITE_CONFIG.nav;
   overlay?.addEventListener('click', closeNav);
   close?.addEventListener('click', closeNav);
 
-  // Initialize Pagefind search
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeNav();
+  });
+
+  // Lazy-load Pagefind on first interaction
   const searchBox = document.getElementById('search-box');
-  if (searchBox && (window as any).PagefindUI) {
-    new (window as any).PagefindUI({
-      element: '#search-box',
-      showSubResults: true,
-      translations: {
-        placeholder: '搜索文档...',
-        zero_results: '没有找到相关结果',
-      },
+  let pagefindLoaded = false;
+
+  function loadPagefind() {
+    if (pagefindLoaded) return;
+    pagefindLoaded = true;
+
+    const placeholder = document.getElementById('search-placeholder');
+
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = '/pagefind/pagefind-ui.css';
+    document.head.appendChild(link);
+
+    const script = document.createElement('script');
+    script.src = '/pagefind/pagefind-ui.js';
+    script.onload = () => {
+      if (placeholder) placeholder.remove();
+      new (window as any).PagefindUI({
+        element: '#search-box',
+        showSubResults: true,
+        translations: {
+          placeholder: '搜索文档...',
+          zero_results: '没有找到相关结果',
+        },
+      });
+    };
+    document.body.appendChild(script);
+  }
+
+  if (searchBox) {
+    // Load Pagefind when browser is idle (non-blocking, but appears quickly)
+    const idle = window.requestIdleCallback || ((cb: () => void) => setTimeout(cb, 200));
+    idle(() => loadPagefind());
+
+    // Focus: open popover with animation
+    searchBox.addEventListener('focusin', () => {
+      searchBox.classList.add('search-active');
+    });
+
+    // Blur: close popover with animation, clear input
+    searchBox.addEventListener('focusout', (e) => {
+      // Delay to allow clicking on search results
+      setTimeout(() => {
+        if (!searchBox.contains(document.activeElement)) {
+          searchBox.classList.remove('search-active');
+          const input = searchBox.querySelector('.pagefind-ui__search-input') as HTMLInputElement;
+          if (input && input.value) {
+            input.value = '';
+            input.dispatchEvent(new Event('input', { bubbles: true }));
+          }
+        }
+      }, 150);
     });
   }
 </script>

@@ -60,6 +60,11 @@ const { prevArticle, nextArticle } = Astro.props;
 
   .article-nav a {
     text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .article-nav a:hover {
+    color: var(--accent-color);
   }
 
   .article-nav a:hover .nav-title {

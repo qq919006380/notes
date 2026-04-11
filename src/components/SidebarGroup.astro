@@ -44,6 +44,7 @@ const { text, items, collapsed } = Astro.props;
     color: var(--text-color);
     list-style: none;
     user-select: none;
+    transition: color var(--transition-fast);
   }
 
   /* Remove default marker */
@@ -67,7 +68,7 @@ const { text, items, collapsed } = Astro.props;
     border-left: 5px solid var(--text-color);
     border-top: 4px solid transparent;
     border-bottom: 4px solid transparent;
-    transition: transform 0.2s ease;
+    transition: transform var(--transition-fast);
     flex-shrink: 0;
   }
 

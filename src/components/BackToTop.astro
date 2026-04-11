@@ -1,4 +1,4 @@
-<button class="back-to-top" id="back-to-top" aria-label="返回顶部" style="display:none">
+<button class="back-to-top" id="back-to-top" aria-label="返回顶部">
   <i class="iconfont icon-huidaodingbu"></i>
 </button>
 
@@ -7,20 +7,28 @@
     position: fixed;
     bottom: 2rem;
     right: 2rem;
-    width: 40px;
-    height: 40px;
+    width: 2.5rem;
+    height: 2.5rem;
     border-radius: 50%;
     border: 1px solid var(--border-color);
     background-color: var(--main-bg);
     color: var(--text-color);
-    font-size: 1.2rem;
     cursor: pointer;
+    z-index: var(--z-back-to-top);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    z-index: 100;
-    transition: opacity 0.3s;
+    font-size: 1.2rem;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(8px);
+    transition: opacity 0.25s ease, transform 0.25s ease, border-color var(--transition-fast), color var(--transition-fast);
+  }
+
+  .back-to-top.visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
   }
 
   .back-to-top:hover {
@@ -32,9 +40,17 @@
 <script>
   const btn = document.getElementById('back-to-top');
   if (btn) {
+    let ticking = false;
     window.addEventListener('scroll', () => {
-      btn.style.display = document.documentElement.scrollTop > 300 ? 'flex' : 'none';
-    });
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          btn.classList.toggle('visible', document.documentElement.scrollTop > 300);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+
     btn.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
