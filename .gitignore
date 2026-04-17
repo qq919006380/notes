@@ -1,18 +1,10 @@
-# npm
+# npm / yarn
 package-lock.json
-node_modules
-
-# yarn
 yarn.lock
+node_modules
 
 # vscode
 .vscode
-
-# vuepress
-docs/.vuepress/dist
-
-# 百度链接推送
-urls.txt
 
 # astro
 dist/
