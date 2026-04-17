@@ -13,12 +13,12 @@
 
 ## 开发命令
 - `pnpm dev` — 启动开发服务器（localhost:4321）
-- `pnpm build` — 构建生产版本（含 Pagefind 索引，`astro build && pagefind --site dist`）
+- `pnpm build` — 构建生产版本（前置 autofix-slugs，含 Pagefind 索引）
 - `pnpm preview` — 预览构建结果
-- `pnpm new "标题" [collection]` — 新建文章，自动生成 slug（默认 collection=notes）
+- `pnpm new "标题" [collection]` — 快捷新建（可选），自动生成 slug 和文件
+- `pnpm autofix` — 扫描 md，**只补**缺失的 slug（已有的永不改）
 - `pnpm validate` — 校验 frontmatter + slug 唯一性 + SEO 注册表
 - `node scripts/validate-urls.mjs` — 构建后验证所有 URL 完整性
-- `node scripts/ui-audit.mjs` — UI 审计
 - `npx playwright test` — 跑测试套件（baseURL: localhost:4323）
 
 ## 内容管理
@@ -26,13 +26,21 @@
 - **文件名 = 标题**（如 `我喜欢的parcel.md`），不是 slug；slug 独立存于 frontmatter
 - 4 个 Content Collections 共享同一 schema（`src/content.config.ts`）
 - Frontmatter 必须包含: title, slug, date, categories, tags
-- **新建文章用 `pnpm new "标题" [collection]`**，脚本会自动生成 6 位 hex slug
-- slug 格式：`^[a-f0-9]{6}$`，Zod schema 构建时强校验
-- 已索引但不符合规则的历史 slug（`个人作品`、`796ac5-心流`）放在 `content.config.ts` 的 `LEGACY_SLUGS` 白名单，不可扩展
+
+### 写文章工作流（极简版）
+1. 在 `src/content/{collection}/{标题}.md` 直接新建文件，写 title + 内容即可（slug 字段可不填）
+2. `pnpm build` — autofix 会**自动补齐缺失的 slug** 并写回文件
+3. `git commit` 提交（**重要**：自动补的 slug 必须入库，否则下次 build 会生成新的，URL 会漂移）
+4. CI 保护：如果 push 的 commit 里有缺 slug 的文章，CI 构建会主动失败
+
+### slug 规则
+- 格式 `^[a-f0-9]{6}$`（6 位小写十六进制）
+- **已有 slug 永不被覆盖**（任何情况），只补缺失
+- 已索引但不符合规则的历史 slug（`个人作品`、`796ac5-心流`）放在 `LEGACY_SLUGS` 白名单
 - slug 对应 URL `/pages/{slug}/`，**不可修改已发布文章的 slug**（Google 已收录）
+- 纯数字 slug 需要加引号（如 `slug: '018557'`），避免 YAML 解析为数字
 - `scripts/permalink-map.json` 是 SEO 注册表，记录所有已公开的 slug
 - sortOrder 字段控制侧边栏和目录页的排序
-- 纯数字 slug 需要加引号（如 `slug: '018557'`），避免 YAML 解析为数字
 
 ## 项目结构
 ```
@@ -57,7 +65,7 @@ src/
 │   └── theme.css     # 主题样式
 └── utils/            # 工具函数（content, date, sidebar, site-config）
 
-scripts/              # 辅助脚本（new-post / validate-content / validate-urls / ui-audit / migrate-content / permalink-map.json）
+scripts/              # 辅助脚本（autofix-slugs / new-post / validate-content / validate-urls / ui-audit / migrate-content / permalink-map.json）
 tests/                # Playwright 测试（accessibility / content / interaction / responsive / seo / ui）
 public/               # 静态资源（_headers 安全头、_redirects、robots.txt、img/）
 ```

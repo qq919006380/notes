@@ -4,10 +4,11 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && pnpm exec pagefind --site dist",
+    "build": "pnpm autofix && astro build && pnpm exec pagefind --site dist",
     "preview": "astro preview",
     "astro": "astro",
     "new": "node scripts/new-post.mjs",
+    "autofix": "node scripts/autofix-slugs.mjs",
     "validate": "node scripts/validate-content.mjs"
   },
   "license": "MIT",
