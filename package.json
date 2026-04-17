@@ -6,7 +6,9 @@
     "dev": "astro dev",
     "build": "astro build && pnpm exec pagefind --site dist",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "new": "node scripts/new-post.mjs",
+    "validate": "node scripts/validate-content.mjs"
   },
   "license": "MIT",
   "dependencies": {
@@ -19,6 +21,7 @@
     "dayjs": "^1.11.20",
     "gray-matter": "^4.0.3",
     "medium-zoom": "^1.1.0",
+    "nanoid": "^5.1.9",
     "tailwindcss": "^4.2.2"
   },
   "devDependencies": {
