@@ -472,37 +472,80 @@ const nav = SITE_CONFIG.nav;
     display: none !important;
   }
 
+  /* Pagefind drawer: default hidden (even via pagefind-ui__hidden), visible when search-active */
   .search-box :global(.pagefind-ui__drawer) {
     position: absolute !important;
     top: calc(100% + 0.5rem) !important;
     right: 0 !important;
     left: auto !important;
     width: 400px !important;
+    max-width: calc(100vw - 3rem) !important;
     max-height: 60vh !important;
     overflow-y: auto !important;
-    background: rgba(255,255,255,0.75) !important;
+    padding: 0.75rem 1rem !important;
+    background: rgba(255, 255, 255, 0.95) !important;
     backdrop-filter: blur(16px) saturate(180%) !important;
     -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
-    border: 1px solid rgba(255,255,255,0.3) !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
     border-radius: 12px !important;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.12) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12) !important;
     z-index: 300 !important;
-    /* Focus/blur animation */
-    opacity: 0 !important;
-    transform: translateY(-8px) !important;
-    pointer-events: none !important;
-    transition: opacity 0.2s ease-out, transform 0.2s ease-out !important;
+    /* Force column layout inside narrow panel (Pagefind default is row) */
+    flex-direction: column !important;
+    /* Default hidden — will be overridden by .search-active */
+    display: none !important;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity 0.18s ease-out, transform 0.18s ease-out;
   }
 
-  .search-box.search-active :global(.pagefind-ui__drawer) {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
-    pointer-events: auto !important;
+  /* When focused, show drawer — overrides both default and pagefind-ui__hidden */
+  .search-box.search-active :global(.pagefind-ui__drawer),
+  .search-box.search-active :global(.pagefind-ui__drawer.pagefind-ui__hidden) {
+    display: flex !important;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  /* Empty state hint — shown when drawer has pagefind-ui__hidden (no results yet) */
+  .search-box.search-active :global(.pagefind-ui__drawer.pagefind-ui__hidden)::before {
+    content: '输入关键词开始搜索';
+    display: block;
+    padding: 0.5rem;
+    color: var(--text-lighten-color);
+    font-size: 0.85rem;
+    text-align: center;
   }
 
   /* Hide the Pagefind logo/branding inside form */
   .search-box :global(.pagefind-ui__suppressed) {
     display: none !important;
+  }
+
+  /* Dev-mode fallback tip (when Pagefind script failed to load) */
+  .search-dev-tip {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+    color: var(--text-color);
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    white-space: nowrap;
+    z-index: 300;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-6px);
+    transition: opacity 0.18s ease-out, transform 0.18s ease-out;
+  }
+
+  .search-box.search-active .search-dev-tip {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   @media (max-width: 768px) {
@@ -581,6 +624,26 @@ const nav = SITE_CONFIG.nav;
           zero_results: '没有找到相关结果',
         },
       });
+      // Wire up ARIA attributes once Pagefind has injected its DOM
+      const drawer = searchBox?.querySelector('.pagefind-ui__drawer');
+      const pInput = searchBox?.querySelector('.pagefind-ui__search-input') as HTMLInputElement | null;
+      if (drawer) drawer.id = 'pagefind-drawer';
+      if (pInput) {
+        pInput.setAttribute('role', 'combobox');
+        pInput.setAttribute('aria-controls', 'pagefind-drawer');
+        pInput.setAttribute('aria-expanded', 'false');
+        pInput.setAttribute('aria-autocomplete', 'list');
+      }
+    };
+    script.onerror = () => {
+      // Dev-mode fallback: Pagefind index only exists after `pnpm build`
+      if (placeholder) {
+        placeholder.setAttribute('placeholder', '搜索（dev 模式不可用，请 pnpm build）');
+      }
+      const tip = document.createElement('div');
+      tip.className = 'search-dev-tip';
+      tip.textContent = '开发模式下搜索索引未生成，请运行 pnpm build && pnpm preview';
+      searchBox?.appendChild(tip);
     };
     document.body.appendChild(script);
   }
@@ -593,21 +656,33 @@ const nav = SITE_CONFIG.nav;
     // Focus: open popover with animation
     searchBox.addEventListener('focusin', () => {
       searchBox.classList.add('search-active');
+      const input = searchBox.querySelector('.pagefind-ui__search-input') as HTMLInputElement | null;
+      input?.setAttribute('aria-expanded', 'true');
     });
 
     // Blur: close popover with animation, clear input
-    searchBox.addEventListener('focusout', (e) => {
-      // Delay to allow clicking on search results
+    searchBox.addEventListener('focusout', () => {
+      // Delay to allow keyboard/click traversal into results
       setTimeout(() => {
         if (!searchBox.contains(document.activeElement)) {
           searchBox.classList.remove('search-active');
-          const input = searchBox.querySelector('.pagefind-ui__search-input') as HTMLInputElement;
-          if (input && input.value) {
-            input.value = '';
-            input.dispatchEvent(new Event('input', { bubbles: true }));
+          const input = searchBox.querySelector('.pagefind-ui__search-input') as HTMLInputElement | null;
+          if (input) {
+            input.setAttribute('aria-expanded', 'false');
+            if (input.value) {
+              input.value = '';
+              input.dispatchEvent(new Event('input', { bubbles: true }));
+            }
           }
         }
       }, 150);
+    });
+
+    // Esc closes popover by blurring the focused element inside
+    searchBox.addEventListener('keydown', (e) => {
+      if ((e as KeyboardEvent).key === 'Escape') {
+        (document.activeElement as HTMLElement | null)?.blur();
+      }
     });
   }
 </script>

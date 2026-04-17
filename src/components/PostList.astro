@@ -1,6 +1,7 @@
 ---
 import { formatDate } from '../utils/date';
 import { extractExcerpt } from '../utils/content';
+import { getCategoryColor } from '../utils/category-color';
 
 interface Article {
   data: {
@@ -24,27 +25,33 @@ const { articles } = Astro.props;
 
 <div class="post-list">
   {articles.map(article => (
-    <div class="post-item">
+    <article class="post-item">
       <h2 class="post-item-title">
         {article.data.titleTag && (
           <span class="title-tag">{article.data.titleTag}</span>
         )}
-        <a href={`/pages/${article.data.slug}/`}>{article.data.title}</a>
+        <a href={`/pages/${article.data.slug}/`} class="post-item-link">{article.data.title}</a>
       </h2>
       <div class="post-item-meta">
-        <span>{formatDate(article.data.date)}</span>
+        <time class="post-item-date">{formatDate(article.data.date)}</time>
         {article.data.categories.length > 0 && (
-          <span class="post-item-categories">
+          <ul class="post-item-tags">
             {article.data.categories.map(cat => (
-              <a href={`/categories/${cat}/`}>{cat}</a>
+              <li>
+                <a
+                  href={`/categories/${cat}/`}
+                  class="post-item-tag"
+                  style={`--tag-color: ${getCategoryColor(cat)};`}
+                >{cat}</a>
+              </li>
             ))}
-          </span>
+          </ul>
         )}
       </div>
       {article.body && (
         <p class="post-item-excerpt">{extractExcerpt(article.body)}</p>
       )}
-    </div>
+    </article>
   ))}
 </div>
 
@@ -56,71 +63,130 @@ const { articles } = Astro.props;
   }
 
   .post-item {
+    position: relative;
     background-color: var(--main-bg);
     border-radius: 8px;
     padding: 1.25rem 1.5rem;
-    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
     transition: box-shadow var(--transition-fast), transform var(--transition-fast);
     overflow: hidden;
     word-break: break-word;
   }
 
   .post-item:hover {
-    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
     transform: translateY(-2px);
   }
 
   .post-item-title {
     font-size: 1.1rem;
-    margin: 0 0 0.5rem 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    margin: 0 0 0.6rem 0;
+    line-height: 1.4;
   }
 
-  .post-item-title a {
+  .post-item-link {
     color: var(--text-color);
     text-decoration: none;
     transition: color var(--transition-fast);
   }
 
-  .post-item-title a:hover {
+  /* Stretched link: whole card navigates to post detail */
+  .post-item-link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 8px;
+  }
+
+  .post-item:hover .post-item-link {
     color: var(--accent-color);
+  }
+
+  .post-item-link:focus-visible::after {
+    outline: 2px solid var(--accent-color);
+    outline-offset: -2px;
   }
 
   .title-tag {
     display: inline-block;
-    padding: 1px 6px;
+    padding: 0.1rem 0.45rem;
     font-size: 0.7rem;
     background-color: var(--accent-color);
     color: #fff;
-    border-radius: 3px;
-    margin-right: 0.5rem;
-    vertical-align: middle;
-    font-weight: normal;
+    border-radius: var(--radius-sm);
+    margin-right: 0.4rem;
+    vertical-align: 0.12em;
+    font-weight: 500;
+    letter-spacing: 0.02em;
   }
 
   .post-item-meta {
-    font-size: 0.8rem;
-    color: color-mix(in srgb, var(--text-color) 80%, white);
     display: flex;
+    align-items: center;
     gap: 0.75rem;
+    flex-wrap: wrap;
+    line-height: 1;
   }
 
-  .post-item-categories a {
-    color: var(--accent-color);
-    font-size: 0.8rem;
+  .post-item-date {
+    font-family: var(--font-family-mono);
+    font-size: 0.75rem;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    color: color-mix(in srgb, var(--text-color) 55%, white);
+  }
+
+  .post-item-tags {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    align-items: center;
+  }
+
+  .post-item-tag {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.2rem 0.7rem;
+    font-size: 0.7rem;
+    line-height: 1;
+    border-radius: 999px;
+    text-decoration: none;
+
+    /* Fallback for browsers without color-mix (iOS < 16.4, Safari < 16.4) */
+    color: var(--tag-color, #6366f1);
+    background-color: rgba(240, 240, 245, 0.6);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+
+    /* Modern: translucent tint */
+    color: color-mix(in srgb, var(--tag-color, #6366f1) 85%, #000);
+    background-color: color-mix(in srgb, var(--tag-color, #6366f1) 14%, transparent);
+    border-color: color-mix(in srgb, var(--tag-color, #6366f1) 25%, transparent);
+
+    transition: background-color var(--transition-fast), border-color var(--transition-fast);
+  }
+
+  .post-item-tag:hover {
+    background-color: rgba(230, 230, 240, 0.8);
+    background-color: color-mix(in srgb, var(--tag-color, #6366f1) 22%, transparent);
+    border-color: color-mix(in srgb, var(--tag-color, #6366f1) 40%, transparent);
     text-decoration: none;
   }
 
-  .post-item-categories a:hover {
-    text-decoration: underline;
+  .post-item-tag:focus-visible {
+    outline: 2px solid var(--tag-color, var(--accent-color));
+    outline-offset: 2px;
   }
 
   .post-item-excerpt {
+    margin: 0.6rem 0 0;
     font-size: 0.9rem;
-    color: color-mix(in srgb, var(--text-color) 80%, white);
-    margin: 0.5rem 0 0;
     line-height: 1.6;
+    color: color-mix(in srgb, var(--text-color) 80%, white);
     overflow: hidden;
     text-overflow: ellipsis;
     word-break: break-word;
