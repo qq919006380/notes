@@ -85,7 +85,7 @@ public/               # 静态资源（_headers 安全头、_redirects、robots.
 - `/sitemap-index.xml` — 由 @astrojs/sitemap 自动生成
 
 ## 部署
-- GitHub Pages: push 到 master 自动部署（`.github/workflows/deploy.yml`）
+- GitHub Pages: push 到 main 自动部署（`.github/workflows/deploy.yml`）
 - Cloudflare Pages: 连接仓库自动部署
 - 自定义域名: weibaichao.com（通过 CNAME 配置）
 - 产物目录: `dist/`
