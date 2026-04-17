@@ -152,7 +152,7 @@
 | `PostLayout` | `title`, `date`, `categories?`, `tags?`, `titleTag?`, `author?`, `headings`, `rawContent`, `prevArticle?`, `nextArticle?`, `collection?`, `currentSlug?` | Article detail page |
 | `CatalogueLayout` | `title`, `description?`, `imgUrl?` | Directory listing page |
 
-### UI Components (17)
+### UI Components (18)
 
 | Component | Props | Description |
 |-----------|-------|-------------|
@@ -173,6 +173,7 @@
 | `ArticleNav` | `prevArticle?`, `nextArticle?` | Prev/next article links |
 | `ReadingProgress` | — | Top purple progress bar tracking scroll position |
 | `BackToTop` | — | Fixed button, appears after 300px scroll |
+| `WorkCard` | `work`, `index?` | Product card for Works page: left accent stripe + initial mark + tagline + star count + demo/repo links |
 
 ## Icon System
 
@@ -207,6 +208,53 @@ All card components share `.card-box` class:
 
 Used by: BloggerBar, SiteInfo, ContactCard, RecentArticles, RightMenu, StructuredSidebar
 
+## Works Page
+
+**页面：** `/works/` — 个人产品集合页，展示业余时间写的 6 个可访问产品。
+
+**数据来源：** `src/utils/works-data.ts`（hardcoded 配置，不走 Content Collection）。产品列表更新频率低、不需要全文检索，写死在 TS 里比每个产品一份 markdown 更直接。保留 `src/content/works/` 的 legacy markdown（保 SEO 旧链接 `/pages/个人作品/`），但不再在 `/works/` 页面展示。
+
+**设计取舍：**
+
+| 决策 | SAFE / RISK | 说明 |
+|------|-------------|------|
+| 沿用 `--main-bg` / `--radius-md` / `--shadow-card` | SAFE | 卡片与全站其他 `.card-box` 视觉同源 |
+| 响应式网格 `auto-fill minmax(280px, 1fr)` | SAFE | 移动单列、平板双列、桌面 3 列自然流动 |
+| 不放产品截图 | RISK | 截图维护成本高且易过期；改用首字母 mark 作为视觉锚点 |
+| 每张卡片独立 accent（左 4px 色条 + 首字母 tint + 主按钮描边） | RISK | 打破千篇一律的全站品牌蓝；每个产品有独立个性 |
+| 卡片进入 stagger fade-up 动画（每张 +60ms） | INTENTIONAL | 首屏视觉节奏感；`prefers-reduced-motion` 下关闭 |
+
+**Accent 色盘（每张卡片独立）：**
+
+| 产品 | Accent | 选色理由 |
+|------|--------|----------|
+| pencil-vue | `#f59e0b`（amber） | 手绘风 → 暖黄 |
+| MindMap | `#10b981`（green） | 思维生长 → 绿色 |
+| Frontend Resource Hub | `#0969A5`（brand） | 开发者工具 → 沿用主色 |
+| AI Character Generator | `#a855f7`（purple） | AI 创作 → 紫色 |
+| AutoCommit | `#ef4444`（red） | Git 分支 → 红色 |
+| ABI Vision | `#6366f1`（indigo） | 区块链 → 靛蓝 |
+
+**视觉语言：**
+
+- **卡片主体**：`.card-box` 基础（`--main-bg` + `--radius-md` + `--shadow-card`），padding 加大到 `1.5rem 1.5rem 1.25rem 1.75rem`（左边多出 0.5rem 避让 accent stripe）。
+- **左侧 accent stripe**：`::before` 绝对定位 `width: 4px`，`background: var(--card-accent)`。
+- **Initial mark**：2.5rem 方块，`color-mix(in srgb, var(--card-accent) 14%, transparent)` 底色 + accent 前景，`font-family: var(--font-family-mono)` 让数字/字母节奏更紧。
+- **Tagline**：`var(--text-lighten-color)` + `0.9rem`，占 `flex: 1` 把 footer 推到底部。
+- **Footer**：1px `var(--border-color)` 分割，左 star 数，右 demo/源码按钮。
+- **Primary 按钮（"打开 ↗"）**：用 `color-mix` 动态生成 accent 的 8% 底 + 40% 描边，hover 提升到 18% / 60%。不同产品自动呈现不同色调。
+
+**Hover 反馈：**
+
+- 卡片：`translateY(-2px)` + 阴影升级到 `--shadow-dropdown`。
+- 主按钮：底色从 8% → 18%，描边从 40% → 60%，colorshift 而不是 scale。
+
+**可访问性：**
+
+- star 计数用 `aria-label="{n} stars on GitHub"` 让屏幕阅读器念出完整上下文。
+- 外链全部 `target="_blank" rel="noopener"`。
+- `prefers-reduced-motion: reduce` 下动画和 hover 位移全部禁用。
+
 ## Interactive Effects
 
 | Effect | File | Scope |
@@ -236,3 +284,5 @@ Powered by `astro-expressive-code` (replaces hand-written code-copy.js):
 | 2026-04-11 | 抽离 theme.css 为设计 tokens 单一数据源 | global.css 过于混杂，分离关注点 |
 | 2026-04-11 | .prose 链接添加 underline | WCAG: 链接不能仅靠颜色区分 |
 | 2026-04-11 | CSS opacity → color-mix 实色方案 | 避免 opacity 继承导致子元素对比度不达标 |
+| 2026-04-17 | Works 页面从 PostList 迁移到独立 WorkCard 卡片网格 | 作品不是文章，复用文章列表 UI 无法表达产品个性；hardcoded `works-data.ts` 替代 Content Collection，因为列表静态、无需全文检索 |
+| 2026-04-17 | 每个作品独立 accent 色（而非全站统一品牌色） | 打破 AI 通用样式的千卡一面；首字母 mark + 色条让视觉节奏区分产品 |

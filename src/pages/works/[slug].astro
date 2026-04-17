@@ -1,0 +1,283 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { WORKS, type WorkItem, buildDemoUrl } from '../../utils/works-data';
+
+export function getStaticPaths() {
+  return WORKS.map((work) => ({
+    params: { slug: work.slug },
+    props: { work },
+  }));
+}
+
+interface Props {
+  work: WorkItem;
+}
+
+const { work } = Astro.props;
+
+function renderDescription(text: string): string {
+  return text
+    .split(/\n\n+/)
+    .map((para) => {
+      const html = para
+        .trim()
+        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
+        .replace(/\n/g, '<br>');
+      return `<p>${html}</p>`;
+    })
+    .join('\n');
+}
+
+const descriptionHtml = renderDescription(work.description);
+const metaDescription = work.tagline + ' — ' + work.description.slice(0, 120).replace(/\n+/g, ' ');
+const demoUrl = buildDemoUrl(work);
+---
+
+<BaseLayout title={`${work.name} · 我的作品`} description={metaDescription} ogType="article">
+  <article class="work-page" style={`--card-accent: ${work.accent};`}>
+    <nav class="work-breadcrumb" aria-label="面包屑导航">
+      <a href="/works/">← 返回作品列表</a>
+    </nav>
+
+    <header class="work-hero">
+      <div class="work-hero-logo">
+        <img src={work.logo} alt={`${work.name} logo`} loading="eager" decoding="async" />
+      </div>
+
+      <div class="work-hero-info">
+        <div class="work-hero-meta">
+          <span class="work-stack">{work.stack}</span>
+          {work.stars !== undefined && (
+            <span class="work-stars" aria-label={`${work.stars} stars on GitHub`}>
+              <svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" fill="currentColor">
+                <path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.61L7.327.668A.75.75 0 0 1 8 .25Z"/>
+              </svg>
+              {work.stars}
+            </span>
+          )}
+          {work.featured && <span class="work-badge">Featured</span>}
+          <span class="work-category-tag">{work.category}</span>
+        </div>
+
+        <h1>{work.name}</h1>
+        <p class="work-tagline">{work.tagline}</p>
+
+        <div class="work-cta">
+          <a href={demoUrl} target="_blank" rel="noopener" class="cta cta--primary">
+            访问产品 <span aria-hidden="true">↗</span>
+          </a>
+          {work.repo && (
+            <a href={work.repo} target="_blank" rel="noopener" class="cta">
+              <svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true" fill="currentColor">
+                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/>
+              </svg>
+              GitHub
+            </a>
+          )}
+        </div>
+      </div>
+    </header>
+
+    <section class="work-body">
+      <h2>关于这个作品</h2>
+      <div class="work-prose" set:html={descriptionHtml} />
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .work-page {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: calc(var(--navbar-height) + 1.5rem) 1.5rem 4rem;
+  }
+
+  .work-breadcrumb {
+    margin-bottom: 1.5rem;
+    font-size: var(--font-size-sm);
+  }
+
+  .work-breadcrumb a {
+    color: var(--text-lighten-color);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .work-breadcrumb a:hover {
+    color: var(--card-accent);
+  }
+
+  .work-hero {
+    position: relative;
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    padding: 2rem 2rem 2rem 2.25rem;
+    background-color: var(--main-bg);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+    margin-bottom: 2rem;
+  }
+
+  .work-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 4px;
+    background-color: var(--card-accent);
+  }
+
+  .work-hero-logo {
+    flex-shrink: 0;
+    width: 5rem;
+    height: 5rem;
+    border-radius: var(--radius-md);
+    background: color-mix(in srgb, var(--card-accent) 10%, #fff);
+    border: 1px solid color-mix(in srgb, var(--card-accent) 20%, transparent);
+    overflow: hidden;
+  }
+
+  .work-hero-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .work-hero-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .work-hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    font-size: var(--font-size-xs);
+    color: var(--text-lighten-color);
+  }
+
+  .work-stack {
+    font-family: var(--font-family-mono);
+  }
+
+  .work-stars {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-family: var(--font-family-mono);
+  }
+
+  .work-badge {
+    padding: 0.1rem 0.45rem;
+    border-radius: var(--radius-sm);
+    background-color: color-mix(in srgb, var(--card-accent) 12%, transparent);
+    color: var(--card-accent);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    font-family: var(--font-family-mono);
+  }
+
+  .work-category-tag {
+    padding: 0.1rem 0.45rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    font-size: 0.7rem;
+  }
+
+  .work-hero-info h1 {
+    margin: 0 0 0.5rem;
+    font-size: clamp(1.5rem, 3vw, 1.85rem);
+    color: var(--text-color);
+    line-height: var(--line-height-tight);
+  }
+
+  .work-tagline {
+    margin: 0 0 1.25rem;
+    color: var(--text-lighten-color);
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-base);
+  }
+
+  .work-cta {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-sm);
+    text-decoration: none;
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    transition: background-color var(--transition-fast), border-color var(--transition-fast);
+    white-space: nowrap;
+  }
+
+  .cta:hover {
+    background-color: var(--body-bg);
+    text-decoration: none;
+  }
+
+  .cta--primary {
+    color: #fff;
+    background-color: var(--card-accent);
+    border-color: var(--card-accent);
+  }
+
+  .cta--primary:hover {
+    background-color: color-mix(in srgb, var(--card-accent) 85%, #000);
+    border-color: color-mix(in srgb, var(--card-accent) 85%, #000);
+    color: #fff;
+  }
+
+  .work-body {
+    padding: 0 0.5rem;
+  }
+
+  .work-body h2 {
+    margin: 0 0 1rem;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text-color);
+  }
+
+  .work-prose :global(p) {
+    margin: 0 0 1rem;
+    color: var(--text-color);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+  }
+
+  .work-prose :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .work-prose :global(a) {
+    color: var(--card-accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  @media (max-width: 640px) {
+    .work-hero {
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1.5rem 1.5rem 1.5rem 1.75rem;
+    }
+
+    .work-hero-logo {
+      width: 4rem;
+      height: 4rem;
+    }
+  }
+</style>

@@ -1,0 +1,235 @@
+---
+import { type WorkItem, buildDemoUrl } from '../utils/works-data';
+
+interface Props {
+  work: WorkItem;
+  index?: number;
+}
+
+const { work, index = 0 } = Astro.props;
+const href = `/works/${work.slug}/`;
+const demoUrl = buildDemoUrl(work);
+---
+
+<article class="work-card" style={`--card-accent: ${work.accent}; --stagger: ${index * 60}ms;`}>
+  <header class="work-header">
+    <span class="work-logo-wrap">
+      <img src={work.logo} alt="" class="work-logo" loading="lazy" decoding="async" />
+    </span>
+    <div class="work-title">
+      <h3>
+        <a href={href} class="work-card-link">{work.name}</a>
+      </h3>
+      <span class="work-stack">{work.stack}</span>
+    </div>
+  </header>
+
+  <p class="work-tagline">{work.tagline}</p>
+
+  <footer class="work-footer">
+    <div class="work-meta">
+      {work.stars !== undefined && (
+        <span class="work-stars" aria-label={`${work.stars} stars on GitHub`}>
+          <svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" fill="currentColor">
+            <path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.61L7.327.668A.75.75 0 0 1 8 .25Z"/>
+          </svg>
+          {work.stars}
+        </span>
+      )}
+      {work.featured && <span class="work-badge">Featured</span>}
+    </div>
+    <a
+      href={demoUrl}
+      target="_blank"
+      rel="noopener"
+      class="work-visit"
+      aria-label={`访问 ${work.name} 网站（新窗口打开）`}
+    >
+      访问 <span aria-hidden="true">↗</span>
+    </a>
+  </footer>
+</article>
+
+<style>
+  .work-card {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.5rem 1.5rem 1.25rem 1.75rem;
+    background-color: var(--main-bg);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    opacity: 0;
+    animation: work-rise 0.5s ease var(--stagger) forwards;
+  }
+
+  .work-card::before {
+    content: '';
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 4px;
+    background-color: var(--card-accent);
+  }
+
+  .work-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-dropdown);
+  }
+
+  .work-header {
+    display: flex;
+    gap: 0.875rem;
+    align-items: center;
+  }
+
+  .work-logo-wrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: var(--radius-md);
+    background: color-mix(in srgb, var(--card-accent) 10%, #fff);
+    flex-shrink: 0;
+    overflow: hidden;
+    border: 1px solid color-mix(in srgb, var(--card-accent) 20%, transparent);
+  }
+
+  .work-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .work-title {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    min-width: 0;
+  }
+
+  .work-title h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: var(--line-height-tight);
+    word-break: break-word;
+  }
+
+  .work-card-link {
+    color: var(--text-color);
+    text-decoration: none;
+  }
+
+  .work-card-link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-md);
+  }
+
+  .work-card-link:hover {
+    text-decoration: none;
+    color: var(--card-accent);
+  }
+
+  .work-card-link:focus-visible::after {
+    outline: 2px solid var(--card-accent);
+    outline-offset: -2px;
+  }
+
+  .work-stack {
+    font-size: var(--font-size-xs);
+    color: var(--text-lighten-color);
+    font-family: var(--font-family-mono);
+  }
+
+  .work-tagline {
+    margin: 0;
+    color: var(--text-lighten-color);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    flex: 1;
+  }
+
+  .work-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border-color);
+  }
+
+  .work-meta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: var(--font-size-xs);
+    color: var(--text-lighten-color);
+  }
+
+  .work-stars {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-family: var(--font-family-mono);
+  }
+
+  .work-badge {
+    padding: 0.1rem 0.45rem;
+    border-radius: var(--radius-sm);
+    background-color: color-mix(in srgb, var(--card-accent) 12%, transparent);
+    color: var(--card-accent);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    font-family: var(--font-family-mono);
+  }
+
+  .work-visit {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.3rem 0.65rem;
+    margin: -0.3rem -0.65rem -0.3rem 0;
+    font-size: var(--font-size-sm);
+    color: var(--card-accent);
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+    transition: background-color var(--transition-fast);
+  }
+
+  .work-visit:hover {
+    background-color: color-mix(in srgb, var(--card-accent) 10%, transparent);
+    text-decoration: none;
+  }
+
+  .work-visit:focus-visible {
+    outline: 2px solid var(--card-accent);
+    outline-offset: 2px;
+  }
+
+  @keyframes work-rise {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .work-card {
+      animation: none;
+      opacity: 1;
+    }
+    .work-card:hover {
+      transform: none;
+    }
+  }
+</style>
