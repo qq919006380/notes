@@ -15,19 +15,24 @@
 - `pnpm dev` — 启动开发服务器（localhost:4321）
 - `pnpm build` — 构建生产版本（含 Pagefind 索引，`astro build && pagefind --site dist`）
 - `pnpm preview` — 预览构建结果
+- `pnpm new "标题" [collection]` — 新建文章，自动生成 slug（默认 collection=notes）
+- `pnpm validate` — 校验 frontmatter + slug 唯一性 + SEO 注册表
 - `node scripts/validate-urls.mjs` — 构建后验证所有 URL 完整性
-- `node scripts/validate-content.mjs` — 校验 Markdown frontmatter
 - `node scripts/ui-audit.mjs` — UI 审计
 - `npx playwright test` — 跑测试套件（baseURL: localhost:4323）
 
 ## 内容管理
 - 文章放在 `src/content/{blog,notes,posts,works}/`
+- **文件名 = 标题**（如 `我喜欢的parcel.md`），不是 slug；slug 独立存于 frontmatter
 - 4 个 Content Collections 共享同一 schema（`src/content.config.ts`）
 - Frontmatter 必须包含: title, slug, date, categories, tags
-- slug 对应 URL `/pages/{slug}/`，不可修改已发布文章的 slug（SEO 关键）
+- **新建文章用 `pnpm new "标题" [collection]`**，脚本会自动生成 6 位 hex slug
+- slug 格式：`^[a-f0-9]{6}$`，Zod schema 构建时强校验
+- 已索引但不符合规则的历史 slug（`个人作品`、`796ac5-心流`）放在 `content.config.ts` 的 `LEGACY_SLUGS` 白名单，不可扩展
+- slug 对应 URL `/pages/{slug}/`，**不可修改已发布文章的 slug**（Google 已收录）
+- `scripts/permalink-map.json` 是 SEO 注册表，记录所有已公开的 slug
 - sortOrder 字段控制侧边栏和目录页的排序
 - 纯数字 slug 需要加引号（如 `slug: '018557'`），避免 YAML 解析为数字
-- `scripts/permalink-map.json` 记录 slug 映射，`migrate-content.mjs` 是迁移辅助脚本
 
 ## 项目结构
 ```
@@ -52,7 +57,7 @@ src/
 │   └── theme.css     # 主题样式
 └── utils/            # 工具函数（content, date, sidebar, site-config）
 
-scripts/              # 构建辅助脚本（migrate / validate-urls / validate-content / ui-audit / permalink-map.json）
+scripts/              # 辅助脚本（new-post / validate-content / validate-urls / ui-audit / migrate-content / permalink-map.json）
 tests/                # Playwright 测试（accessibility / content / interaction / responsive / seo / ui）
 public/               # 静态资源（_headers 安全头、_redirects、robots.txt、img/）
 ```
