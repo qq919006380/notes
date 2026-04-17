@@ -59,7 +59,7 @@ src/
 │   ├── tags/                  # 标签索引页
 │   ├── rss.xml.ts             # RSS 输出
 │   └── {archives,blog,notes,works}.astro
-├── scripts/          # 客户端脚本（vanilla JS：love-me / reading-progress / time-greeting / typing-animation）
+├── scripts/          # 客户端脚本（vanilla JS：reading-progress / time-greeting / typing-animation）
 ├── styles/           # 全局样式
 │   ├── global.css    # design tokens（:root 变量）
 │   └── theme.css     # 主题样式

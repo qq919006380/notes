@@ -211,7 +211,6 @@ Used by: BloggerBar, SiteInfo, ContactCard, RecentArticles, RightMenu, Structure
 
 | Effect | File | Scope |
 |--------|------|-------|
-| Click hearts | `src/scripts/love-me.js` | Global, all pages |
 | Time greeting | `src/scripts/time-greeting.js` | Homepage only (`/`) |
 | Typing animation | `src/scripts/typing-animation.js` | HomeBanner description |
 | Reading progress | `src/scripts/reading-progress.js` | All pages with `#reading-progress` |
