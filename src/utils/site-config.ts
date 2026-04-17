@@ -9,9 +9,9 @@ export const SITE_CONFIG = {
   },
   blogCreate: '2019-12-12',
   social: [
-    { icon: 'icon-youjian', title: '发邮件', link: 'mailto:919006380@qq.com' },
-    { icon: 'icon-github', title: 'GitHub', link: 'https://github.com/qq919006380' },
-    { icon: 'icon-juejin', title: '掘金', link: 'https://juejin.cn/user/3825956194361406/posts' },
+    { icon: 'lucide:mail', title: '发邮件', link: 'mailto:919006380@qq.com' },
+    { icon: 'lucide:github', title: 'GitHub', link: 'https://github.com/qq919006380' },
+    { icon: 'lucide:pen-tool', title: '掘金', link: 'https://juejin.cn/user/3825956194361406/posts' },
   ],
   footer: {
     createYear: 2019,

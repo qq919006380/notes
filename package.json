@@ -15,10 +15,12 @@
   "dependencies": {
     "@astrojs/rss": "^4.0.18",
     "@astrojs/sitemap": "^3.7.2",
+    "@iconify-json/lucide": "^1.2.102",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.2.2",
     "astro": "^6.1.5",
     "astro-expressive-code": "^0.41.7",
+    "astro-icon": "^1.1.5",
     "dayjs": "^1.11.20",
     "gray-matter": "^4.0.3",
     "medium-zoom": "^1.1.0",

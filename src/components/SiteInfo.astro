@@ -1,4 +1,5 @@
 ---
+import { Icon } from 'astro-icon/components';
 import { getCollection } from 'astro:content';
 import { SITE_CONFIG } from '../utils/site-config';
 import { daysSince } from '../utils/date';
@@ -30,7 +31,7 @@ const totalWordsDisplay = totalWords >= 10000
 
 <div class="site-info card-box">
   <div class="site-info-title">
-    <i class="iconfont icon-award" style="font-size: 0.875rem; font-weight: 900"></i>
+    <Icon name="lucide:award" width={14} height={14} />
     <span>站点信息</span>
   </div>
   <div class="site-info-item">

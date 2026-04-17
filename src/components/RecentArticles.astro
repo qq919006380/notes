@@ -1,4 +1,5 @@
 ---
+import { Icon } from 'astro-icon/components';
 import { getCollection } from 'astro:content';
 import { formatDate } from '../utils/date';
 
@@ -14,7 +15,7 @@ const recent = [...blog, ...notes, ...posts]
 
 <div class="recent-articles card-box">
   <div class="recent-title">
-    <i class="iconfont icon-zuixin" style="font-size: 0.875rem"></i>
+    <Icon name="lucide:sparkles" width={14} height={14} />
     <span>最近更新</span>
   </div>
   <ul class="recent-list">

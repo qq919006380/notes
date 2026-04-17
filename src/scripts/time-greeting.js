@@ -9,7 +9,7 @@
   style.textContent =
     '.index-tip{position:fixed;display:flex;align-items:center;top:-60px;left:50%;opacity:0;min-width:320px;max-width:90vw;transform:translateX(-50%);transition:opacity .3s linear,top .4s ease;z-index:99999;padding:15px 15px 15px 20px;border:1px solid #ebeef5;border-radius:8px;line-height:17px;pointer-events:none;box-shadow:0 2px 12px rgba(0,0,0,0.1)}' +
     '.index-tip p{line-height:17px;margin:0;font-size:14px}' +
-    '.tip-icon{margin-right:10px;line-height:17px}' +
+    '.tip-icon{margin-right:10px;display:inline-flex;align-items:center;color:#909399}' +
     '.tip-info{background-color:#edf2fc;border-color:#ebeef5}' +
     '.tip-info .tip-info-content{color:#606266}' +
     '@media(max-width:640px){.index-tip{min-width:auto;width:90vw}}';
@@ -34,15 +34,17 @@
     div.style.top = '-60px';
     div.setAttribute('data-top', newTop);
 
+    // Inline Lucide SVGs (info / circle-check / circle-x / triangle-alert)
+    var SVG_ATTRS = 'xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"';
     var icons = {
-      info: 'icon-info',
-      success: 'icon-dagouyouquan',
-      danger: 'icon-cuowu',
-      warning: 'icon-gantanhao'
+      info: '<svg ' + SVG_ATTRS + '><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>',
+      success: '<svg ' + SVG_ATTRS + '><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>',
+      danger: '<svg ' + SVG_ATTRS + '><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>',
+      warning: '<svg ' + SVG_ATTRS + '><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>'
     };
 
     div.innerHTML =
-      '<i class="iconfont ' + (icons[type] || icons.info) + ' tip-icon"></i>' +
+      '<span class="tip-icon">' + (icons[type] || icons.info) + '</span>' +
       '<p class="tip-' + type + '-content">' + content + '</p>';
 
     document.body.appendChild(div);

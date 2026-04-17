@@ -1,4 +1,5 @@
 ---
+import { Icon } from 'astro-icon/components';
 import BaseLayout from './BaseLayout.astro';
 import StructuredSidebar from '../components/StructuredSidebar.astro';
 import Sidebar from '../components/Sidebar.astro';
@@ -59,20 +60,20 @@ const metaDescription = description || extractExcerpt(rawContent, 150);
           </h1>
           <div class="post-meta">
             <span class="meta-item">
-              <i class="iconfont icon-riqi"></i>
+              <Icon name="lucide:calendar" width={14} height={14} />
               {formatDateTime(date)}
             </span>
             <span class="meta-item">
-              <i class="iconfont icon-shu"></i>
+              <Icon name="lucide:file-text" width={14} height={14} />
               {wordCount} 字
             </span>
             <span class="meta-item">
-              <i class="iconfont icon-shijian"></i>
+              <Icon name="lucide:clock" width={14} height={14} />
               {readTime}
             </span>
             {author && (
               <span class="meta-item">
-                <i class="iconfont icon-zuozhe"></i>
+                <Icon name="lucide:user" width={14} height={14} />
                 <a href={author.link} target="_blank" rel="noopener">{author.name}</a>
               </span>
             )}
