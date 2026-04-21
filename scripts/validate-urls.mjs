@@ -11,52 +11,72 @@ import path from 'path';
 
 const DIST = path.resolve('dist');
 const CONTENT_DIR = path.resolve('src/content');
+const WORKS_DIR = path.join(CONTENT_DIR, 'works');
 
 // ============================================
-// 1. Collect all slugs from content collections
+// 1. Collect slugs from article collections (blog/notes/posts)
+//    — these map to /pages/{slug}/
+//    works uses /works/{slug}/ and is handled separately below.
 // ============================================
-const slugs = new Map(); // slug → title
+const articleSlugs = new Map(); // slug → title
+const workSlugs = new Map();
 
-function scanContent(dir) {
+function parseFrontmatter(raw) {
+  const fmMatch = raw.match(/^---\n([\s\S]*?)\n---/);
+  if (!fmMatch) return {};
+  const fm = fmMatch[1];
+  const slugMatch = fm.match(/^slug:\s*['"]?(.+?)['"]?\s*$/m);
+  const titleMatch = fm.match(/^title:\s*['"]?(.+?)['"]?\s*$/m);
+  return {
+    slug: slugMatch ? slugMatch[1] : null,
+    title: titleMatch ? titleMatch[1] : null,
+  };
+}
+
+function scanDir(dir, target) {
   if (!fs.existsSync(dir)) return;
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     const full = path.join(dir, entry.name);
     if (entry.isDirectory()) {
-      scanContent(full);
+      scanDir(full, target);
     } else if (entry.name.endsWith('.md')) {
       try {
-        const raw = fs.readFileSync(full, 'utf8');
-        // Simple frontmatter parsing (no dependency on gray-matter)
-        const fmMatch = raw.match(/^---\n([\s\S]*?)\n---/);
-        if (fmMatch) {
-          const fm = fmMatch[1];
-          const slugMatch = fm.match(/^slug:\s*['"]?(.+?)['"]?\s*$/m);
-          const titleMatch = fm.match(/^title:\s*['"]?(.+?)['"]?\s*$/m);
-          if (slugMatch) {
-            slugs.set(slugMatch[1], titleMatch ? titleMatch[1] : entry.name);
-          }
-        }
-      } catch (e) {
+        const { slug, title } = parseFrontmatter(fs.readFileSync(full, 'utf8'));
+        if (slug) target.set(slug, title || entry.name);
+      } catch {
         // skip unparseable files
       }
     }
   }
 }
 
-scanContent(CONTENT_DIR);
+for (const entry of fs.readdirSync(CONTENT_DIR, { withFileTypes: true })) {
+  if (!entry.isDirectory()) continue;
+  const dir = path.join(CONTENT_DIR, entry.name);
+  if (dir === WORKS_DIR) {
+    scanDir(dir, workSlugs);
+  } else {
+    scanDir(dir, articleSlugs);
+  }
+}
 
 // ============================================
-// 2. Check each slug exists in dist/pages/
+// 2. Check each slug exists in its respective dist path
 // ============================================
 const results = { pass: [], fail: [] };
 
-for (const [slug, title] of slugs) {
+for (const [slug, title] of articleSlugs) {
   const htmlPath = path.join(DIST, 'pages', slug, 'index.html');
-  if (fs.existsSync(htmlPath)) {
-    results.pass.push({ url: `/pages/${slug}/`, title });
-  } else {
-    results.fail.push({ url: `/pages/${slug}/`, title });
-  }
+  const url = `/pages/${slug}/`;
+  if (fs.existsSync(htmlPath)) results.pass.push({ url, title });
+  else results.fail.push({ url, title });
+}
+
+for (const [slug, title] of workSlugs) {
+  const htmlPath = path.join(DIST, 'works', slug, 'index.html');
+  const url = `/works/${slug}/`;
+  if (fs.existsSync(htmlPath)) results.pass.push({ url, title });
+  else results.fail.push({ url, title });
 }
 
 // ============================================
@@ -85,10 +105,11 @@ for (const url of specialPages) {
 // 4. Report
 // ============================================
 console.log('\n=== URL Validation Report ===\n');
-console.log(`Total article slugs: ${slugs.size}`);
-console.log(`Special pages:       ${specialPages.length}`);
-console.log(`PASS:                ${results.pass.length}`);
-console.log(`FAIL:                ${results.fail.length}`);
+console.log(`Article slugs: ${articleSlugs.size}`);
+console.log(`Work slugs:    ${workSlugs.size}`);
+console.log(`Special pages: ${specialPages.length}`);
+console.log(`PASS:          ${results.pass.length}`);
+console.log(`FAIL:          ${results.fail.length}`);
 
 if (results.fail.length > 0) {
   console.log('\n--- FAILED URLs ---');

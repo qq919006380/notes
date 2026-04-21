@@ -13,9 +13,10 @@ import path from 'node:path';
 import matter from 'gray-matter';
 
 const CONTENT_ROOT = path.resolve('src/content');
-const COLLECTIONS = ['blog', 'notes', 'posts', 'works'];
+// works is excluded: it has its own schema and semantic slugs.
+const COLLECTIONS = ['blog', 'notes', 'posts'];
 const HEX6 = /^[a-f0-9]{6}$/;
-const LEGACY_SLUGS = new Set(['个人作品', '796ac5-心流']);
+const LEGACY_SLUGS = new Set(['796ac5-心流']);
 
 const slugs = new Map();
 const issues = [];

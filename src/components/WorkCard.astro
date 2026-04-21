@@ -1,49 +1,51 @@
 ---
-import { type WorkItem, buildDemoUrl } from '../utils/works-data';
+import type { WorkEntry } from '../utils/works';
+import { buildDemoUrl } from '../utils/works';
 
 interface Props {
-  work: WorkItem;
+  work: WorkEntry;
   index?: number;
 }
 
 const { work, index = 0 } = Astro.props;
-const href = `/works/${work.slug}/`;
-const demoUrl = buildDemoUrl(work);
+const data = work.data;
+const href = `/works/${data.slug}/`;
+const demoUrl = buildDemoUrl(data);
 ---
 
-<article class="work-card" style={`--card-accent: ${work.accent}; --stagger: ${index * 60}ms;`}>
+<article class="work-card" style={`--card-accent: ${data.accent}; --stagger: ${index * 60}ms;`}>
   <header class="work-header">
     <span class="work-logo-wrap">
-      <img src={work.logo} alt="" class="work-logo" loading="lazy" decoding="async" />
+      <img src={data.logo} alt="" class="work-logo" loading="lazy" decoding="async" />
     </span>
     <div class="work-title">
       <h3>
-        <a href={href} class="work-card-link">{work.name}</a>
+        <a href={href} class="work-card-link">{data.title}</a>
       </h3>
-      <span class="work-stack">{work.stack}</span>
+      <span class="work-stack">{data.stack}</span>
     </div>
   </header>
 
-  <p class="work-tagline">{work.tagline}</p>
+  <p class="work-tagline">{data.tagline}</p>
 
   <footer class="work-footer">
     <div class="work-meta">
-      {work.stars !== undefined && (
-        <span class="work-stars" aria-label={`${work.stars} stars on GitHub`}>
+      {data.stars !== undefined && (
+        <span class="work-stars" aria-label={`${data.stars} stars on GitHub`}>
           <svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" fill="currentColor">
             <path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.61L7.327.668A.75.75 0 0 1 8 .25Z"/>
           </svg>
-          {work.stars}
+          {data.stars}
         </span>
       )}
-      {work.featured && <span class="work-badge">Featured</span>}
+      {data.featured && <span class="work-badge">Featured</span>}
     </div>
     <a
       href={demoUrl}
       target="_blank"
       rel="noopener"
       class="work-visit"
-      aria-label={`访问 ${work.name} 网站（新窗口打开）`}
+      aria-label={`访问 ${data.title} 网站（新窗口打开）`}
     >
       访问 <span aria-hidden="true">↗</span>
     </a>

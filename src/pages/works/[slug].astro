@@ -1,39 +1,30 @@
 ---
+import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { WORKS, type WorkItem, buildDemoUrl } from '../../utils/works-data';
+import { buildDemoUrl, type WorkEntry } from '../../utils/works';
 
-export function getStaticPaths() {
-  return WORKS.map((work) => ({
-    params: { slug: work.slug },
-    props: { work },
-  }));
+export async function getStaticPaths() {
+  const entries = await getCollection('works');
+  return entries
+    .filter((e) => !e.data.draft)
+    .map((entry) => ({
+      params: { slug: entry.data.slug },
+      props: { entry },
+    }));
 }
 
 interface Props {
-  work: WorkItem;
+  entry: WorkEntry;
 }
 
-const { work } = Astro.props;
-
-function renderDescription(text: string): string {
-  return text
-    .split(/\n\n+/)
-    .map((para) => {
-      const html = para
-        .trim()
-        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
-        .replace(/\n/g, '<br>');
-      return `<p>${html}</p>`;
-    })
-    .join('\n');
-}
-
-const descriptionHtml = renderDescription(work.description);
-const metaDescription = work.tagline + ' — ' + work.description.slice(0, 120).replace(/\n+/g, ' ');
+const { entry } = Astro.props;
+const work = entry.data;
+const { Content } = await render(entry);
 const demoUrl = buildDemoUrl(work);
+const metaDescription = work.tagline;
 ---
 
-<BaseLayout title={`${work.name} · 我的作品`} description={metaDescription} ogType="article">
+<BaseLayout title={`${work.title} · 我的作品`} description={metaDescription} ogType="article">
   <article class="work-page" style={`--card-accent: ${work.accent};`}>
     <nav class="work-breadcrumb" aria-label="面包屑导航">
       <a href="/works/">← 返回作品列表</a>
@@ -41,7 +32,7 @@ const demoUrl = buildDemoUrl(work);
 
     <header class="work-hero">
       <div class="work-hero-logo">
-        <img src={work.logo} alt={`${work.name} logo`} loading="eager" decoding="async" />
+        <img src={work.logo} alt={`${work.title} logo`} loading="eager" decoding="async" />
       </div>
 
       <div class="work-hero-info">
@@ -59,7 +50,7 @@ const demoUrl = buildDemoUrl(work);
           <span class="work-category-tag">{work.category}</span>
         </div>
 
-        <h1>{work.name}</h1>
+        <h1>{work.title}</h1>
         <p class="work-tagline">{work.tagline}</p>
 
         <div class="work-cta">
@@ -78,9 +69,8 @@ const demoUrl = buildDemoUrl(work);
       </div>
     </header>
 
-    <section class="work-body">
-      <h2>关于这个作品</h2>
-      <div class="work-prose" set:html={descriptionHtml} />
+    <section class="work-body prose">
+      <Content />
     </section>
   </article>
 </BaseLayout>
@@ -242,30 +232,6 @@ const demoUrl = buildDemoUrl(work);
 
   .work-body {
     padding: 0 0.5rem;
-  }
-
-  .work-body h2 {
-    margin: 0 0 1rem;
-    font-size: 1.15rem;
-    font-weight: 600;
-    color: var(--text-color);
-  }
-
-  .work-prose :global(p) {
-    margin: 0 0 1rem;
-    color: var(--text-color);
-    font-size: var(--font-size-base);
-    line-height: var(--line-height-base);
-  }
-
-  .work-prose :global(p:last-child) {
-    margin-bottom: 0;
-  }
-
-  .work-prose :global(a) {
-    color: var(--card-accent);
-    text-decoration: underline;
-    text-underline-offset: 2px;
   }
 
   @media (max-width: 640px) {

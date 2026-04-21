@@ -22,10 +22,11 @@
 - `npx playwright test` — 跑测试套件（baseURL: localhost:4323）
 
 ## 内容管理
-- 文章放在 `src/content/{blog,notes,posts,works}/`
+- 文章放在 `src/content/{blog,notes,posts}/`，作品放在 `src/content/works/`
 - **文件名 = 标题**（如 `我喜欢的parcel.md`），不是 slug；slug 独立存于 frontmatter
-- 4 个 Content Collections 共享同一 schema（`src/content.config.ts`）
-- Frontmatter 必须包含: title, slug, date, categories, tags
+- 3 个文章 Collections（blog/notes/posts）共享 `articleSchema`；`works` 走独立的 `worksSchema`（`src/content.config.ts`）
+- 文章 frontmatter 必须包含: title, slug, date, categories, tags
+- 作品 frontmatter 字段：title, slug, tagline, stack, category, logo, accent, demo, repo?, stars?, featured?, sortOrder
 
 ### 写文章工作流（极简版）
 1. 在 `src/content/{collection}/{标题}.md` 直接新建文件，写 title + 内容即可（slug 字段可不填）
@@ -34,13 +35,14 @@
 4. CI 保护：如果 push 的 commit 里有缺 slug 的文章，CI 构建会主动失败
 
 ### slug 规则
-- 格式 `^[a-f0-9]{6}$`（6 位小写十六进制）
+- **文章**（blog/notes/posts）：格式 `^[a-f0-9]{6}$`（6 位小写十六进制），对应 URL `/pages/{slug}/`
+- **作品**（works）：语义化 slug（如 `pencil-vue`、`mindmap`），对应 URL `/works/{slug}/`，不走 autofix 也不登记 `permalink-map.json`
 - **已有 slug 永不被覆盖**（任何情况），只补缺失
-- 已索引但不符合规则的历史 slug（`个人作品`、`796ac5-心流`）放在 `LEGACY_SLUGS` 白名单
-- slug 对应 URL `/pages/{slug}/`，**不可修改已发布文章的 slug**（Google 已收录）
+- 已索引但不符合规则的历史 slug（`796ac5-心流`）放在 `LEGACY_SLUGS` 白名单
+- **不可修改已发布文章/作品的 slug**（Google 已收录）
 - 纯数字 slug 需要加引号（如 `slug: '018557'`），避免 YAML 解析为数字
-- `scripts/permalink-map.json` 是 SEO 注册表，记录所有已公开的 slug
-- sortOrder 字段控制侧边栏和目录页的排序
+- `scripts/permalink-map.json` 是文章 SEO 注册表（不含作品）
+- sortOrder 字段控制侧边栏、目录页、作品列表的排序
 
 ## 项目结构
 ```
@@ -77,8 +79,10 @@ public/               # 静态资源（_headers 安全头、_redirects、robots.
 - 组件间通过 Props 接口传递数据，避免全局状态
 
 ## 路由规则
-- `/pages/{slug}/` — 文章详情页（所有 collection 聚合）
-- `/blog/`, `/notes/`, `/works/` — 目录页（按子分类分组）
+- `/pages/{slug}/` — 文章详情页（blog/notes/posts 聚合）
+- `/works/{slug}/` — 作品详情页（独立路由，语义化 slug）
+- `/blog/`, `/notes/` — 目录页（按子分类分组）
+- `/works/` — 作品列表页
 - `/page/{n}/` — 首页分页（第 1 页重定向到 `/`）
 - `/archives/`, `/categories/`, `/tags/` — 索引页
 - `/rss.xml` — RSS 订阅

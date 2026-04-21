@@ -1,19 +1,22 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import WorkCard from '../components/WorkCard.astro';
-import { WORKS } from '../utils/works-data';
+import { sortWorks } from '../utils/works';
+
+const works = sortWorks(await getCollection('works'));
 ---
 
 <BaseLayout title="我的作品" description="夏天夏的作品集：独立开发的产品、工具与开源组件">
   <div class="works-page">
     <header class="works-hero">
-      <p class="works-eyebrow">Works · {WORKS.length}</p>
+      <p class="works-eyebrow">Works · {works.length}</p>
       <h1>我的作品</h1>
       <p class="works-lead">独立开发的产品、工具与开源组件。点进去看详细介绍，或直接访问线上版本。</p>
     </header>
 
     <ul class="works-grid">
-      {WORKS.map((work, i) => (
+      {works.map((work, i) => (
         <li><WorkCard work={work} index={i} /></li>
       ))}
     </ul>

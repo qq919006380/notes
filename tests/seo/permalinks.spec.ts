@@ -18,12 +18,12 @@ const permalinkMap: PermalinkEntry[] = JSON.parse(
   readFileSync(join(__dirname, '../../scripts/permalink-map.json'), 'utf-8')
 );
 
-test.describe('Permalink 路由验证（104 个文章 URL）', () => {
-  test('permalink-map.json 共有 104 个条目', () => {
-    expect(permalinkMap.length).toBe(104);
+test.describe('Permalink 路由验证（103 个文章 URL）', () => {
+  test('permalink-map.json 共有 103 个条目', () => {
+    expect(permalinkMap.length).toBe(103);
   });
 
-  // 将 104 个 slug 分批测试，每批 20 个
+  // 将 103 个 slug 分批测试，每批 20 个
   const batchSize = 20;
   for (let i = 0; i < permalinkMap.length; i += batchSize) {
     const batch = permalinkMap.slice(i, i + batchSize);

@@ -14,7 +14,8 @@ import path from 'node:path';
 import matter from 'gray-matter';
 import { customAlphabet } from 'nanoid';
 
-const COLLECTIONS = ['blog', 'notes', 'posts', 'works'];
+// works is excluded: it uses semantic slugs (e.g. "pencil-vue"), not 6-hex.
+const COLLECTIONS = ['blog', 'notes', 'posts'];
 const nanohex = customAlphabet('0123456789abcdef', 6);
 
 function collectExistingSlugs() {

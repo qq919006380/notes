@@ -3,7 +3,7 @@ import { glob } from 'astro/loaders';
 
 // Historical slugs indexed by Google that predate the 6-hex rule.
 // Do not extend this list — new slugs must match the regex below.
-const LEGACY_SLUGS = new Set(['个人作品', '796ac5-心流']);
+const LEGACY_SLUGS = new Set(['796ac5-心流']);
 
 const slugSchema = z
   .coerce
@@ -33,6 +33,24 @@ const articleSchema = z.object({
   sortOrder: z.number().default(0),
 });
 
+// Works are independent projects, not blog posts.
+// Semantic slugs (e.g. "pencil-vue") are used to form readable URLs like /works/pencil-vue/.
+const worksSchema = z.object({
+  title: z.coerce.string(),
+  slug: z.coerce.string(),
+  tagline: z.string(),
+  stack: z.string(),
+  category: z.string(),
+  logo: z.string(),
+  accent: z.string(),
+  demo: z.string().url(),
+  repo: z.string().url().optional(),
+  stars: z.number().optional(),
+  featured: z.boolean().default(false),
+  sortOrder: z.number().default(0),
+  draft: z.boolean().default(false),
+});
+
 const blog = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/blog' }),
   schema: articleSchema,
@@ -50,7 +68,7 @@ const posts = defineCollection({
 
 const works = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/works' }),
-  schema: articleSchema,
+  schema: worksSchema,
 });
 
 export const collections = { blog, notes, posts, works };

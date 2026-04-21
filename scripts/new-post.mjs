@@ -16,11 +16,11 @@ import matter from 'gray-matter';
 const HEX6 = /^[a-f0-9]{6}$/;
 const nanohex = customAlphabet('0123456789abcdef', 6);
 
+// works is excluded: it uses semantic slugs and a separate schema — add works entries by hand.
 const COLLECTIONS = {
   blog: { dir: 'src/content/blog', category: '个人博客' },
   notes: { dir: 'src/content/notes', category: '笔记' },
   posts: { dir: 'src/content/posts', category: '随笔' },
-  works: { dir: 'src/content/works', category: '个人作品' },
 };
 
 const MAP_FILE = 'scripts/permalink-map.json';

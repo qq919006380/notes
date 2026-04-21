@@ -210,9 +210,9 @@ Used by: BloggerBar, SiteInfo, ContactCard, RecentArticles, RightMenu, Structure
 
 ## Works Page
 
-**页面：** `/works/` — 个人产品集合页，展示业余时间写的 6 个可访问产品。
+**页面：** `/works/` — 个人产品集合页，每个作品对应一份独立 markdown 长文。
 
-**数据来源：** `src/utils/works-data.ts`（hardcoded 配置，不走 Content Collection）。产品列表更新频率低、不需要全文检索，写死在 TS 里比每个产品一份 markdown 更直接。保留 `src/content/works/` 的 legacy markdown（保 SEO 旧链接 `/pages/个人作品/`），但不再在 `/works/` 页面展示。
+**数据来源：** `src/content/works/*.md`（Astro Content Collection）。每个作品一份 markdown，frontmatter 里放 meta（title/slug/tagline/stack/accent/demo/repo/stars/sortOrder），正文写完整介绍（为什么做、怎么做、面向用户）。详情页 `/works/{slug}/` 由 `src/pages/works/[slug].astro` 渲染 `<Content />` 进 `.prose`。schema 在 `src/content.config.ts` 中以 `worksSchema` 独立定义（语义化 slug，不走 6-hex 规则）。
 
 **设计取舍：**
 
@@ -224,16 +224,19 @@ Used by: BloggerBar, SiteInfo, ContactCard, RecentArticles, RightMenu, Structure
 | 每张卡片独立 accent（左 4px 色条 + 首字母 tint + 主按钮描边） | RISK | 打破千篇一律的全站品牌蓝；每个产品有独立个性 |
 | 卡片进入 stagger fade-up 动画（每张 +60ms） | INTENTIONAL | 首屏视觉节奏感；`prefers-reduced-motion` 下关闭 |
 
-**Accent 色盘（每张卡片独立）：**
+**Accent 色盘（每张卡片独立，来源于每个作品 frontmatter 的 `accent` 字段）：**
 
 | 产品 | Accent | 选色理由 |
 |------|--------|----------|
 | pencil-vue | `#f59e0b`（amber） | 手绘风 → 暖黄 |
 | MindMap | `#10b981`（green） | 思维生长 → 绿色 |
-| Frontend Resource Hub | `#0969A5`（brand） | 开发者工具 → 沿用主色 |
-| AI Character Generator | `#a855f7`（purple） | AI 创作 → 紫色 |
-| AutoCommit | `#ef4444`（red） | Git 分支 → 红色 |
-| ABI Vision | `#6366f1`（indigo） | 区块链 → 靛蓝 |
+| NFT Generator | `#6366f1`（indigo） | Web3 → 靛蓝 |
+| CharacterGen | `#a855f7`（purple） | AI 角色 → 紫色 |
+| AI Logo Generator | `#ef4444`（red） | 品牌能量 → 红色 |
+| Bucici | `#ec4899`（pink） | 星座占卜 → 粉色 |
+| Ice Breaker Games | `#14b8a6`（teal） | 社交破冰 → 青色 |
+| AskJoey | `#f97316`（orange） | 约会暖色 → 橙色 |
+| Filz | `#0969A5`（brand） | 工具效率 → 沿用主色 |
 
 **视觉语言：**
 
@@ -286,3 +289,4 @@ Powered by `astro-expressive-code` (replaces hand-written code-copy.js):
 | 2026-04-11 | CSS opacity → color-mix 实色方案 | 避免 opacity 继承导致子元素对比度不达标 |
 | 2026-04-17 | Works 页面从 PostList 迁移到独立 WorkCard 卡片网格 | 作品不是文章，复用文章列表 UI 无法表达产品个性；hardcoded `works-data.ts` 替代 Content Collection，因为列表静态、无需全文检索 |
 | 2026-04-17 | 每个作品独立 accent 色（而非全站统一品牌色） | 打破 AI 通用样式的千卡一面；首字母 mark + 色条让视觉节奏区分产品 |
+| 2026-04-21 | Works 从 hardcoded `works-data.ts` 迁回 Astro Content Collection，走独立 `worksSchema` | 作品需要独立长文（为什么做 / 怎么做 / 面向用户），markdown body + `<Content />` 渲染比 TS 字符串模板更自然；semantic slug 保留人类可读 URL |

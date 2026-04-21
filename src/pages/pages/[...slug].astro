@@ -3,7 +3,7 @@ import { getCollection, render } from 'astro:content';
 import PostLayout from '../../layouts/PostLayout.astro';
 
 export async function getStaticPaths() {
-  const collections = ['blog', 'notes', 'posts', 'works'] as const;
+  const collections = ['blog', 'notes', 'posts'] as const;
   const allArticles: { article: Awaited<ReturnType<typeof getCollection>>[number]; collection: string }[] = [];
 
   for (const collectionName of collections) {
@@ -58,7 +58,7 @@ const { Content, headings } = await render(article);
   rawContent={article.body || ''}
   prevArticle={prevArticle}
   nextArticle={nextArticle}
-  collection={collection !== 'works' ? collection : undefined}
+  collection={collection}
   currentSlug={article.data.slug}
 >
   <Content />
