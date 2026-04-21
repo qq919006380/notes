@@ -8,19 +8,38 @@ const tocHeadings = headings.filter(h => h.depth >= 2 && h.depth <= 4);
 ---
 
 {tocHeadings.length > 0 && (
-  <div class="right-menu card-box">
-    <p class="right-menu-title">目录</p>
-    <ul class="toc-list">
-      {tocHeadings.map(h => (
-        <li class={`toc-item depth-${h.depth}`}>
-          <a href={`#${h.slug}`} class="toc-link">{h.text}</a>
-        </li>
-      ))}
-    </ul>
-  </div>
+  <aside class="right-sidebar" aria-label="文章目录">
+    <div class="right-menu">
+      <p class="right-menu-title">目录</p>
+      <ul class="toc-list">
+        {tocHeadings.map(h => (
+          <li class={`toc-item depth-${h.depth}`}>
+            <a href={`#${h.slug}`} class="toc-link">{h.text}</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </aside>
 )}
 
 <style>
+  .right-sidebar {
+    width: 240px;
+    flex-shrink: 0;
+    position: sticky;
+    top: calc(var(--navbar-height) + 1rem);
+    align-self: flex-start;
+  }
+
+  .right-menu {
+    background: var(--main-bg);
+    border-radius: 8px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+    padding: 1.25rem;
+    max-height: calc(100vh - var(--navbar-height) - 2.5rem);
+    overflow-y: auto;
+  }
+
   .right-menu-title {
     font-weight: bold;
     font-size: 0.9rem;
@@ -46,6 +65,12 @@ const tocHeadings = headings.filter(h => h.depth >= 2 && h.depth <= 4);
     padding-left: 2rem;
   }
 
+  .toc-item.is-active .toc-link {
+    color: var(--accent-color);
+    opacity: 1;
+    font-weight: 500;
+  }
+
   .toc-link {
     font-size: 0.8rem;
     color: var(--text-color);
@@ -58,4 +83,42 @@ const tocHeadings = headings.filter(h => h.depth >= 2 && h.depth <= 4);
     color: var(--accent-color);
     opacity: 1;
   }
+
+  @media (max-width: 1024px) {
+    .right-sidebar {
+      width: 100%;
+      position: static;
+    }
+  }
 </style>
+
+<script>
+  const tocItems = document.querySelectorAll<HTMLElement>('.right-sidebar .toc-item');
+  if (tocItems.length > 0) {
+    const linkBySlug = new Map<string, HTMLElement>();
+    tocItems.forEach((item) => {
+      const anchor = item.querySelector<HTMLAnchorElement>('.toc-link');
+      const slug = anchor?.getAttribute('href')?.slice(1);
+      if (slug) linkBySlug.set(slug, item);
+    });
+
+    const headings = Array.from(linkBySlug.keys())
+      .map(slug => document.getElementById(slug))
+      .filter((el): el is HTMLElement => el !== null);
+
+    if (headings.length > 0) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          const visible = entries.filter(e => e.isIntersecting);
+          if (visible.length === 0) return;
+          const top = visible.sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
+          const slug = top.target.id;
+          tocItems.forEach(it => it.classList.remove('is-active'));
+          linkBySlug.get(slug)?.classList.add('is-active');
+        },
+        { rootMargin: '-80px 0px -65% 0px', threshold: 0 }
+      );
+      headings.forEach(h => observer.observe(h));
+    }
+  }
+</script>

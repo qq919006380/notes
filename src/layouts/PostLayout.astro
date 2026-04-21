@@ -1,8 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
 import BaseLayout from './BaseLayout.astro';
-import StructuredSidebar from '../components/StructuredSidebar.astro';
-import Sidebar from '../components/Sidebar.astro';
 import RightMenu from '../components/RightMenu.astro';
 import ArticleNav from '../components/ArticleNav.astro';
 import { formatDateTime } from '../utils/date';
@@ -48,9 +46,6 @@ const metaDescription = description || extractExcerpt(rawContent, 150);
 <BaseLayout title={title} description={metaDescription} ogType="article">
   <div class="post-page">
     <div class="content-wrapper">
-      {collection && (
-        <StructuredSidebar collection={collection} currentSlug={currentSlug} />
-      )}
       <article class="post-content">
         <!-- Article header -->
         <header class="post-header">
@@ -110,10 +105,8 @@ const metaDescription = description || extractExcerpt(rawContent, 150);
         </div>
       </article>
 
-      <!-- Right sidebar with TOC -->
-      <Sidebar showBlogger={false} showContact={false}>
-        <RightMenu headings={headings} />
-      </Sidebar>
+      <!-- Right sidebar TOC -->
+      <RightMenu headings={headings} />
     </div>
   </div>
 </BaseLayout>
@@ -121,15 +114,17 @@ const metaDescription = description || extractExcerpt(rawContent, 150);
 <style>
   .post-page {
     padding-top: calc(var(--navbar-height) + 1rem);
-    max-width: var(--home-page-width);
-    margin: 0 auto;
+    padding-bottom: 3rem;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
+    max-width: var(--home-page-width);
+    margin: 0 auto;
   }
 
   .content-wrapper {
     display: flex;
     gap: 2rem;
+    align-items: flex-start;
   }
 
   .post-content {
@@ -137,7 +132,7 @@ const metaDescription = description || extractExcerpt(rawContent, 150);
     min-width: 0;
     background-color: var(--main-bg);
     border-radius: 8px;
-    padding: 2rem;
+    padding: 2.5rem;
     box-shadow: 0 1px 6px rgba(0,0,0,0.05);
   }
 
@@ -168,8 +163,24 @@ const metaDescription = description || extractExcerpt(rawContent, 150);
     margin-bottom: 1rem;
   }
 
-  .meta-item i {
-    margin-right: 0.25rem;
+  .meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .meta-item :global(svg) {
+    opacity: 0.6;
+    flex-shrink: 0;
+  }
+
+  .meta-item a {
+    color: var(--accent-color);
+    text-decoration: none;
+  }
+
+  .meta-item a:hover {
+    text-decoration: underline;
   }
 
   .post-categories {
@@ -230,6 +241,12 @@ const metaDescription = description || extractExcerpt(rawContent, 150);
   @media (max-width: 1024px) {
     .content-wrapper {
       flex-direction: column;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .post-content {
+      padding: 1.5rem 1.25rem;
     }
   }
 </style>
