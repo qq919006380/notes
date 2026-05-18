@@ -1,5 +1,5 @@
 ---
-title: 如何快速消耗掉200max的token
+title: 如何快速消耗掉claude code 200max的token
 slug: 56c10e
 date: '2026-05-18T00:00:00.000Z'
 categories:
