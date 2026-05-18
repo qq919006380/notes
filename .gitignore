@@ -16,6 +16,3 @@ dist/
 # Test artifacts
 test-results/
 .playwright-mcp/
-*.png
-!/public/**/*.png
-!/src/**/*.png
